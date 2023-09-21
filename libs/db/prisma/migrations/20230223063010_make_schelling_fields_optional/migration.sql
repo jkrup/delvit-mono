@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Schelling" ALTER COLUMN "answer" DROP NOT NULL,
+ALTER COLUMN "confidence" DROP NOT NULL,
+ALTER COLUMN "bestPostId" DROP NOT NULL,
+ALTER COLUMN "personalAnswer" DROP NOT NULL;

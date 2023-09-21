@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.so {
+    display: none;
+}
+form:focus-within .so {
+    display: inherit;
+}

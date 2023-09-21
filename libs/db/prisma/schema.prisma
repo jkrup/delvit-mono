@@ -1,0 +1,309 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+  //output   = "../../../node_modules/@prisma/client/delvit"
+}
+
+// datasource db {
+// provider = "sqlite"
+// url      = "file:./db.sqlite"
+// }
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum QuestionStateState {
+  PENDING
+  ACTIVE
+  CLOSED
+}
+
+enum OpinionOpinion {
+  AGREE
+  DISAGREE
+}
+
+enum SchellingState {
+  INVITED
+  PENDING
+  SUBMITTED
+}
+
+model Schelling {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  answer         Boolean?
+  confidence     Int?
+  bestPostId     String?
+  bestPost       Post?    @relation(fields: [bestPostId], references: [id], onDelete: Cascade)
+  personalAnswer Boolean?
+
+  state SchellingState
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, questionId])
+}
+
+model QuestionState {
+  id         String             @id @default(cuid())
+  questionId String
+  state      QuestionStateState // PENDING, ACTIVE, CLOSED, (possibly more in future) ...
+  createdAt  DateTime           @default(now())
+  Question   Question           @relation(fields: [questionId], references: [id], onDelete: Cascade)
+}
+
+model Question {
+  id             String          @id @default(cuid())
+  title          String
+  comments       Comment[]
+  views          Int
+  authorId       String
+  author         User            @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  questionStates QuestionState[]
+  forPercent     Int // WIP field... likely temporary
+  createdAt      DateTime        @default(now())
+
+  posts     EvidenceOnQuestion[]
+  topics    TopicOnQuestion[]
+  opinions  Opinion[]
+  Schelling Schelling[]
+  Consensus Consensus?
+}
+
+model Consensus {
+  questionId String
+  question   Question     @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  body       String
+  confidence String
+  answer     EvidenceType
+
+  @@unique([questionId])
+}
+
+model Opinion {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  opinion OpinionOpinion
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, questionId], name: "opinion_user_question")
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  imgSrc    String?
+  url       String? // commaseparated urls
+  createdAt DateTime @default(now())
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  views Int @default(0)
+
+  comments Comment[]
+
+  parentQuestions EvidenceOnQuestion[]
+  parentPosts     EvidenceOnPost[]     @relation("evidence")
+  evidencePosts   EvidenceOnPost[]     @relation("parent")
+
+  topics TopicOnPost[]
+
+  Schelling Schelling[]
+}
+
+enum EvidenceType {
+  FOR
+  AGAINST
+}
+
+model EvidenceOnQuestion {
+  parentQuestionId String
+  parentQuestion   Question @relation(fields: [parentQuestionId], references: [id], onDelete: Cascade)
+
+  evidencePostId String
+  evidencePost   Post   @relation(fields: [evidencePostId], references: [id], onDelete: Cascade)
+
+  evidenceType EvidenceType // FOR or AGAINST
+
+  // createdAt         DateTime  @default(now())
+  // linkedBy          User
+
+  @@unique([evidencePostId, parentQuestionId])
+}
+
+model EvidenceOnPost {
+  parentPostId String
+  parentPost   Post   @relation("parent", fields: [parentPostId], references: [id], onDelete: Cascade)
+
+  evidencePostId String
+  evidencePost   Post   @relation("evidence", fields: [evidencePostId], references: [id], onDelete: Cascade)
+
+  evidenceType EvidenceType // FOR or AGAINST
+
+  // createdAt         DateTime  @default(now())
+  // linkedBy          User
+
+  @@unique([evidencePostId, parentPostId])
+}
+
+model Vote {
+  id     String @id @unique @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  postId     String?
+  questionId String?
+  commentId  String?
+
+  vote Int
+
+  @@index([userId, postId], name: "user_post")
+  @@index([userId, questionId], name: "user_question")
+  @@index([userId, commentId], name: "user_comment")
+}
+
+// Can belong to either Question | Post (1 : many) Comment[]
+model Comment {
+  id   String @id @default(cuid())
+  body String
+
+  createdAt DateTime @default(now())
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  parentCommentId String?
+  parentComment   Comment? @relation("children", fields: [parentCommentId], references: [id], onDelete: Cascade)
+
+  childComments Comment[] @relation("children")
+
+  // sort-of cached fields
+  depth Int @default(0)
+  votes Int @default(0)
+
+  postId String?
+  post   Post?   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  questionId String?
+  question   Question? @relation(fields: [questionId], references: [id], onDelete: Cascade)
+}
+
+model TopicOnQuestion {
+  topicId String
+  topic   Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([topicId, questionId])
+}
+
+model TopicOnPost {
+  topicId String
+  topic   Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  postId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([topicId, postId])
+}
+
+model Topic {
+  id    String  @id @default(cuid())
+  title String
+  body  String?
+
+  questions TopicOnQuestion[]
+  posts     TopicOnPost[]
+}
+
+model Web3Account {
+  id       String @id @default(cuid())
+  userId   String
+  provider String
+  address  String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, address])
+}
+
+model User {
+  id   String  @id @default(cuid())
+  name String?
+
+  email         String?   @unique
+  emailVerified DateTime?
+
+  image String  @default("https://ipfs.io/ipfs/QmWPg7N5oD2SQ5ML2ZhbpUYtxv8NP322iTWycCs8YWxP9T")
+  role  String?
+
+  title String?
+  bio   String?
+
+  Web3Account Web3Account[]
+
+  accounts Account[]
+  sessions Session[]
+
+  posts     Post[]
+  questions Question[]
+  comments  Comment[]
+  votes     Vote[]
+  opinions  Opinion[]
+  Schelling Schelling[]
+}
+
+// Account for nextauth
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

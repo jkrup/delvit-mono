@@ -1,0 +1,53 @@
+{
+  "name": "db",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/db/src",
+  "projectType": "library",
+  "targets": {
+    "serve": {
+			"executor": "nx:run-commands",
+			"options": {
+				"cwd": "libs/db",
+				"command": "docker-compose up",
+				"color": true
+			}
+		},
+    "generate": {
+      "command": "prisma generate",
+      "options": {
+        "cwd": "libs/db"
+      }
+    },
+    "ui": {
+      "command": "DATABASE_URL={args.DATABASE_URL} prisma studio",
+      "options": {
+        "cwd": "libs/db"
+      },
+      "configurations": {
+        "development": {
+          "DATABASE_URL": "postgresql://postgres:asdf@127.0.0.1:5432/postgres"
+        },
+        "production": {
+          "DATABASE_URL": "postgresql://postgres:asdf@127.0.0.1:5432/postgres"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "migrate": {
+      "command": "DATABASE_URL={args.DATABASE_URL} prisma migrate deploy",
+      "options": {
+        "cwd": "libs/db"
+      },
+      "configurations": {
+        "development": {
+          "DATABASE_URL": "postgresql://postgres:asdf@127.0.0.1:5432/postgres"
+        },
+        "production": {
+          "DATABASE_URL": "postgresql://postgres:asdf@127.0.0.1:5432/postgres"
+        }
+      },
+      "defaultConfiguration": "development"
+    }
+  },
+  "tags": []
+}
