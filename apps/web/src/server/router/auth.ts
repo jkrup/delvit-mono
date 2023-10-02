@@ -32,6 +32,11 @@ export const authRouter = createRouter()
               votes: true,
             },
           },
+          points: {
+            orderBy: {
+              createdAt: 'desc'
+            }
+          }
         },
       });
 
@@ -136,6 +141,7 @@ export const authRouter = createRouter()
           message: "Not attached to postId or questionId",
         });
       }
+      const userId = ctx.session!.userId as string
 
       const comment = await ctx.prisma.comment.create({
         data: {
@@ -146,6 +152,25 @@ export const authRouter = createRouter()
           parentCommentId,
         },
       });
+
+      const existingComments = await ctx.prisma.comment.count({
+        where: {
+          authorId: userId
+        }
+      })
+
+      if (existingComments === 1) {
+        // give points for first comment
+        await ctx.prisma.pointDisbursement.create({
+          data: {
+            amount: 100,
+            message: `First Banter`,
+            kind: 'SYSTEM',
+            userId
+          }
+        })
+      }
+
 
       return comment;
     },

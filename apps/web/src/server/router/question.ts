@@ -194,6 +194,47 @@ export const questionRouter = createRouter()
         throw new TRPCError({ code: "UNAUTHORIZED" });
       }
 
+      // retrieve all answers and determine consensus results
+      const schellings = await ctx.prisma.schelling.findMany({
+        where: input,
+      });
+      
+      // FOR is positive, AGAINST is negative
+      // low confidence = 1 point
+      // high confidence = 5 points
+
+      // calculate the net consensus opinion and the total magnitude
+      // e.g. confidenceMagnitude = total magnitude of all votes
+      // e.g. netConsensus = net weight of all votes
+      const [confidenceMagnitude, netConsensus] = schellings.reduce(([confidenceMagnitude, netConsensus], val) => {
+        const mult = val.answer ? 1 : -1
+        const strength = (val.confidence ?? 0)
+        return [
+          confidenceMagnitude + strength, 
+          netConsensus + (mult * strength)
+        ]
+      }, [0, 0])
+
+      // Calculate the percentage of the votes that agreed
+      // ranges from -5 to +5
+      const confidenceScore = 5 * Math.abs(netConsensus / confidenceMagnitude)
+      const confidenceStrength = Math.abs(confidenceScore)
+      let confidence: string
+      if (confidenceStrength > 4) {
+        confidence = 'Very High'
+      }
+      else if (confidenceStrength > 3) {
+        confidence = 'High'
+      }
+      else if (confidenceStrength > 2) {
+        confidence = 'Medium'
+      }
+      else if (confidenceStrength > 1) {
+        confidence = 'Low'
+      }
+      else
+        confidence = 'Very Low'
+
       await ctx.prisma.questionState.create({
         data: {
           questionId,
@@ -204,11 +245,31 @@ export const questionRouter = createRouter()
       await ctx.prisma.consensus.create({
         data: {
           questionId,
-          answer: 'FOR',
+          answer: netConsensus > 0 ? 'FOR' : 'AGAINST',
           body: '',
-          confidence: '3',
+          confidence,
         },
       });
+
+      const question = await ctx.prisma.question.findUnique({
+        where: {
+          id: input.questionId
+        },
+        select: {
+          authorId: true,
+          title: true
+        }
+      });
+
+      // Give points to author of question
+      await ctx.prisma.pointDisbursement.create({
+        data: {
+          amount: 250,
+          message: `Question Reached Consensus: "${question?.title}"`,
+          kind: 'CONSENSUS',
+          userId: question!.authorId
+        }
+      })
 
       return true
     },
@@ -499,8 +560,6 @@ export const questionRouter = createRouter()
         orderBy,
       });
 
-      console.log(allQuestions.filter((q) => q.questionStates?.[0]?.state === "CLOSED"))
-
       const pendingQuestions = allQuestions
         .filter((q) => q.questionStates?.[0]?.state === "CLOSED" && !!q.Consensus)
         .sort((a, b) => {
@@ -671,6 +730,24 @@ export const questionRouter = createRouter()
           views: 0,
         },
       });
+
+      const existingQ = await ctx.prisma.question.count({
+        where: {
+          authorId: userId
+        }
+      })
+
+      if (existingQ === 1) {
+        // give points for first question
+        await ctx.prisma.pointDisbursement.create({
+          data: {
+            amount: 100,
+            message: `First Question`,
+            kind: 'SYSTEM',
+            userId
+          }
+        })
+      }
 
       return {
         questionId: a?.id,

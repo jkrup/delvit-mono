@@ -28,6 +28,12 @@ enum OpinionOpinion {
   DISAGREE
 }
 
+enum DisbursementKind {
+  SYSTEM // points given by the system, e.g. onboarding
+  VOTE // points given or received from other user's votes
+  CONSENSUS // points received from consensus process
+}
+
 enum SchellingState {
   INVITED
   PENDING
@@ -80,6 +86,7 @@ model Question {
   opinions  Opinion[]
   Schelling Schelling[]
   Consensus Consensus?
+  points PointDisbursement[]
 }
 
 model Consensus {
@@ -246,6 +253,18 @@ model Web3Account {
   @@unique([provider, address])
 }
 
+model PointDisbursement {
+  id         String             @id @default(cuid())
+  message    String
+  amount     Int
+  kind       DisbursementKind   @default(VOTE)
+  createdAt  DateTime           @default(now())
+  user       User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  question   Question?          @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId String?
+}
+
 model User {
   id   String  @id @default(cuid())
   name String?
@@ -270,6 +289,7 @@ model User {
   votes     Vote[]
   opinions  Opinion[]
   Schelling Schelling[]
+  points PointDisbursement[]
 }
 
 // Account for nextauth

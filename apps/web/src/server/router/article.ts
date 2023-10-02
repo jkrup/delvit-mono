@@ -620,6 +620,24 @@ export const articleRouter = createRouter()
         }
       });
 
+      const existingPosts = await ctx.prisma.post.count({
+        where: {
+          authorId: userId
+        }
+      })
+
+      if (existingPosts === 1) {
+        // give points for first post
+        await ctx.prisma.pointDisbursement.create({
+          data: {
+            amount: 100,
+            message: `First Post`,
+            kind: 'SYSTEM',
+            userId
+          }
+        })
+      }
+
       if (input.questionId && a?.id) {
         const relationship = await ctx.prisma.evidenceOnQuestion.create({
           data: {

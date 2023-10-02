@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Head from "next/head";
 import Image from "next/image";
+import { timeToReadibleAgo } from "../utils/helpers"
 
 const ProfilePage = () => {
   const { data, status } = useSession();
@@ -74,8 +75,13 @@ const ProfilePage = () => {
     name,
     title,
     bio,
+    points,
     _count: { posts, comments, votes }, //TODO: humanReadify posts/comments/votes
   } = profileData;
+
+  const totalPoints = points.reduce((total, point) => {
+    return total + point.amount
+  }, 0)
 
   return <>
     <Head>
@@ -110,6 +116,10 @@ const ProfilePage = () => {
             <div>
               <div className="text-2xl">{votes}</div>
               <div>Upvotes</div>
+            </div>
+            <div>
+              <div className="text-2xl text-green-600">{totalPoints}</div>
+              <div>Points</div>
             </div>
           </div>
           <p className="text-justify mb-8 whitespace-pre-wrap">{bio}</p>
@@ -216,6 +226,30 @@ const ProfilePage = () => {
             Sign out?
           </button>
         </form>
+      </div>
+
+      <div className="text-center mx-auto max-w-screen-xl">
+        <h2 className="text-2xl font-semibold text-yellow-800 font-serif">Points</h2>
+      </div>
+      <div className="flex flex-col my-8 mx-auto max-w-screen-xl">
+        {points.map(point => (
+          <div className="rounded bg-yellow-600 bg-opacity-5 flex flex-row my-4 shadow-md justify-center items-center p-4">
+            <div className="mr-4">
+              {point.kind}
+            </div>
+            <div className="mr-4">
+              {point.amount > 0 ? 
+                <span className="text-green-600">+{point.amount}</span>: 
+                <span className="text-red-600">{point.amount}</span>
+              }
+            </div>
+            <div>
+              <span> {point.message}</span>
+              <br/>
+              <span className="text-gray-500">{timeToReadibleAgo(point.createdAt)}</span>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </>;
