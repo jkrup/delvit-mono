@@ -32,6 +32,18 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60
   },
   adapter: PrismaAdapter(prisma),
+  events: {
+    async createUser(message) {
+      await prisma.pointDisbursement.create({
+        data: {
+          amount: 100,
+          message: `Welcome to Delvit!`,
+          kind: 'SYSTEM',
+          userId: message.user.id
+        }
+      }) 
+    },
+  },
   providers: [
     CredentialsProvider({
       id: 'metamask',

@@ -29,7 +29,11 @@ const QuestionPage = () => {
   const userID = trpc.useQuery(["auth.getUserID"]);
 
   const answerSchelling = trpc.useMutation(["question.answerSchelling"]);
-  const finalizeConsensus = trpc.useMutation(["question.finalizeConsensus"]);
+  const finalizeConsensus = trpc.useMutation(["question.finalizeConsensus"], {
+    onSuccess() {
+      router.push("/?type=consensus");
+    }
+  });
   const questionData = question.data;
   const schellings = questionData?.Schelling ?? []
   const scheller = schellings.filter(

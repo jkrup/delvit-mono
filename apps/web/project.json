@@ -15,7 +15,9 @@
         "development": {
           "outputPath": "apps/web"
         },
-        "production": {}
+        "production": {
+          "generateLockfile": true
+        }
       }
     },
     "serve": {
@@ -41,7 +43,49 @@
       "options": {
         "buildTarget": "web:build:production"
       }
-    }
+    },
+    "release": {
+			"executor": "nx:run-commands",
+			"dependsOn": ["deploy"],
+			"options": {
+				"cwd": "apps/web",
+				"commands": ["kubectl -n hstk rollout restart deploy/hstk-web"],
+				"envFile": "apps/web/.env.production",
+				"parallel": false,
+				"color": true
+			}
+		},
+    "deploy": {
+			"executor": "nx:run-commands",
+			"dependsOn": ["container"],
+			"options": {
+				"cwd": "apps/web",
+				"commands": ["kubectl -n hstk apply -f deploy/prod/ -f deploy/common.yaml"],
+				"envFile": "apps/web/.env.production",
+				"parallel": false,
+				"color": true
+			}
+		},
+    "container": {
+			"executor": "@nx-tools/nx-container:build",
+			"dependsOn": ["build"],
+			"defaultConfiguration": "production",
+			"options": {
+				"engine": "docker",
+				"file": "apps/web/Dockerfile",
+        "context": "./"
+			},
+			"configurations": {
+				"local": {
+					"tags": ["delvit/web:latest"],
+					"push": false
+				},
+				"production": {
+					"tags": ["gcr.io/carbon-sunup-250522/delvit/web:latest"],
+					"push": true
+				}
+			}
+		}
   },
   "tags": []
 }

@@ -12,42 +12,75 @@
 				"color": true
 			}
 		},
-    "generate": {
-      "command": "prisma generate",
-      "options": {
-        "cwd": "libs/db"
-      }
-    },
     "ui": {
-      "command": "DATABASE_URL={args.DATABASE_URL} prisma studio",
+			"executor": "nx:run-commands",
       "options": {
+        "command": "prisma studio",
         "cwd": "libs/db"
       },
       "configurations": {
         "development": {
-          "DATABASE_URL": "postgresql://postgres:asdf@127.0.0.1:5432/postgres"
+          "envFile": "libs/db/.env"
         },
         "production": {
-          "DATABASE_URL": "postgresql://postgres:asdf@127.0.0.1:5432/postgres"
+          "envFile": "libs/db/.env"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx prisma generate --schema=libs/db/prisma/schema.prisma"
+      },
+      "configurations": {
+        "development": {
+          "envFile": "libs/db/.env"
+        },
+        "production": {
+          "envFile": "libs/db/.env"
         }
       },
       "defaultConfiguration": "development"
     },
     "migrate": {
-      "command": "DATABASE_URL={args.DATABASE_URL} prisma migrate deploy",
+			"command": "npx prisma migrate dev",
       "options": {
         "cwd": "libs/db"
       },
       "configurations": {
         "development": {
-          "DATABASE_URL": "postgresql://postgres:asdf@127.0.0.1:5432/postgres"
+          "envFile": "libs/db/.env"
         },
         "production": {
-          "DATABASE_URL": "postgresql://postgres:asdf@127.0.0.1:5432/postgres"
+          "envFile": "libs/db/.env"
         }
       },
       "defaultConfiguration": "development"
-    }
+    },
+    "deploy": {
+			"command": "npx prisma migrate deploy",
+      "options": {
+        "cwd": "libs/db"
+      },
+      "configurations": {
+        "development": {
+          "envFile": "libs/db/.env"
+        },
+        "production": {
+          "envFile": "libs/db/.env"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "proxy": {
+			"executor": "nx:run-commands",
+			"options": {
+				"cwd": "libs/db",
+				"command": "kubectl -n hstk port-forward svc/hstk-web-db 5432",
+				"color": true
+			}
+		},
   },
   "tags": []
 }
