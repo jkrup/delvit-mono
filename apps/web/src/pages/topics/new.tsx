@@ -1,8 +1,9 @@
-import Page from '@delvit/web/components/Page'
-import { trpc } from '@delvit/web/utils/trpc'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+
+import Page from '@delvit/web/components/Page'
+import { trpc } from '@delvit/web/utils/trpc'
 
 const NewTopicPage = () => {
 	const router = useRouter()

@@ -1,6 +1,7 @@
+import { LinkIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { useState } from 'react'
-import { LinkIcon } from '@heroicons/react/20/solid'
+
 import BanterSection from './BanterSection'
 import DeleteIcon from './DeleteIcon'
 
@@ -31,15 +32,15 @@ const Article: React.FC<ArticleProps> = ({
 	const [noError, setNoError] = useState(true)
 
 	return (
-        <div className='rounded-md p-4 flex flex-col shadow bg-white'>
+		<div className='rounded-md p-4 flex flex-col shadow bg-white'>
 			{/* Article Header */}
 			<div className='flex space-x-2 mb-2 w-full'>
 				<img alt='commenter avatar' className='rounded-full w-6 h-6' src={avatar} />
-				<div className="flex flex-row flex-grow justify-between">
+				<div className='flex flex-row flex-grow justify-between'>
 					<div className='text-stone-500 items-center text-sm'>
 						Posted by {postedByName} at {postedAt}
 					</div>
-					<DeleteIcon postId={id}/>
+					<DeleteIcon postId={id} />
 				</div>
 			</div>
 
@@ -70,16 +71,10 @@ const Article: React.FC<ArticleProps> = ({
 				)}
 				{url &&
 					url.split(',').map((u) => (
-						(<Link
-                            href={u}
-                            key={u}
-                            target='_blank'
-                            className='text-yellow-700 hover:text-yellow-400 flex items-center'>
-
-                            <LinkIcon className='h-6 w-6 shrink-0' />
-                            <div className='truncate text-sm italic'>{u}</div>
-
-                        </Link>)
+						<Link href={u} key={u} target='_blank' className='text-yellow-700 hover:text-yellow-400 flex items-center'>
+							<LinkIcon className='h-6 w-6 shrink-0' />
+							<div className='truncate text-sm italic'>{u}</div>
+						</Link>
 					))}
 
 				{!!tags.length && (
@@ -102,7 +97,7 @@ const Article: React.FC<ArticleProps> = ({
 			</div>
 			<BanterSection articleId={articleId} />
 		</div>
-    );
+	)
 }
 
 export default Article

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
+
 import { timeToReadibleAgo } from '@delvit/web/utils/helpers'
 
 export interface FeedPostProps {
@@ -33,7 +34,7 @@ const FeedPost: React.FC<FeedPostProps> = ({
 }) => {
 	const articleUrl = questionId ? `/articles/${id}?questionId=${questionId}` : `/articles/${id}`
 	return (
-        <div className='bg-white rounded-md p-2 px-4 flex flex-col space-y-2 shadow hover:shadow-lg transition'>
+		<div className='bg-white rounded-md p-2 px-4 flex flex-col space-y-2 shadow hover:shadow-lg transition'>
 			<div className='flex space-x-8 text-yellow-800 items-center'>
 				<div className='flex space-x-2 items-center'>
 					<div className='bg-yellow-800 rounded-full h-4 w-4'></div>
@@ -105,7 +106,7 @@ const FeedPost: React.FC<FeedPostProps> = ({
 				</Link>
 			</div>
 		</div>
-    );
+	)
 }
 
 export default FeedPost

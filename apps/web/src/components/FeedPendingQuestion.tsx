@@ -1,10 +1,12 @@
+import { HandThumbDownIcon, HandThumbUpIcon } from '@heroicons/react/20/solid'
 import { ChatBubbleLeftRightIcon, CheckBadgeIcon } from '@heroicons/react/24/outline'
-import type { Author } from './Author'
-import { trpc } from '@delvit/web/utils/trpc'
 import { useState } from 'react'
-import { HandThumbUpIcon, HandThumbDownIcon, } from '@heroicons/react/20/solid'
-import { CommentData } from './Comment'
+
+import { trpc } from '@delvit/web/utils/trpc'
+
+import type { Author } from './Author'
 import BanterSection from './BanterSection'
+import { CommentData } from './Comment'
 
 interface OpinionProps {
 	questionId: string
@@ -31,7 +33,8 @@ const Opinion: React.FC<OpinionProps> = ({ questionId, opinion: defaultOpinion }
 		<div
 			className={`rounded-lg overflow-hidden border flex flex-col space-y-2 shrink-0 font-serif bg-stone-100 ${
 				opinion ? '' : 'border-yellow-800'
-			}`}>
+			}`}
+		>
 			{opinion ? (
 				opinion === 'AGREE' ? (
 					renderAgreed()
@@ -51,7 +54,8 @@ const Opinion: React.FC<OpinionProps> = ({ questionId, opinion: defaultOpinion }
 								opinion: 'AGREE',
 							})
 							setLocalOpinion('AGREE')
-						}}>
+						}}
+					>
 						AGREE
 					</button>
 					<button
@@ -64,7 +68,8 @@ const Opinion: React.FC<OpinionProps> = ({ questionId, opinion: defaultOpinion }
 								opinion: 'DISAGREE',
 							})
 							setLocalOpinion('DISAGREE')
-						}}>
+						}}
+					>
 						DISAGREE
 					</button>
 					<div></div>
@@ -116,7 +121,8 @@ const Question: React.FC<FeedPendingQuestionProps> = ({ id, author, votes = 0, t
 							<button
 								onClick={() => {
 									setExpanded(true)
-								}}>
+								}}
+							>
 								Banter
 							</button>
 						</button>

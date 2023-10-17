@@ -1,6 +1,7 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+
 import { trpc } from '../utils/trpc'
 
 const TrendingTopics = () => {
@@ -19,7 +20,9 @@ const TrendingTopics = () => {
 	const popTopics = popularTopics.data
 	return (
 		<div className='flex flex-col rounded bg-white overflow-hidden'>
-			<div className='title pt-4 text-center text-yellow-900 text-xl border-b-2 pb-4 border-yellow-600'>Trending Tags</div>
+			<div className='title pt-4 text-center text-yellow-900 text-xl border-b-2 pb-4 border-yellow-600'>
+				Trending Tags
+			</div>
 			<div className='flex flex-col justify-center p-4 space-y-4'>
 				<div className='rounded text-center flex items-center px-2 mx-1 bg-neutral-100'>
 					<MagnifyingGlassIcon className='h-6 w-6 text-stone-500' />

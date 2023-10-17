@@ -1,13 +1,15 @@
-import BackTitle from '@delvit/web/components/BackTitle'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import React, { useState, useEffect, useMemo } from 'react'
-import Header from '../../components/Header'
-import { trpc } from '../../utils/trpc'
-import Page from '@delvit/web/components/Page'
-import { useBoolState, wrapPreventDefault, wrapStopPropagation } from '@delvit/web/utils/helpers'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { orderBy } from 'lodash'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import React, { useEffect, useMemo, useState } from 'react'
+
+import BackTitle from '@delvit/web/components/BackTitle'
+import Page from '@delvit/web/components/Page'
+import { useBoolState, wrapPreventDefault, wrapStopPropagation } from '@delvit/web/utils/helpers'
+
+import Header from '../../components/Header'
+import { trpc } from '../../utils/trpc'
 
 const NewArticlePage = () => {
 	const router = useRouter()
@@ -53,7 +55,7 @@ const NewArticlePage = () => {
 			url,
 			for: evidenceType === 'FOR',
 			image,
-			tags: postTopics.map(t => t.id)
+			tags: postTopics.map((t) => t.id),
 		})
 
 		return false
@@ -99,16 +101,13 @@ const NewArticlePage = () => {
 			topics.data
 				?.filter((topic) => topicSearch === '' || topic.title.toLowerCase().includes(topicSearch.toLowerCase()))
 				.filter((topic) => !selectedIDs.has(topic.id)) ?? [],
-				x => x.title.toLowerCase(),
-				'asc'
+			(x) => x.title.toLowerCase(),
+			'asc'
 		)
 	}, [topics.data, postTopics, topicSearch])
 
 	return (
-		<Page
-			title='Create Post'
-			onClick={topicSearchHasFocus.setFalse}
-		>
+		<Page title='Create Post' onClick={topicSearchHasFocus.setFalse}>
 			<div className='flex flex-col max-w-screen-md m-auto'>
 				<div className='text-center text-yellow-600 text-3xl font-semibold'>Create Post</div>
 				<form onSubmit={onSubmit} className='flex flex-col space-y-4'>
@@ -155,9 +154,13 @@ const NewArticlePage = () => {
 										className='px-4 py-2 bg-yellow-600 bg-opacity-10 rounded-lg text-center justify-center align-center text-yellow-600 select-none'
 									>
 										<span>
-											{topic.title} <XMarkIcon className='w-4 h-4 inline cursor-pointer' onClick={() => {
-												setPostTopics(topics => topics.filter(t => t.id !== topic.id))
-											}}/>
+											{topic.title}{' '}
+											<XMarkIcon
+												className='w-4 h-4 inline cursor-pointer'
+												onClick={() => {
+													setPostTopics((topics) => topics.filter((t) => t.id !== topic.id))
+												}}
+											/>
 										</span>
 									</div>
 								))}
@@ -174,7 +177,7 @@ const NewArticlePage = () => {
 
 							<div
 								className={`absolute left-0 w-full z-[1] flex-col bg-white divide-y divide-slate-200 drop-shadow-md max-h-[320px] overflow-y-auto ${
-									(topicSearch !== '' || topicSearchHasFocus.val ) ? 'flex' : 'hidden'
+									topicSearch !== '' || topicSearchHasFocus.val ? 'flex' : 'hidden'
 								}`}
 							>
 								{filteredTags.map((topic, idx) => (
@@ -190,8 +193,7 @@ const NewArticlePage = () => {
 										{topic.title}
 									</div>
 								))}
-								{filteredTags.length ==
-									0 && <div className='p-4 text-neutral-400'>No Results...</div>}
+								{filteredTags.length == 0 && <div className='p-4 text-neutral-400'>No Results...</div>}
 							</div>
 
 							{/* <select

@@ -1,9 +1,10 @@
-import React from 'react'
-import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import { trpc } from '@delvit/web/utils/trpc'
+import { useRouter } from 'next/router'
+import React from 'react'
+
 import Page from '@delvit/web/components/Page'
+import { trpc } from '@delvit/web/utils/trpc'
 
 // const TimedQuestion = () => {
 //     return (
@@ -97,18 +98,18 @@ const Topic: React.FC<TopicProps> = ({ data }) => {
 	const admin = true
 
 	return (
-        <div className='bg-white rounded h-auto p-2 px-4 flex flex-col col-span-3 w-full'>
+		<div className='bg-white rounded h-auto p-2 px-4 flex flex-col col-span-3 w-full'>
 			<div className='text-center text-xl mt-4 mb-10'>
 				{data.title}
 				{admin && (
 					<Link href={`/topics/edit/${topicId}`} className='text-blue-600 text-sm'>
-						 Edit
+						Edit
 					</Link>
 				)}
 			</div>
 			<div className='mx-5'>{data.body}</div>
 		</div>
-    );
+	)
 }
 
 const TopicPage = () => {

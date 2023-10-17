@@ -1,6 +1,7 @@
+import { ArrowDownIcon, ArrowUpIcon, ChatBubbleLeftIcon } from '@heroicons/react/24/outline'
 import React, { useEffect, useState } from 'react'
+
 import { trpc } from '../utils/trpc'
-import { ChatBubbleLeftIcon, ArrowUpIcon, ArrowDownIcon } from '@heroicons/react/24/outline'
 
 export type CommentData = {
 	id: string

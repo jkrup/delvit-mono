@@ -1,10 +1,11 @@
-import hstkLogoUrl from '../imgs/hstk-logo.png'
-import Link from 'next/link'
 import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import UserMenu from './UserMenu'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
+import hstkLogoUrl from '../imgs/hstk-logo.png'
+import UserMenu from './UserMenu'
 
 const Header = () => {
 	const { status } = useSession()
@@ -29,15 +30,14 @@ const Header = () => {
 	}
 
 	return (
-        <div className='h-24 bg-white p-4'>
+		<div className='h-24 bg-white p-4'>
 			<div className='flex flex-row justify-between items-center max-w-screen-xl mx-auto'>
 				<Link href='/'>
-
-                    <Bars3Icon className='w-10 relative' />
-
-                </Link>
+					<img src={hstkLogoUrl.src} width={'64px'} height={'64px'} />
+					{/* <Bars3Icon className='w-10 relative' /> */}
+				</Link>
 				<form
-					className='grow my-auto flex-wrap space-x-4 mx-8 justify-center max-w-screen-xl hidden sm:flex lg:mx-32'
+					className='grow my-auto flex-wrap space-x-4 mx-8 justify-center max-w-screen-xl hidden sm:flex'
 					onSubmit={onSearch}
 				>
 					<div className='flex items-center bg-neutral-100 bg-opacity-50 text-stone-400 space-x-2 flex-1 rounded-sm px-2 overflow-hidden text-zinc-600 focus:text-zinc-400'>
@@ -54,7 +54,7 @@ const Header = () => {
 				<UserMenu />
 			</div>
 		</div>
-    );
+	)
 }
 
 export default Header

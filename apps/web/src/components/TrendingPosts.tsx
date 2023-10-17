@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useState } from 'react'
+
 import { trpc } from '../utils/trpc'
 
 const TrendingPosts = () => {
@@ -8,7 +9,7 @@ const TrendingPosts = () => {
 	const viewAll = limit >= (trendingPost.data?.length || 1)
 
 	return (
-        <div className='flex flex-col rounded bg-white overflow-hidden'>
+		<div className='flex flex-col rounded bg-white overflow-hidden'>
 			<div className='title pt-4 text-center text-yellow-900 text-xl border-b-2 pb-4 border-yellow-600'>
 				Trending Posts
 			</div>
@@ -17,19 +18,18 @@ const TrendingPosts = () => {
 					{trendingPost.data?.map(
 						(consensusQuestion, i) =>
 							i < limit && (
-								(<Link
-                                    key={consensusQuestion.id}
-                                    href={`/articles/${consensusQuestion.id}`}
-                                    className='px-4 hover:bg-stone-300 hover:text-yellow-800 grow'>
-
-                                    <div key={consensusQuestion.id} className='flex p-4 items-center space-x-4'>
-                                        <div className='text-xl font-bold'>{i + 1}</div>
-                                        <div className='m-1 text-lg rounded grow border-yellow-800 line-clamp-2'>
-                                            {consensusQuestion.title}
-                                        </div>
-                                    </div>
-
-                                </Link>)
+								<Link
+									key={consensusQuestion.id}
+									href={`/articles/${consensusQuestion.id}`}
+									className='px-4 hover:bg-stone-300 hover:text-yellow-800 grow'
+								>
+									<div key={consensusQuestion.id} className='flex p-4 items-center space-x-4'>
+										<div className='text-xl font-bold'>{i + 1}</div>
+										<div className='m-1 text-lg rounded grow border-yellow-800 line-clamp-2'>
+											{consensusQuestion.title}
+										</div>
+									</div>
+								</Link>
 							)
 					)}
 					{!trendingPost.data?.length && <div className='p-2'></div>}
@@ -48,7 +48,7 @@ const TrendingPosts = () => {
 				)}
 			</div>
 		</div>
-    );
+	)
 }
 
 export default TrendingPosts
