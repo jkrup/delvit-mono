@@ -100,6 +100,9 @@ export const articleRouter = createRouter()
 				parentPosts: {
 					none: {},
 				},
+				evidencePosts: {
+					none: {},
+				},
 				parentQuestions: {
 					none: {},
 				},
