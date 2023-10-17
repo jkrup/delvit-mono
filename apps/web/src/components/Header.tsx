@@ -33,7 +33,8 @@ const Header = () => {
 		<div className='h-24 bg-white p-4'>
 			<div className='flex flex-row justify-between items-center max-w-screen-xl mx-auto'>
 				<Link href='/'>
-					<Bars3Icon className='w-10 relative' />
+					<img src={hstkLogoUrl.src} width={'64px'} height={'64px'} />
+					{/* <Bars3Icon className='w-10 relative' /> */}
 				</Link>
 				<form
 					className='grow my-auto flex-wrap space-x-4 mx-8 justify-center max-w-screen-xl hidden sm:flex'

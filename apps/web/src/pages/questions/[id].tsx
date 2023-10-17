@@ -19,6 +19,7 @@ import Page from '@delvit/web/components/Page'
 import { timeToReadibleAgo } from '@delvit/web/utils/helpers'
 
 import Header from '../../components/Header'
+import hstkLogoUrl from '../../imgs/hstk-logo.png'
 import { trpc } from '../../utils/trpc'
 
 const QuestionPage = () => {
@@ -348,8 +349,11 @@ const QuestionPage = () => {
 									<div className={`bg-green-600 rounded-xl h-2`} style={{ width: `${forPercent}%` }}></div>
 								</div>
 								<div className='flex px-2 justify-between text-yellow-700'>
-									<div>{forPostsCount} Posts</div>
-									<div>Earn {forEarn}</div>
+									<div className='flex items-center justify-center'>{forPostsCount} Posts</div>
+									<div className='flex items-center justify-center'>
+										<span className='mr-1'>Earn {forEarn}</span>
+										<img src={hstkLogoUrl.src} width='32px' height='32px' />
+									</div>
 								</div>
 							</div>
 
@@ -359,8 +363,11 @@ const QuestionPage = () => {
 									<div className={`bg-red-500 rounded-xl h-2`} style={{ width: `${100 - forPercent}%` }}></div>
 								</div>
 								<div className='flex px-2 justify-between text-yellow-700'>
-									<div>{againstPostsCount} Posts</div>
-									<div>Earn {againstEarn}</div>
+									<div className='flex items-center justify-center'>{againstPostsCount} Posts</div>
+									<div className='flex items-center justify-center'>
+										<span className='mr-1'>Earn {againstEarn}</span>
+										<img src={hstkLogoUrl.src} width='32px' height='32px' />
+									</div>
 								</div>
 							</div>
 						</div>
