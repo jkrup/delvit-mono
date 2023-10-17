@@ -27,6 +27,15 @@ export const timeToReadibleAgo = (past: Date) => {
 	return rtf.format(-Math.floor(diff / (60 * 60 * 24 * 30)), 'month')
 }
 
+const IntFormatter = new Intl.NumberFormat('en-us', {
+	maximumFractionDigits: 0,
+	useGrouping: true
+})
+
+export function prettyPrintInt(val: number) {
+	return IntFormatter.format(val)
+}
+
 export function useBoolState(init?: boolean) {
 	const [state, setState] = useState(!!init)
 	return {

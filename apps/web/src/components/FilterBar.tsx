@@ -1,6 +1,5 @@
 import { ArrowTrendingUpIcon, BoltIcon, FireIcon, FunnelIcon } from '@heroicons/react/20/solid'
 import { LightBulbIcon, RssIcon, TrophyIcon } from '@heroicons/react/24/outline'
-import '@heroicons/react/24/solid'
 import { useRouter } from 'next/router'
 
 const FilterBar = () => {

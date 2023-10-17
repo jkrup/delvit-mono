@@ -36,7 +36,7 @@ const Header = () => {
 					<Bars3Icon className='w-10 relative' />
 				</Link>
 				<form
-					className='grow my-auto flex-wrap space-x-4 mx-8 justify-center max-w-screen-xl hidden sm:flex lg:mx-32'
+					className='grow my-auto flex-wrap space-x-4 mx-8 justify-center max-w-screen-xl hidden sm:flex'
 					onSubmit={onSearch}
 				>
 					<div className='flex items-center bg-neutral-100 bg-opacity-50 text-stone-400 space-x-2 flex-1 rounded-sm px-2 overflow-hidden text-zinc-600 focus:text-zinc-400'>

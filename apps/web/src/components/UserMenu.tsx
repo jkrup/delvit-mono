@@ -1,9 +1,11 @@
+import { BoltIcon, CurrencyDollarIcon, WalletIcon } from '@heroicons/react/24/solid'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 
 import hstkLogoUrl from '../imgs/hstk-logo.png'
+import { prettyPrintInt } from '../utils/helpers'
 import { trpc } from '../utils/trpc'
 
 const userOptions = {
@@ -45,13 +47,18 @@ const UserMenu = () => {
 	const [open, setOpen] = useState(true)
 
 	const avatarData = trpc.useQuery(['auth.getAvatar'])
-
+	const profile = trpc.useQuery(['auth.getProfile'])
 	const avatar = avatarData.data || '/noavatar.png'
+	const points = profile.data?.points.map((p) => p.amount).reduce((acc, p) => p + acc, 0) ?? 0
 
 	return (
 		<div className='flex justify-items-end'>
 			<div className={`duration-300`} onClick={() => setOpen(!open)}>
-				<div>
+				<div className='flex space-between'>
+					<div className='flex flex-col relative text-center items-center justify-center'>
+						<BoltIcon className='w-10 h-10 text-yellow-600 opacity-30' />
+						<span className='text-green-600 text-sm font-bold'>+{prettyPrintInt(points)}</span>
+					</div>
 					<Image
 						alt='Profile Avatar'
 						className={`rounded-full mx-4 cursor-pointer ${open ? '' : ''} duration-500`}
