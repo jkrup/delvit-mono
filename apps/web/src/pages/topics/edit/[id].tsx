@@ -1,9 +1,10 @@
 //@ts-nocheck
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import React, { useState, useEffect, useRef } from 'react'
 import { XIcon } from '@heroicons/react/24/outline'
+import Head from 'next/head'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import React, { useEffect, useRef, useState } from 'react'
+
 import Page from '@delvit/web/components/Page'
 import { trpc } from '@delvit/web/utils/trpc'
 
@@ -79,7 +80,7 @@ const EditTopicPage = () => {
 	}
 
 	return (
-        <Page title='Edit Topic'>
+		<Page title='Edit Topic'>
 			<div className='bg-slate-300 min-h-screen'>
 				<form onSubmit={onSubmit} className='flex flex-col space-y-4 max-w-screen-lg m-auto py-8'>
 					<input
@@ -103,11 +104,13 @@ const EditTopicPage = () => {
 							<ol className=''>
 								{relatedArticles?.map((relatedArticle) => {
 									return (
-                                        <li
+										<li
 											key={relatedArticle.id}
 											className='my-2 w-full flex justify-between items-center hover:bg-yellow-500'
 										>
-											<Link href={'/articles/' + relatedArticle.id} legacyBehavior>{relatedArticle.title}</Link>
+											<Link href={'/articles/' + relatedArticle.id} legacyBehavior>
+												{relatedArticle.title}
+											</Link>
 											<XIcon
 												onClick={() => {
 													removeRelatedArticle(relatedArticle.id)
@@ -115,7 +118,7 @@ const EditTopicPage = () => {
 												className='h-4 w-4'
 											/>
 										</li>
-                                    );
+									)
 								})}
 							</ol>
 							<div className='flex'>
@@ -130,7 +133,7 @@ const EditTopicPage = () => {
 				</form>
 			</div>
 		</Page>
-    );
+	)
 }
 
 export default EditTopicPage

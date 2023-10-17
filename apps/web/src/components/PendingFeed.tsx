@@ -1,7 +1,9 @@
-import { trpc } from '@delvit/web/utils/trpc'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useRef } from 'react'
+
+import { trpc } from '@delvit/web/utils/trpc'
+
 import FeedPendingQuestion from './FeedPendingQuestion'
 import FilterBar from './FilterBar'
 import InfoSection from './InfoSection'
@@ -9,7 +11,7 @@ import SearchDisplay from './SearchDisplay'
 
 const SelectedAlert = () => {
 	return (
-        <div className='flex bg-yellow-600 px-8 py-4 items-center'>
+		<div className='flex bg-yellow-600 px-8 py-4 items-center'>
 			<div className='text-white italic font-semibold'>
 				Alert - you have been randomly selected to participate in the truth Consensus Algorithm
 			</div>
@@ -19,7 +21,7 @@ const SelectedAlert = () => {
 				</Link>
 			</div>
 		</div>
-    );
+	)
 }
 
 const PendingFeed = () => {
@@ -102,7 +104,7 @@ const PendingFeed = () => {
 								await activateQuestion.mutateAsync({
 									questionId: pendingQuestion.id,
 								})
-                await allPendingQuestions.refetch()
+								await allPendingQuestions.refetch()
 							}}
 						/>
 					)

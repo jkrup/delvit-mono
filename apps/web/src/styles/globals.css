@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 .so {
-    display: none;
+	display: none;
 }
 form:focus-within .so {
-    display: inherit;
+	display: inherit;
 }

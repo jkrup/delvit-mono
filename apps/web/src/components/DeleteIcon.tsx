@@ -1,8 +1,9 @@
-import React from 'react'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
+import { XMarkIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { XMarkIcon } from '@heroicons/react/24/solid'
+import React from 'react'
+
 import { trpc } from '@delvit/web/utils/trpc'
 
 type Props = {
@@ -31,7 +32,7 @@ const DeleteIcon: React.FC<Props> = ({ reload, ...rest }) => {
 					await removeQ.mutateAsync(rest)
 				}
 				if (reload) router.reload()
-        else router.replace('/')
+				else router.replace('/')
 			}}
 		/>
 	)

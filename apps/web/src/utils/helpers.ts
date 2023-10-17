@@ -74,7 +74,6 @@ export function wrapPreventDefault(fn: React.EventHandler<React.SyntheticEvent>)
 	}
 }
 
-
 export function wrapStopPropagation(fn: React.EventHandler<React.SyntheticEvent>) {
 	return (e: React.SyntheticEvent) => {
 		e.stopPropagation()

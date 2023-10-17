@@ -1,7 +1,8 @@
-import { createRouter } from './context'
-import { z } from 'zod'
-import { TRPCError } from '@trpc/server'
 import { Prisma } from '@prisma/client'
+import { TRPCError } from '@trpc/server'
+import { z } from 'zod'
+
+import { createRouter } from './context'
 
 export const topicRouter = createRouter()
 	.query('getPopularTopics', {
