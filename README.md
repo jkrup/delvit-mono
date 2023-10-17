@@ -7,7 +7,7 @@
 1. Run db container: `nx run db:serve` or `nx serve db`
 2. Run next server: `nx run web:serve`  or `nx serve web` (served on port 4200 by default)
 
-Alternatively, use `nx run-many -t serve -p web db` to run both servers in a single console
+Alternatively, use `nx run-many -t serve` to run both servers in a single console
 
 ## Dev Tools
 - Prisma studio: `nx run db:ui`
