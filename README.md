@@ -16,7 +16,7 @@ Alternatively, use `nx run-many -t serve` to run both servers in a single consol
 
 ## First-time setup
 > in the root directory
-1. Install packages: `npm i`
+1. Install packages: `yarn`
 2. Run DB container in background: `nx run db:serve`
 3. (new terminal) Setup db schema: `nx run db:migrate`
 4. Populate `apps/web/.env` file and then follow quickstart steps above
