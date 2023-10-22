@@ -24,6 +24,7 @@ Alternatively, use `nx run-many -t serve` to run both servers in a single consol
 # Production - Fly.io
 
 ## Deploying
+- Build and deploy to fly.io: `nx run web:release`
 
 References:
 - [Deploying with a Dockerfile](https://fly.io/docs/languages-and-frameworks/dockerfile/)
