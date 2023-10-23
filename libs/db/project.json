@@ -23,7 +23,7 @@
           "envFile": "libs/db/.env"
         },
         "production": {
-          "envFile": "libs/db/.env"
+          "envFile": "libs/db/.env.production"
         }
       },
       "defaultConfiguration": "development"
@@ -53,7 +53,7 @@
           "envFile": "libs/db/.env"
         },
         "production": {
-          "envFile": "libs/db/.env"
+          "envFile": "libs/db/.env.production"
         }
       },
       "defaultConfiguration": "development"
