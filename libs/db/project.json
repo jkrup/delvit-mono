@@ -68,19 +68,19 @@
           "envFile": "libs/db/.env"
         },
         "production": {
-          "envFile": "libs/db/.env"
+          "envFile": "libs/db/.env.production"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "production"
     },
     "proxy": {
 			"executor": "nx:run-commands",
 			"options": {
 				"cwd": "libs/db",
-				"command": "kubectl -n hstk port-forward svc/hstk-web-db 5432",
+				"command": "fly proxy 5432 -a dlv-web-db",
 				"color": true
 			}
-		},
+		}
   },
   "tags": []
 }
