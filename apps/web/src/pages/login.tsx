@@ -213,10 +213,10 @@ const LoginPage: React.FC = () => {
 			<div className='blur'>
 				<HomePage />
 			</div>
-			<div className='absolute top-0 left-0 w-full grid min-h-screen bg-zinc-700/50'>
+      <div className='absolute top-0 left-0 w-full grid min-h-screen'>
 				<div
 					className={
-						'm-auto bg-white p-12 py-4 w-[400px] rounded-xl drop-shadow-2xl flex flex-col space-y-3' +
+          'm-auto bg-zinc-800/75 p-12 py-4 w-[400px] rounded-xl drop-shadow-2xl flex flex-col space-y-3' +
 						(loggingIn && ' blur')
 					}
 				>
@@ -224,10 +224,10 @@ const LoginPage: React.FC = () => {
 						<Image alt='Delvit Logo' className='cursor-pointer rounded-full mx-4 h-[64px] w-[64px]' src={hstkLogoUrl} />
 					</div>
 					<div className='pb-4 text-center w-full flex flex-col'>
-						<h2 className='text-3xl pb-4'>Login With:</h2>
+						<h2 className='text-3xl pb-4 text-white'>Login With:</h2>
 						<button
 							className={
-								'text-xl justify-center rounded-xl font-bold p-4 my-2 bg-slate-700 hover:bg-slate-600 hover:drop-shadow text-white flex items-center'
+								'text-xl justify-center rounded-xl font-bold p-4 my-2 bg-yellow-600 hover:bg-yellow-500 hover:drop-shadow text-white flex items-center'
 							}
 							onClick={() => signIn('email')}
 						>
@@ -235,31 +235,15 @@ const LoginPage: React.FC = () => {
 						</button>
 						<button
 							className={
-								'text-xl justify-center rounded-xl font-bold p-4 my-2 bg-slate-700 hover:bg-slate-600 hover:drop-shadow text-white flex items-center'
+								'text-xl justify-center rounded-xl font-bold p-4 my-2 bg-yellow-600 hover:bg-yellow-500 hover:drop-shadow text-white flex items-center'
 							}
 							onClick={() => signIn('google')}
 						>
 							Google
 						</button>
-						{/* <button
-              className={
-                "justify-center rounded-xl font-bold p-4 my-2 bg-slate-700 hover:bg-slate-600 hover:drop-shadow text-white flex items-center"
-              }
-              onClick={() => signIn("github")}
-            >
-              Login With GitHub
-            </button> */}
-						{/* <button
-              className={
-                "justify-center rounded-xl font-bold p-4 my-2 bg-slate-700 hover:bg-slate-600 hover:drop-shadow text-white flex items-center"
-              }
-              onClick={() => signIn("facebook")}
-            >
-              Login With Facebook
-            </button> */}
 						<button
 							className={
-								'justify-center rounded-xl font-bold p-4 my-2 bg-slate-700 hover:bg-slate-600 hover:drop-shadow text-white flex items-center'
+								'justify-center rounded-xl font-bold p-4 my-2 bg-yellow-600 hover:bg-yellow-500 hover:drop-shadow text-white flex items-center'
 							}
 							onClick={() => loginWithMetamask()}
 						>
@@ -268,18 +252,7 @@ const LoginPage: React.FC = () => {
 							</div>
 							<div className='text-xl'>Metamask</div>
 						</button>
-						<button
-							className={
-								'justify-center rounded-xl font-bold p-4 my-2 bg-slate-700 hover:bg-slate-600 hover:drop-shadow text-white flex items-center'
-							}
-							onClick={() => loginWithKeplr()}
-						>
-							<Image alt='Login with Keplr' width={130} height={28} src='/keplr_w.svg' />
-						</button>
 					</div>
-					<a href='https://www.keplr.app/' className='self-end text-sm pt-1'>
-						Install Keplr Wallet
-					</a>
 				</div>
 			</div>
 		</div>
