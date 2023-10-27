@@ -13,6 +13,7 @@ Alternatively, use `nx run-many -t serve` to run both servers in a single consol
 - Prisma studio: `nx run db:ui`
 - Update DB schema: `nx run db:migrate`
 - Rebuild prisma querybuilder: `nx run db:generate`
+- Delete dev DB data: `nx run db:reset`
 
 ## First-time setup
 > in the root directory

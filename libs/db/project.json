@@ -80,6 +80,14 @@
 				"command": "fly proxy 5432 -a dlv-web-db",
 				"color": true
 			}
+		},
+    "reset": {
+			"executor": "nx:run-commands",
+			"options": {
+				"cwd": "libs/db",
+				"command": "sudo rm -rf data",
+				"color": true
+			}
 		}
   },
   "tags": []
