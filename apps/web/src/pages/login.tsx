@@ -16,25 +16,28 @@ import hstkLogoUrl from '../imgs/hstk-logo.png'
 const HomePage = () => {
 	return (
 		<div>
-			<div className='bg-black h-24 flex flex-row p-4 justify-between'>
-				<Link href='/'>
-					<Image alt='Delvit Logo' className='cursor-pointer rounded-full mx-4 h-[64px] w-[64px]' src={hstkLogoUrl} />
+			<div className='bg-black h-24 flex flex-row p-4 justify-between overflow-hidden'>
+			<Link href='/'>
+					<img src={hstkLogoUrl.src} width={'64px'} height={'64px'} />
+					{/* <Bars3Icon className='w-10 relative' /> */}
 				</Link>
-				<form className='grow my-auto flex space-x-8 justify-center max-w-screen-md'>
-					<div className='flex items-center bg-zinc-500 text-zinc-100 space-x-2 flex-1 rounded-sm px-2 overflow-hidden'>
-						<MagnifyingGlassIcon className='h-6 w-6' />
+				<form
+					className='grow my-auto flex-wrap space-x-4 mx-8 justify-center max-w-screen-xl hidden sm:flex'
+				>
+					<div className='flex items-center bg-neutral-100 bg-opacity-50 text-stone-400 space-x-2 flex-1 rounded-sm px-2 overflow-hidden text-zinc-600 focus:text-zinc-400'>
+						<MagnifyingGlassIcon className='w-6' />
 						<input
-							className='grow max-w-screen-md bg-zinc-500 h-8 text-zinc-100 flex-1 outline-none'
+							className='grow max-w-screen-xl bg-neutral-100 bg-opacity-0 h-8 placeholder:text-zinc-300 focus:placeholder:text-zinc-400 flex-1 outline-none'
 							type='text'
 							placeholder='Search Truth'
 							name='search'
 						/>
 					</div>
-					<button className='bg-slate-600 px-6 text-zinc-50 font-bold'>Search</button>
+					<button className='rounded px-10 py-2 text-neutral-600 font-medium bg-neutral-100'>Search</button>
 				</form>
 				<UserMenu />
 			</div>
-			<div className='pt-4 bg-zinc-700 min-h-screen'>
+			<div className='pt-4 bg-zinc-700 min-h-screen overflow-hidden'>
 				<div className='grid grid-cols-3 gap-4 max-w-screen-xl mx-auto'>
 					{/* Main SubSection */}
 					<ArticlesFeed />
@@ -216,7 +219,7 @@ const LoginPage: React.FC = () => {
       <div className='absolute top-0 left-0 w-full grid min-h-screen'>
 				<div
 					className={
-          'm-auto bg-zinc-800/75 p-12 py-4 w-[400px] rounded-xl drop-shadow-2xl flex flex-col space-y-3' +
+          'm-auto bg-zinc-800/75 p-12 py-4 w-[280px] sm:w-[400px] rounded-xl drop-shadow-2xl flex flex-col space-y-3' +
 						(loggingIn && ' blur')
 					}
 				>

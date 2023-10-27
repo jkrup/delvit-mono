@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 import hstkLogoUrl from '../imgs/hstk-logo.png'
+import walletIcon from 'apps/web/public/wallet.png'
 import { prettyPrintInt } from '../utils/helpers'
 import { trpc } from '../utils/trpc'
 
@@ -56,7 +57,7 @@ const UserMenu = () => {
 			<div className={`duration-300`} onClick={() => setOpen(!open)}>
 				<div className='flex space-between'>
 					<div className='flex flex-col relative text-center items-center justify-center'>
-						<BoltIcon className='w-10 h-10 text-yellow-600 opacity-30' />
+						<img src={walletIcon.src} className='w-12'/>
 						<span className='text-green-600 text-sm font-bold'>+{prettyPrintInt(points)}</span>
 					</div>
 					<Image
