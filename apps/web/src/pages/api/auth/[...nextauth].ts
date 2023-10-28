@@ -9,6 +9,8 @@ import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import EmailProvider from 'next-auth/providers/email'
 import GoogleProvider from 'next-auth/providers/google'
+import { getCsrfToken } from 'next-auth/react'
+import { SiweMessage } from 'siwe'
 
 import { verify } from '../../../../verify'
 import { prisma } from '../../../server/db/client'
@@ -75,7 +77,7 @@ export const authOptions: NextAuthOptions = {
 					return null
 				}
 
-				const acct = await prisma.web3Account.findUnique({
+				const acct: any = await prisma.web3Account.findUnique({
 					where: {
 						provider_address: {
 							address,
@@ -179,6 +181,85 @@ export const authOptions: NextAuthOptions = {
 				return {
 					id: myUser.id,
 					name: myUser.name,
+				}
+			},
+		}),
+		// walletconnect
+		CredentialsProvider({
+			id: "walletconnect",
+			name: "walletconnect",
+			credentials: {
+				message: { label: "Message", type: "text" },
+				signedMessage: { label: "Signed Message", type: "text" }, // aka signature
+			},
+			async authorize(credentials, req) {
+				if (!credentials?.signedMessage || !credentials?.message) {
+					return null;
+				}
+				console.log({ credentials, req })
+				try {
+					const siwe = new SiweMessage(JSON.parse(credentials?.message));
+					const nextAuthUrl = new URL(`${process.env.NEXTAUTH_URL_INTERNAL}`)
+					const result = await siwe.verify({
+						signature: credentials.signedMessage,
+						domain: nextAuthUrl.host,
+						nonce: await getCsrfToken({ req }),
+					});
+					const address: string = result?.data?.address
+					console.log({ result })
+					console.log({ address })
+					if (!result.success) throw new Error("Invalid Signature");
+
+					if (result.data.statement !== process.env.NEXT_PUBLIC_SIGNIN_MESSAGE)
+						throw new Error("Statement Mismatch");
+
+					// if (new Date(result.data.expirationTime as string) < new Date())
+					//   throw new Error("Signature Already expired");
+					console.log("Returning")
+
+					const acct = await prisma.web3Account.findUnique({
+						where: {
+							provider_address: {
+								address,
+								provider: 'walletconnect'
+							}
+						},
+						include: {
+							user: true
+						}
+					})
+
+					if (acct === null) {
+						const newUser = await prisma.user.create({
+							data: {
+								name: address
+							}
+						})
+
+						// Create the new acct
+						await prisma.web3Account.create({
+							data: {
+								address,
+								provider: 'walletconnect',
+								userId: newUser.id
+							}
+						})
+
+						return {
+							id: newUser.id,
+							name: newUser.name
+						}
+					}
+
+					const myUser = acct.user
+
+					return {
+						id: myUser.id,
+						name: myUser.name
+					}
+				} catch (error) {
+					console.log(error);
+					return null;
 				}
 			},
 		}),

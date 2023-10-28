@@ -1,15 +1,20 @@
-import { OfflineAminoSigner } from '@cosmjs/amino'
+import WalletConnectButton from '@/components/mobile/partials/WalletConnectButton'
+import ArticlesFeed from '@/components/webview/ArticlesFeed'
+import PopularTopics from '@/components/webview/PopularTopics'
+import UserMenu from '@/components/webview/UserMenu'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { useWeb3Modal } from '@web3modal/react'
+import { getCsrfToken, signIn, signOut, useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { SiWalletconnect } from 'react-icons/si'
+import { SiweMessage } from 'siwe'
+import { useAccount, useConnect, useNetwork, useSignMessage } from 'wagmi'
+import { InjectedConnector } from 'wagmi/connectors/injected'
 
-import ArticlesFeed from '../components/ArticlesFeed'
-import PopularTopics from '../components/PopularTopics'
-import UserMenu from '../components/UserMenu'
 import hstkLogoUrl from '../imgs/hstk-logo.png'
 
 // Skeleton that will be blurred
@@ -17,13 +22,11 @@ const HomePage = () => {
 	return (
 		<div>
 			<div className='bg-black h-24 flex flex-row p-4 justify-between overflow-hidden'>
-			<Link href='/'>
+				<Link href='/'>
 					<img src={hstkLogoUrl.src} width={'64px'} height={'64px'} />
 					{/* <Bars3Icon className='w-10 relative' /> */}
 				</Link>
-				<form
-					className='grow my-auto flex-wrap space-x-4 mx-8 justify-center max-w-screen-xl hidden sm:flex'
-				>
+				<form className='grow my-auto flex-wrap space-x-4 mx-8 justify-center max-w-screen-xl hidden sm:flex'>
 					<div className='flex items-center bg-neutral-100 bg-opacity-50 text-stone-400 space-x-2 flex-1 rounded-sm px-2 overflow-hidden text-zinc-600 focus:text-zinc-400'>
 						<MagnifyingGlassIcon className='w-6' />
 						<input
@@ -55,14 +58,16 @@ const HomePage = () => {
 	)
 }
 
-interface Keplr {
-	enable: (chainId: string) => Promise<any>
-	getOfflineSigner: (chainId: string) => OfflineAminoSigner
-}
-
 const LoginPage: React.FC = () => {
 	const { data: session } = useSession()
 	const [loggingIn, setLoggingIn] = useState(false)
+	const { chain } = useNetwork()
+	const { isConnected, address } = useAccount()
+	const { signMessageAsync } = useSignMessage()
+	const { open } = useWeb3Modal()
+	const { connect } = useConnect({
+		connector: new InjectedConnector(),
+	})
 
 	const router = useRouter()
 
@@ -104,71 +109,34 @@ const LoginPage: React.FC = () => {
 		}
 	}
 
-	const loginWithKeplr = async () => {
-		const chainId = 'cosmoshub-4'
-		const msgToSign = 'LogMeIn'
-		const signDoc = {
-			msgs: [
-				{
-					type: 'hstk-login',
-					value: msgToSign,
-				},
-			],
-			fee: {
-				amount: [],
-				// Note: this needs to be 0 gas to comply with ADR36, but Keplr current throws an error. See: https://github.com/cosmos/cosmos-sdk/blob/master/docs/architecture/adr-036-arbitrary-signature.md#decision
-				gas: '0',
-			},
-			chain_id: chainId,
-			memo: 'Login to DLV',
-			account_number: '0',
-			sequence: '0',
-		}
+	const loginWithWalletConnect = async () => {
+		if (!isConnected) open()
+		try {
+			const message = new SiweMessage({
+				domain: window.location.host,
+				uri: window.location.origin,
+				version: '1',
+				address: address,
+				statement: process.env.NEXT_PUBLIC_SIGNIN_MESSAGE,
+				nonce: await getCsrfToken(),
+				chainId: chain?.id,
+			})
 
-		setLoggingIn(true)
+			const signedMessage = await signMessageAsync({
+				message: message.prepareMessage(),
+			})
 
-		if ((window as any).keplr) {
-			try {
-				const keplr: Keplr = (window as any).keplr
-				await keplr.enable(chainId)
-				const offlineSigner = keplr.getOfflineSigner(chainId)
-				const accounts = await offlineSigner.getAccounts()
-				const account = accounts[0]
-
-				if (!account) {
-					throw new Error('No Keplr accounts')
-				}
-
-				const { signed, signature } = await offlineSigner.signAmino(account.address, signDoc)
-
-				const payload = JSON.stringify({
-					signed,
-					signature,
-					pk: Array.from(account.pubkey),
-				})
-
-				signIn('credentials', {
-					keplr: payload,
-					callbackUrl: '/profile',
-				}).then((sir) => {
-					setLoggingIn(false)
-					if (sir) {
-						const { error, status, ok, url } = sir
-						if (error) {
-							console.error(error)
-						}
-						console.log({ status, ok, url })
-					}
-				})
-			} catch (err) {
-				console.error(err)
-				setLoggingIn(false)
-				return
+			const response = await signIn('walletconnect', {
+				message: JSON.stringify(message),
+				signedMessage,
+				redirect: true,
+				callbackUrl: '/profile',
+			})
+			if (response?.error) {
+				console.log('Error occured:', response.error)
 			}
-		} else {
-			// Error no keplr detected
-			alert('No Keplr Wallet detected')
-			setLoggingIn(false)
+		} catch (error) {
+			console.log('Error Occured', error)
 		}
 	}
 
@@ -178,13 +146,9 @@ const LoginPage: React.FC = () => {
 	if (router.query['auto'] === 'facebook') {
 		signIn('facebook')
 	}
-	if (router.query['auto'] === 'keplr') {
-		let q = router.query
-		delete q['auto']
-		loginWithKeplr()
-	}
+
 	if (router.query['auto'] === 'metamask') {
-		let q = router.query
+		const q = router.query
 		delete q['auto']
 		loginWithMetamask()
 	}
@@ -216,10 +180,10 @@ const LoginPage: React.FC = () => {
 			<div className='blur'>
 				<HomePage />
 			</div>
-      <div className='absolute top-0 left-0 w-full grid min-h-screen'>
+			<div className='absolute top-0 left-0 w-full grid min-h-screen'>
 				<div
 					className={
-          'm-auto bg-zinc-800/75 p-12 py-4 w-[280px] sm:w-[400px] rounded-xl drop-shadow-2xl flex flex-col space-y-3' +
+						'm-auto bg-zinc-800/75 p-12 py-4 w-[280px] sm:w-[400px] rounded-xl drop-shadow-2xl flex flex-col space-y-3' +
 						(loggingIn && ' blur')
 					}
 				>
@@ -255,6 +219,15 @@ const LoginPage: React.FC = () => {
 							</div>
 							<div className='text-xl'>Metamask</div>
 						</button>
+						<WalletConnectButton
+							onClick={loginWithWalletConnect}
+							icon={
+								<div className=''>
+									<SiWalletconnect className='w-6 h-6' />
+								</div>
+							}
+							label={'Walletconnect'}
+						/>
 					</div>
 				</div>
 			</div>
