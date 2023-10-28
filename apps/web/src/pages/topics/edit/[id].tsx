@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
 
-import Page from '@delvit/web/components/Page'
-import { trpc } from '@delvit/web/utils/trpc'
+import Page from '@/components/Page'
+import { trpc } from '@/utils/trpc'
 
 const EditTopicPage = () => {
 	const router = useRouter()

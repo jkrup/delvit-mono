@@ -11,7 +11,7 @@ const CardLink = ({ url }: { url: string | undefined }) => {
             href={u}
             key={u}
             target="_blank"
-            className="text-yellow-700 hover:text-yellow-400 flex items-center">
+            className="text-gold hover:text-yellow-400 flex items-center">
 
             <LinkIcon />
             <div className="truncate text-sm italic">{u}</div>

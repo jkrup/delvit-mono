@@ -69,7 +69,7 @@ const FeedPost: React.FC<FeedPostProps> = ({
         </div>
         {url && (
           <a
-            className="pb-4 flex items-center text-yellow-700 space-x-1 truncate w-80"
+            className="pb-4 flex items-center text-gold space-x-1 truncate w-80"
             href={url}
             rel="noreferrer"
             target="_blank"

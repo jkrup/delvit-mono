@@ -82,7 +82,7 @@ const Article: React.FC<ArticleProps> = ({
                 href={u}
                 key={u}
                 target="_blank"
-                className="text-yellow-700 hover:text-yellow-400 flex items-center">
+                className="text-gold hover:text-yellow-400 flex items-center">
 
                 <LinkIcon className="h-6 w-6 shrink-0" />
                 <div className="truncate text-sm italic">{u}</div>

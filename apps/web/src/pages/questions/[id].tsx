@@ -1,3 +1,14 @@
+import QuestionScreen from '@/components/mobile/screens/QuestionScreen'
+import BackTitle from '@/components/webview/BackTitle'
+import BanterSection from '@/components/webview/BanterSection'
+import ConsensusDropdown from '@/components/webview/ConsensusDropdown'
+import DeleteIcon from '@/components/webview/DeleteIcon'
+import FilterBar from '@/components/webview/FilterBar'
+import LoadingArticlePage from '@/components/webview/LoadingArticlePage'
+import Page from '@/components/webview/Page'
+import { useViewPort } from '@/hooks/useViewPort'
+import { timeToReadibleAgo } from '@/utils/helpers'
+import { trpc } from '@/utils/trpc'
 import {
 	ChevronRightIcon,
 	DocumentMagnifyingGlassIcon,
@@ -9,22 +20,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
-import BackTitle from '@delvit/web/components/BackTitle'
-import BanterSection from '@delvit/web/components/BanterSection'
-import ConsensusDropdown from '@delvit/web/components/ConsensusDropdown'
-import DeleteIcon from '@delvit/web/components/DeleteIcon'
-import FilterBar from '@delvit/web/components/FilterBar'
-import LoadingArticlePage from '@delvit/web/components/LoadingArticlePage'
-import Page from '@delvit/web/components/Page'
-import { timeToReadibleAgo } from '@delvit/web/utils/helpers'
-
-import Header from '../../components/Header'
 import hstkLogoUrl from '../../imgs/hstk-logo.png'
-import { trpc } from '../../utils/trpc'
 
 const QuestionPage = () => {
 	const router = useRouter()
-
+	const { width } = useViewPort()
 	//TODO: Check articleId is string
 	const questionId = router.query.id as string
 	const question = trpc.useQuery(['question.getQuestion', { id: questionId }])
@@ -79,8 +79,8 @@ const QuestionPage = () => {
 		setQuestionFour(scheller?.personalAnswer === null ? true : !!scheller?.personalAnswer)
 	}, [scheller])
 
-	const activeButtonCss = 'bg-yellow-600 rounded-md p-4 font-bold text-white grow basis-1/2'
-	const inactiveButtonCss = 'border-yellow-600 border text-yellow-600 rounded-md py-2 font-bold grow basis-1/2'
+	const activeButtonCss = 'bg-gold rounded-md p-4 font-bold text-white grow basis-1/2'
+	const inactiveButtonCss = 'border-gold border text-gold rounded-md py-2 font-bold grow basis-1/2'
 
 	if (!router.isReady || question.isLoading || !questionData) {
 		return <LoadingArticlePage />
@@ -160,8 +160,8 @@ const QuestionPage = () => {
 									return (
 										<>
 											<button
-												className={`h-4 w-4 border-2 rounded-full outline outline-yellow-600 ${
-													i === questionTwo ? 'bg-yellow-600' : ''
+												className={`h-4 w-4 border-2 rounded-full outline outline-gold ${
+													i === questionTwo ? 'bg-gold' : ''
 												}`}
 												onClick={() => {
 													setQuestionTwo(i)
@@ -176,15 +176,15 @@ const QuestionPage = () => {
 											>
 												&nbsp;
 											</button>
-											{i !== 4 && <div className='grow bg-yellow-600 h-1'></div>}
+											{i !== 4 && <div className='grow bg-gold h-1'></div>}
 										</>
 									)
 								})}
 						</div>
 						<div className='flex space-x-2 justify-between'>
-							<div className='text-yellow-600 uppercase'>Low</div>
-							<div className='text-yellow-600 uppercase'>Average</div>
-							<div className='text-yellow-600 uppercase'>High</div>
+							<div className='text-gold uppercase'>Low</div>
+							<div className='text-gold uppercase'>Average</div>
+							<div className='text-gold uppercase'>High</div>
 						</div>
 					</div>
 					<button
@@ -329,117 +329,123 @@ const QuestionPage = () => {
 	}
 
 	return (
-		<Page title={questionData.title}>
-			<div className='grid grid-cols-3 gap-4 max-w-screen-xl mx-auto'>
-				{!votingMode && (
-					<div className='p-2 flex flex-col space-y-2'>
-						<BackTitle title='Question' url='/' />
-						<div className='bg-zinc-200 rounded-md p-4 flex flex-col'>
-							<div className='flex flex-row justify-between'>
-								<div className='whitespace-nowrap overflow-ellipsis overflow-clip'>
-									Posted by {question.data?.author.name}
-								</div>
-								{question.data?.id && <DeleteIcon questionId={question.data?.id} />}
-							</div>
-							<div className='text-xl font-bold my-4'>{questionData.title}</div>
+		<>
+			{width > 992 ? (
+				<Page title={questionData.title}>
+					<div className='grid grid-cols-3 gap-4 max-w-screen-xl mx-auto'>
+						{!votingMode && (
+							<div className='p-2 flex flex-col space-y-2'>
+								<BackTitle title='Question' url='/' />
+								<div className='bg-zinc-200 rounded-md p-4 flex flex-col'>
+									<div className='flex flex-row justify-between'>
+										<div className='whitespace-nowrap overflow-ellipsis overflow-clip'>
+											Posted by {question.data?.author.name}
+										</div>
+										{question.data?.id && <DeleteIcon questionId={question.data?.id} />}
+									</div>
+									<div className='text-xl font-bold my-4'>{questionData.title}</div>
 
-							<div className='p-4 bg-slate-300 rounded-md flex flex-col'>
-								<div className='text-green-600'>{forPercent}% FOR</div>
-								<div className='bg-gray-200 rounded-xl'>
-									<div className={`bg-green-600 rounded-xl h-2`} style={{ width: `${forPercent}%` }}></div>
-								</div>
-								<div className='flex px-2 justify-between text-yellow-700'>
-									<div className='flex items-center justify-center'>{forPostsCount} Posts</div>
-									<div className='flex items-center justify-center'>
-										<span className='mr-1'>Earn {forEarn}</span>
-										<img src={hstkLogoUrl.src} width='32px' height='32px' />
+									<div className='p-4 bg-slate-300 rounded-md flex flex-col'>
+										<div className='text-green-600'>{forPercent}% FOR</div>
+										<div className='bg-gray-200 rounded-xl'>
+											<div className={`bg-green-600 rounded-xl h-2`} style={{ width: `${forPercent}%` }}></div>
+										</div>
+										<div className='flex px-2 justify-between text-gold'>
+											<div className='flex items-center justify-center'>{forPostsCount} Posts</div>
+											<div className='flex items-center justify-center'>
+												<span className='mr-1'>Earn {forEarn}</span>
+												<img src={hstkLogoUrl.src} width='32px' height='32px' />
+											</div>
+										</div>
+									</div>
+
+									<div className='p-4 rounded-md flex flex-col'>
+										<div className='text-red-700'>{100 - forPercent}% AGAINST</div>
+										<div className='bg-gray-200 rounded-xl'>
+											<div className={`bg-red-500 rounded-xl h-2`} style={{ width: `${100 - forPercent}%` }}></div>
+										</div>
+										<div className='flex px-2 justify-between text-gold'>
+											<div className='flex items-center justify-center'>{againstPostsCount} Posts</div>
+											<div className='flex items-center justify-center'>
+												<span className='mr-1'>Earn {againstEarn}</span>
+												<img src={hstkLogoUrl.src} width='32px' height='32px' />
+											</div>
+										</div>
 									</div>
 								</div>
+								<Link href={`/articles/newWithQuestion/?questionId=${questionId}`} legacyBehavior>
+									<button className='bg-gold rounded-md p-4 font-bold text-white'>POST YOUR VIEW</button>
+								</Link>
+								<BanterSection questionId={questionId} />
+								{/* <div>Banter...</div> */}
 							</div>
+						)}
 
-							<div className='p-4 rounded-md flex flex-col'>
-								<div className='text-red-700'>{100 - forPercent}% AGAINST</div>
-								<div className='bg-gray-200 rounded-xl'>
-									<div className={`bg-red-500 rounded-xl h-2`} style={{ width: `${100 - forPercent}%` }}></div>
+						<div className='flex flex-col space-y-2 col-span-2'>
+							<div className='bg-white rounded-md p-2 px-4'>
+								<FilterBar />
+							</div>
+							{isAdmin.data && !finalizeConsensus.isSuccess && questionState === 'ACTIVE' && (
+								<div className='bg-white rounded-md p-2 px-4 flex justify-around items-center'>
+									<ConsensusDropdown questionId={questionId} />
+									<span>Invitations: {consensusInvitations?.length}</span>
+									<span>Responses: {consensusCompleted?.length}</span>
+									<button
+										className='bg-green-600 rounded-md p-3 text-white font-bold text-sm'
+										disabled={finalizeConsensus.isLoading}
+										onClick={() => {
+											finalizeConsensus.mutate({ questionId })
+										}}
+									>
+										Finalize Consensus
+									</button>
 								</div>
-								<div className='flex px-2 justify-between text-yellow-700'>
-									<div className='flex items-center justify-center'>{againstPostsCount} Posts</div>
-									<div className='flex items-center justify-center'>
-										<span className='mr-1'>Earn {againstEarn}</span>
-										<img src={hstkLogoUrl.src} width='32px' height='32px' />
+							)}
+
+							<div className='flex flex-col space-y-4'>
+								{questionData.posts.map((post) => {
+									const p = post.evidencePost
+									return (
+										<FeedPost
+											key={p.id}
+											url={p.url || undefined}
+											id={p.id}
+											questionId={questionId}
+											title={p.title}
+											body={p.body}
+											author={p?.author.name || ''}
+											evidenceType={post.evidenceType}
+											createdAt={p.createdAt}
+											postsCount={0}
+											votes={0}
+											evidenceBlocksCount={p._count.evidencePosts}
+										/>
+									)
+								})}
+							</div>
+							{/* <PostsList questionId={questionId} posts={questionData.posts} /> */}
+						</div>
+						{votingMode && (
+							<div className='flex flex-col rounded overflow-hidden'>
+								<div className='text-lg p-4 px-8 font-bold bg-stone-800 overflow-hidden text-gold'>
+									{questionData.title}
+								</div>
+								<div className='bg-slate-100 rounded-md flex flex-col py-4 px-6 space-y-4'>
+									<div className='flex items-center text-center justify-center space-x-2'>
+										<h2 className='text-lg'>Truth Consensus Algorithm</h2>
+										<QuestionMarkCircleIcon className='h-6 w-6 text-gold' />
 									</div>
+									{renderStep()}
+									{/* <div>Banter...</div> */}
 								</div>
 							</div>
-						</div>
-						<Link href={`/articles/newWithQuestion/?questionId=${questionId}`} legacyBehavior>
-							<button className='bg-yellow-600 rounded-md p-4 font-bold text-white'>POST YOUR VIEW</button>
-						</Link>
-						<BanterSection questionId={questionId} />
-						{/* <div>Banter...</div> */}
+						)}
 					</div>
-				)}
-
-				<div className='flex flex-col space-y-2 col-span-2'>
-					<div className='bg-white rounded-md p-2 px-4'>
-						<FilterBar />
-					</div>
-					{isAdmin.data && !finalizeConsensus.isSuccess && questionState === 'ACTIVE' && (
-						<div className='bg-white rounded-md p-2 px-4 flex justify-around items-center'>
-							<ConsensusDropdown questionId={questionId} />
-							<span>Invitations: {consensusInvitations?.length}</span>
-							<span>Responses: {consensusCompleted?.length}</span>
-							<button
-								className='bg-green-600 rounded-md p-3 text-white font-bold text-sm'
-								disabled={finalizeConsensus.isLoading}
-								onClick={() => {
-									finalizeConsensus.mutate({ questionId })
-								}}
-							>
-								Finalize Consensus
-							</button>
-						</div>
-					)}
-
-					<div className='flex flex-col space-y-4'>
-						{questionData.posts.map((post) => {
-							const p = post.evidencePost
-							return (
-								<FeedPost
-									key={p.id}
-									url={p.url || undefined}
-									id={p.id}
-									questionId={questionId}
-									title={p.title}
-									body={p.body}
-									author={p?.author.name || ''}
-									evidenceType={post.evidenceType}
-									createdAt={p.createdAt}
-									postsCount={0}
-									votes={0}
-									evidenceBlocksCount={p._count.evidencePosts}
-								/>
-							)
-						})}
-					</div>
-					{/* <PostsList questionId={questionId} posts={questionData.posts} /> */}
-				</div>
-				{votingMode && (
-					<div className='flex flex-col rounded overflow-hidden'>
-						<div className='text-lg p-4 px-8 font-bold bg-stone-800 overflow-hidden text-yellow-600'>
-							{questionData.title}
-						</div>
-						<div className='bg-slate-100 rounded-md flex flex-col py-4 px-6 space-y-4'>
-							<div className='flex items-center text-center justify-center space-x-2'>
-								<h2 className='text-lg'>Truth Consensus Algorithm</h2>
-								<QuestionMarkCircleIcon className='h-6 w-6 text-yellow-600' />
-							</div>
-							{renderStep()}
-							{/* <div>Banter...</div> */}
-						</div>
-					</div>
-				)}
-			</div>
-		</Page>
+				</Page>
+			) : (
+				<QuestionScreen questionData={questionData} />
+			)}
+		</>
 	)
 }
 
@@ -470,7 +476,7 @@ const FeedPost: React.FC<FeedPostProps> = ({
 }) => {
 	const articleUrl = `/articles/${id}?questionId=${questionId}`
 	return (
-        <div className='bg-white rounded-md p-2 px-4 flex flex-col space-y-2 shadow hover:shadow-lg transition'>
+		<div className='bg-white rounded-md p-2 px-4 flex flex-col space-y-2 shadow hover:shadow-lg transition'>
 			<div className='flex space-x-8 text-yellow-800 items-center'>
 				<div className='flex space-x-2 items-center'>
 					<div className={`${evidenceType === 'FOR' ? 'bg-green-600' : 'bg-red-600'} rounded-full h-4 w-4`}></div>
@@ -499,7 +505,7 @@ const FeedPost: React.FC<FeedPostProps> = ({
 
 			{url && (
 				<a
-					className='pb-4 flex items-center text-yellow-700 space-x-1 truncate w-80'
+					className='pb-4 flex items-center text-gold space-x-1 truncate w-80'
 					href={url}
 					rel='noreferrer'
 					target='_blank'
@@ -522,7 +528,7 @@ const FeedPost: React.FC<FeedPostProps> = ({
 				</Link>
 			</div>
 		</div>
-    );
+	)
 }
 
 export default QuestionPage

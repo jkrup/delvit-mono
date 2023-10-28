@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
-import BackTitle from '@delvit/web/components/BackTitle'
+import BackTitle from '@/components/BackTitle'
 
 import Header from '../../components/Header'
 import { trpc } from '../../utils/trpc'

@@ -3,8 +3,184 @@
 @tailwind utilities;
 
 .so {
-	display: none;
+  display: none;
 }
 form:focus-within .so {
-	display: inherit;
+  display: inherit;
+}
+body {
+  @apply bg-gray-100;
+}
+.sidebar {
+  background: linear-gradient(180deg, #8a836e -19.4%, #000 170.97%);
+  @apply z-50 text-white pt-16 shadow h-full w-4/5 fixed top-0 left-0 transform transition-transform duration-300 ease-in-out;
+}
+.pc-body {
+  background-color: rgba(173, 140, 59, 0.03);
+  @apply rounded-lg my-3 text-gold border-gold border p-4;
+}
+.btn {
+  @apply uppercase bg-gold text-white w-4/10 !important;
+}
+
+/* multistep progress bar */
+.stepProgressBar {
+  --stepProgressBar-space-unit: 5px;
+  --stepProgressBar-indicator-size: 20px;
+  --stepProgressBar-font-size: 14px;
+  --stepProgressBar-step-size: 80px;
+  --stepProgressBar-step-line-size: 4px;
+  --stepProgressBar-color-primary: #AD8C3B;
+  --stepProgressBar-color-secondary: #d1d5db;
+  --stepProgressBar-color-neutral: #fff;
+  --stepProgressBar-color-neutral-400: #a3a3a3;
+  --stepProgressBar-color-neutral-800: #262626;
+  display: flex;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.stepProgressBar__step {
+  display: flex;
+}
+
+.stepProgressBar__step:not(:first-child) {
+  width: 100%;
+}
+
+/* --- button ---- */
+.stepProgressBar__step__button {
+  align-items: center;
+  color: var(--stepProgressBar-color-neutral-400);
+  display: flex;
+  font-size: var(--stepProgressBar-font-size);
+  flex-direction: column;
+  flex-shrink: 0;
+  position: relative;
+  transition: color 0.2s ease-in;
+  width: var(--stepProgressBar-step-size);
+}
+
+.stepProgressBar__step--current .stepProgressBar__step__button {
+  color: var(--stepProgressBar-color-neutral-800);
+}
+
+.stepProgressBar__step__button__indicator {
+  align-items: center;
+  background-color: var(--stepProgressBar-color-secondary);
+  border: calc(var(--stepProgressBar-indicator-size) / 3.5) solid
+    var(--stepProgressBar-color-neutral);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  height: var(--stepProgressBar-indicator-size);
+  transition: background-color 0.3s ease-in;
+  width: var(--stepProgressBar-indicator-size);
+}
+
+.stepProgressBar__step--current .stepProgressBar__step__button__indicator {
+  background-color: var(--stepProgressBar-color-neutral);
+  border: calc(var(--stepProgressBar-indicator-size) / 4) solid
+    var(--stepProgressBar-color-primary);
+  transition: all 0.3s ease-in;
+}
+
+.stepProgressBar__step--completed .stepProgressBar__step__button__indicator {
+  border: 0;
+  transition: all 0.3s ease-in;
+}
+
+.stepProgressBar__step:not(
+    .stepProgressBar__step--current
+  ).stepProgressBar__step--navigable
+  .stepProgressBar__step__button__indicator {
+  background-color: var(--stepProgressBar-color-primary);
+  transition: all 0.3s ease-in;
+}
+
+.stepProgressBar__step__button__indicator__icon-completed {
+  fill: transparent;
+}
+
+.stepProgressBar__step--completed
+  .stepProgressBar__step__button__indicator__icon-completed {
+  animation: fillColorChange 0.2s ease-in 0.3s forwards;
+}
+
+.stepProgressBar__step__button__label {
+  margin-top: var(--stepProgressBar-space-unit);
+}
+
+/* --- button states ---- */
+
+@supports selector(:hover) {
+  .stepProgressBar__step__button:hover {
+    color: var(--stepProgressBar-color-primary);
+  }
+  .stepProgressBar__step:not(.stepProgressBar__step--current)
+    .stepProgressBar__step__button:hover
+    .stepProgressBar__step__button__indicator {
+    background-color: var(--stepProgressBar-color-primary);
+  }
+}
+
+.stepProgressBar__step__button:focus-visible {
+  border-radius: 4px;
+  outline: var(--stepProgressBar-color-primary) solid 2px;
+}
+
+@supports not selector(:focus-visible) {
+  /* fallback for browsers without focus-visible support */
+  .stepProgressBar__step__button:focus {
+    border-radius: 4px;
+    outline: var(--stepProgressBar-color-primary) solid 2px;
+  }
+}
+
+/* --- line ---- */
+.stepProgressBar__step__line {
+  background-color: var(--stepProgressBar-color-secondary);
+  height: var(--stepProgressBar-step-line-size);
+  margin-top: calc(
+    var(--stepProgressBar-indicator-size) / 2 -
+      var(--stepProgressBar-step-line-size) / 2
+  );
+  margin-left: calc(var(--stepProgressBar-step-size) / 2 * -1);
+  margin-right: calc(var(--stepProgressBar-step-size) / 2 * -1);
+  transition: background-color 0.3s ease-in;
+  width: 100%;
+}
+
+.stepProgressBar__step--navigable .stepProgressBar__step__line {
+  background-color: var(--stepProgressBar-color-primary);
+  transition: background-color 0.2s ease-in;
+}
+
+/* --- other ---- */
+
+@keyframes fillColorChange {
+  0% {
+    fill: var(--stepProgressBar-color-primary);
+  }
+  100% {
+    fill: var(--stepProgressBar-color-neutral);
+  }
+}
+
+/* This media query is based on step-size * 5,
+    if you change the value of it update it here too
+ */
+@media (max-width: 400px) {
+  .stepProgressBar__step__button {
+    width: auto;
+  }
+
+  .stepProgressBar__step__line {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .stepProgressBar__step__button__label {
+    display: none;
+  }
 }

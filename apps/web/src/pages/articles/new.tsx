@@ -4,9 +4,9 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
 
-import BackTitle from '@delvit/web/components/BackTitle'
-import Page from '@delvit/web/components/Page'
-import { useBoolState, wrapPreventDefault, wrapStopPropagation } from '@delvit/web/utils/helpers'
+import BackTitle from '@/components/BackTitle'
+import Page from '@/components/Page'
+import { useBoolState, wrapPreventDefault, wrapStopPropagation } from '@/utils/helpers'
 
 import Header from '../../components/Header'
 import { trpc } from '../../utils/trpc'
@@ -109,7 +109,7 @@ const NewArticlePage = () => {
 	return (
 		<Page title='Create Post' onClick={topicSearchHasFocus.setFalse}>
 			<div className='flex flex-col max-w-screen-md m-auto'>
-				<div className='text-center text-yellow-600 text-3xl font-semibold'>Create Post</div>
+				<div className='text-center text-gold text-3xl font-semibold'>Create Post</div>
 				<form onSubmit={onSubmit} className='flex flex-col space-y-4'>
 					<div className='flex flex-col'>
 						<label className='text-neutral-700 text-l mb-2'>Post Title</label>
@@ -151,7 +151,7 @@ const NewArticlePage = () => {
 								{postTopics.map((topic) => (
 									<div
 										key={topic.id}
-										className='px-4 py-2 bg-yellow-600 bg-opacity-10 rounded-lg text-center justify-center align-center text-yellow-600 select-none'
+										className='px-4 py-2 bg-gold bg-opacity-10 rounded-lg text-center justify-center align-center text-gold select-none'
 									>
 										<span>
 											{topic.title}{' '}
@@ -218,10 +218,10 @@ const NewArticlePage = () => {
 						/>
 					</div>
 					<div className='text-center flex justify-center'>
-						<button className='border border-yellow-600 rounded-lg text-yellow-600 text-2xl uppercase w-64 h-16 mr-8'>
+						<button className='border border-gold rounded-lg text-gold text-2xl uppercase w-64 h-16 mr-8'>
 							Discard
 						</button>
-						<button className='bg-yellow-600 rounded-lg text-white text-2xl uppercase font-bold w-64 h-16'>Post</button>
+						<button className='bg-gold rounded-lg text-white text-2xl uppercase font-bold w-64 h-16'>Post</button>
 					</div>
 				</form>
 			</div>

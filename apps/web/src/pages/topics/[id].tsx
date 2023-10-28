@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 
-import Page from '@delvit/web/components/Page'
-import { trpc } from '@delvit/web/utils/trpc'
+import Page from '@/components/Page'
+import { trpc } from '@/utils/trpc'
 
 // const TimedQuestion = () => {
 //     return (
@@ -37,7 +37,7 @@ import { trpc } from '@delvit/web/utils/trpc'
 //                 <div className='px-5 text-left'>Dius aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</div>
 //             </div>
 //             <div className='flex justify-between mx-28 my-8 transition-colors'>
-//                 <button className='bg-gradient-to-tr from-yellow-500 via-yellow-500 to-yellow-600 hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-yellow-400 hover:to-yellow-500 rounded-2xl w-32 p-1 font-bold text-white duration-200'>
+//                 <button className='bg-gradient-to-tr from-yellow-500 via-yellow-500 to-gold hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-yellow-400 hover:to-yellow-500 rounded-2xl w-32 p-1 font-bold text-white duration-200'>
 //                     AGREE
 //                 </button>
 //                 <button className='outline outline-yellow-500 hover:bg-neutral-100 rounded-2xl w-32 p-1 font-bold duration-200'>

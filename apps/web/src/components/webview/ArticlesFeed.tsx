@@ -75,7 +75,7 @@ const ArticlesFeed = () => {
 				<div className='flex justify-between'>
 					<div className='flex space-x-2'>
 						<button
-							className={'flex items-center ' + (mode === 'NEW' ? 'font-bold text-yellow-700' : '')}
+							className={'flex items-center ' + (mode === 'NEW' ? 'font-bold text-gold' : '')}
 							onClick={() => {
 								delete router.query.order
 								router.push(router)
@@ -85,7 +85,7 @@ const ArticlesFeed = () => {
 							<span>New</span>
 						</button>
 						<button
-							className={'flex items-center ' + (mode === 'TOP' ? 'font-bold text-yellow-700 ' : '')}
+							className={'flex items-center ' + (mode === 'TOP' ? 'font-bold text-gold ' : '')}
 							onClick={() => {
 								router.push({
 									query: {

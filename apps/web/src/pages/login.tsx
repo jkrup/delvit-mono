@@ -20,7 +20,7 @@ import hstkLogoUrl from '../imgs/hstk-logo.png'
 // Skeleton that will be blurred
 const HomePage = () => {
 	return (
-        <div>
+		<div>
 			<div className='bg-black h-24 flex flex-row p-4 justify-between overflow-hidden'>
 				<Link href='/' legacyBehavior>
 					<img src={hstkLogoUrl.src} width={'64px'} height={'64px'} />
@@ -55,7 +55,7 @@ const HomePage = () => {
 				</div>
 			</div>
 		</div>
-    );
+	)
 }
 
 const LoginPage: React.FC = () => {
@@ -177,13 +177,13 @@ const LoginPage: React.FC = () => {
 				<meta name='description' content='Delvit' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<div className='blur'>
+			<div className='hidden md:block blur'>
 				<HomePage />
 			</div>
 			<div className='absolute top-0 left-0 w-full grid min-h-screen'>
 				<div
 					className={
-						'm-auto bg-zinc-800/75 p-12 py-4 w-[280px] sm:w-[400px] rounded-xl drop-shadow-2xl flex flex-col space-y-3' +
+						'm-auto bg-white md:bg-zinc-800/75 p-12 py-4 w-screen h-screen md:h-auto md:w-3/5 lg:w-[400px] mx-auto rounded-xl drop-shadow-2xl flex flex-col space-y-3' +
 						(loggingIn && ' blur')
 					}
 				>
@@ -194,7 +194,7 @@ const LoginPage: React.FC = () => {
 						<h2 className='text-3xl pb-4 text-white'>Login With:</h2>
 						<button
 							className={
-								'text-xl justify-center rounded-xl font-bold p-4 my-2 bg-yellow-600 hover:bg-yellow-500 hover:drop-shadow text-white flex items-center'
+								'text-xl justify-center rounded-xl font-bold p-4 my-2 bg-gold hover:bg-yellow-500 hover:drop-shadow text-white flex items-center'
 							}
 							onClick={() => signIn('email')}
 						>
@@ -202,7 +202,7 @@ const LoginPage: React.FC = () => {
 						</button>
 						<button
 							className={
-								'text-xl justify-center rounded-xl font-bold p-4 my-2 bg-yellow-600 hover:bg-yellow-500 hover:drop-shadow text-white flex items-center'
+								'text-xl justify-center rounded-xl font-bold p-4 my-2 bg-gold hover:bg-yellow-500 hover:drop-shadow text-white flex items-center'
 							}
 							onClick={() => signIn('google')}
 						>
@@ -210,7 +210,7 @@ const LoginPage: React.FC = () => {
 						</button>
 						<button
 							className={
-								'justify-center rounded-xl font-bold p-4 my-2 bg-yellow-600 hover:bg-yellow-500 hover:drop-shadow text-white flex items-center'
+								'justify-center rounded-xl font-bold p-4 my-2 bg-gold hover:bg-yellow-500 hover:drop-shadow text-white flex items-center'
 							}
 							onClick={() => loginWithMetamask()}
 						>

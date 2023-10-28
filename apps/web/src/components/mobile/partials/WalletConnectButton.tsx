@@ -36,7 +36,7 @@ export default function WalletConnectButton({
   return (
     <button
       className={
-        "justify-center rounded-xl font-bold p-4 my-2 bg-yellow-600 hover:bg-yellow-500 hover:drop-shadow text-white flex items-center"
+        "justify-center rounded-xl font-bold p-4 my-2 bg-gold hover:bg-yellow-500 hover:drop-shadow text-white flex items-center"
       }
       onClick={onClick}
       disabled={loading}

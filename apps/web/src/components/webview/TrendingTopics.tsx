@@ -19,7 +19,7 @@ const TrendingTopics = () => {
 	const popTopics = popularTopics.data
 	return (
 		<div className='flex flex-col rounded bg-white overflow-hidden'>
-			<div className='title pt-4 text-center text-yellow-900 text-xl border-b-2 pb-4 border-yellow-600'>
+			<div className='title pt-4 text-center text-yellow-900 text-xl border-b-2 pb-4 border-gold'>
 				Trending Tags
 			</div>
 			<div className='flex flex-col justify-center p-4 space-y-4'>
@@ -48,8 +48,8 @@ const TrendingTopics = () => {
 												}
 												router.push({ query: router.query })
 											}}
-											className={`m-1 py-2 px-4 text-lg  whitespace-nowrap  rounded hover:bg-stone-200 hover:text-yellow-800 bg-yellow-600 bg-opacity-5 grow border border-2 text-yellow-600 ${
-												activeTopic === topic.id ? 'border-yellow-600 font-bold' : 'border-transparent font-medium'
+											className={`m-1 py-2 px-4 text-lg  whitespace-nowrap  rounded hover:bg-stone-200 hover:text-yellow-800 bg-gold bg-opacity-5 grow border border-2 text-gold ${
+												activeTopic === topic.id ? 'border-gold font-bold' : 'border-transparent font-medium'
 											}`}
 										>
 											{topic.title}

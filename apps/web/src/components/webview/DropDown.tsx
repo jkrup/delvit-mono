@@ -1,5 +1,6 @@
 type DropDownProps = {
   children?: React.ReactNode;
+  className?: string;
   onSelect: React.ChangeEventHandler<HTMLSelectElement>;
 };
 

@@ -64,7 +64,7 @@ const ProfilePage = () => {
           <div className="flex-1">
             <button
               type="button"
-              className="w-full bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="w-full bg-yellow-500 hover:bg-gold text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               onClick={() => signIn()}
             >
               Sign In

@@ -3,13 +3,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
-import Article from '@delvit/web/components/Article'
-import BackTitle from '@delvit/web/components/BackTitle'
-import DropDown from '@delvit/web/components/DropDown'
-import Evidence from '@delvit/web/components/Evidence'
-import EvidenceArticle from '@delvit/web/components/EvidenceArticle'
-import LoadingArticlePage from '@delvit/web/components/LoadingArticlePage'
-import Page from '@delvit/web/components/Page'
+import Article from '@/components/Article'
+import BackTitle from '@/components/BackTitle'
+import DropDown from '@/components/DropDown'
+import Evidence from '@/components/Evidence'
+import EvidenceArticle from '@/components/EvidenceArticle'
+import LoadingArticlePage from '@/components/LoadingArticlePage'
+import Page from '@/components/Page'
 
 import Header from '../../components/Header'
 import { trpc } from '../../utils/trpc'
@@ -126,7 +126,7 @@ const ArticlePage = () => {
 						{' '}
 						{/* Col 2 */}
 						<div className='bg-white rounded-md mb-4 overflow-hidden'>
-							<div className='p-4 bg-yellow-600 font-bold text-center text-white flex justify-between items-center'>
+							<div className='p-4 bg-gold font-bold text-center text-white flex justify-between items-center'>
 								<div className='font-serif text-xl px-4'>Evidence Blocks</div>
 								<Link
 									href={`/articles/newWithQuestion?postId=${articleId}`}
