@@ -52,7 +52,7 @@ const UserMenu = () => {
 	const points = profile.data?.points.map((p) => p.amount).reduce((acc, p) => p + acc, 0) ?? 0
 
 	return (
-		<div className='flex justify-items-end'>
+        <div className='flex justify-items-end'>
 			<div className={`duration-300`} onClick={() => setOpen(!open)}>
 				<div className='flex space-between'>
 					<div className='flex flex-col relative text-center items-center justify-center'>
@@ -98,7 +98,7 @@ const UserMenu = () => {
 					</li>
 
 					<div className='flex items-center justify-center pt-24 pb-3'>
-						<Link href='/'>
+						<Link href='/' legacyBehavior>
 							<Image
 								alt='Delvit Logo'
 								className='cursor-pointer rounded-full mx-4 h-[64px] w-[64px]'
@@ -110,7 +110,7 @@ const UserMenu = () => {
 				</ul>
 			</div>
 		</div>
-	)
+    );
 }
 
 export default UserMenu

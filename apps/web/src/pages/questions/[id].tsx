@@ -470,7 +470,7 @@ const FeedPost: React.FC<FeedPostProps> = ({
 }) => {
 	const articleUrl = `/articles/${id}?questionId=${questionId}`
 	return (
-		<div className='bg-white rounded-md p-2 px-4 flex flex-col space-y-2 shadow hover:shadow-lg transition'>
+        <div className='bg-white rounded-md p-2 px-4 flex flex-col space-y-2 shadow hover:shadow-lg transition'>
 			<div className='flex space-x-8 text-yellow-800 items-center'>
 				<div className='flex space-x-2 items-center'>
 					<div className={`${evidenceType === 'FOR' ? 'bg-green-600' : 'bg-red-600'} rounded-full h-4 w-4`}></div>
@@ -490,7 +490,7 @@ const FeedPost: React.FC<FeedPostProps> = ({
 			</div>
 
 			{/* Article Title */}
-			<Link href={articleUrl} className='text-2xl font-bold mb-6'>
+			<Link href={articleUrl} className='text-2xl font-bold mb-6' legacyBehavior>
 				{title}
 			</Link>
 
@@ -522,7 +522,7 @@ const FeedPost: React.FC<FeedPostProps> = ({
 				</Link>
 			</div>
 		</div>
-	)
+    );
 }
 
 export default QuestionPage

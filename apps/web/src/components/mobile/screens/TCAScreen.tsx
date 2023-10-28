@@ -73,10 +73,12 @@ const TCAScreen = () => {
             <div className="my-4 px-2 text-white">
               &lsquo;{question.title}&rsquo;
             </div>
-            <Link href={`/participate/${question.id}`}>
-              <a className="italic underline text-gold">
+            <Link
+              href={`/participate/${question.id}`}
+              className="italic underline text-gold">
+              
                 Click here to view evidence and cast your vote.
-              </a>
+              
             </Link>
           </div>
         )}

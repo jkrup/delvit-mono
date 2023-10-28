@@ -20,9 +20,9 @@ import hstkLogoUrl from '../imgs/hstk-logo.png'
 // Skeleton that will be blurred
 const HomePage = () => {
 	return (
-		<div>
+        <div>
 			<div className='bg-black h-24 flex flex-row p-4 justify-between overflow-hidden'>
-				<Link href='/'>
+				<Link href='/' legacyBehavior>
 					<img src={hstkLogoUrl.src} width={'64px'} height={'64px'} />
 					{/* <Bars3Icon className='w-10 relative' /> */}
 				</Link>
@@ -55,7 +55,7 @@ const HomePage = () => {
 				</div>
 			</div>
 		</div>
-	)
+    );
 }
 
 const LoginPage: React.FC = () => {

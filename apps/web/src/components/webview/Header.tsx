@@ -29,9 +29,9 @@ const Header = () => {
 	}
 
 	return (
-		<div className='h-24 bg-white p-4'>
+        <div className='h-24 bg-white p-4'>
 			<div className='flex flex-row justify-between items-center max-w-screen-xl mx-auto'>
-				<Link href='/'>
+				<Link href='/' legacyBehavior>
 					<img src={hstkLogoUrl.src} width={'64px'} height={'64px'} />
 					{/* <Bars3Icon className='w-10 relative' /> */}
 				</Link>
@@ -53,7 +53,7 @@ const Header = () => {
 				<UserMenu />
 			</div>
 		</div>
-	)
+    );
 }
 
 export default Header

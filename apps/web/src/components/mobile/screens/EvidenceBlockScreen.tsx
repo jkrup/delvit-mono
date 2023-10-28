@@ -12,15 +12,15 @@ const EvidenceBlockScreen = () => {
   const [evidenceView, setEvidenceView] = useState("FOR");
   
   const PostBtn = (
-    <Link href={`/articles/newWithQuestion?postId=${query.id}`}>
-      <a className="w-1/5">
-        <Button
-          classname="rounded-xl w-full uppercase"
-          title="Post"
-          onChange={() => null}
-        />
-      </a>
-    </Link>
+    (<Link href={`/articles/newWithQuestion?postId=${query.id}`} className="w-1/5">
+
+      <Button
+        classname="rounded-xl w-full uppercase"
+        title="Post"
+        onChange={() => null}
+      />
+
+    </Link>)
   );
 
   return (

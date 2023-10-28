@@ -83,273 +83,275 @@ const ProfilePage = () => {
     _count: { posts, comments, votes }, //TODO: humanReadify posts/comments/votes
   } = profileData;
 
-  return (
-    <>
-      <Head>
-        <title>HSTK | Submit Question</title>
-      </Head>
-      {width > 992 ? (
-        <div className="bg-gray-50 min-h-screen">
-          <Header />
-          <div className="flex my-8 mx-auto space-x-16 justify-around max-w-screen-xl">
-            <div className="rounded flex flex-col basis-2/5 shadow-gold shadow-md justify-center p-4 px-8 items-center h-fit">
-              {image && (
-                <Image
-                  src={image}
-                  width="100"
-                  height="100"
-                  alt="profile"
-                  className="w-32 h-32 rounded-full my-4"
-                />
-              )}
-              <h2 className="text-sm md:text-2xl font-semibold text-gold font-serif">
-                {name}
-              </h2>
-              <h3 className="text-gold text-lg">{title}</h3>
-              <div className="flex text-center justify-evenly w-full my-8">
-                <div>
-                  <div className="text-2xl">{posts}</div>
-                  <div>Posts</div>
-                </div>
-                <div>
-                  <div className="text-2xl">{comments}</div>
-                  <div>Banter</div>
-                </div>
-                <div>
-                  <div className="text-2xl">{votes}</div>
-                  <div>Upvotes</div>
-                </div>
-              </div>
-              <p className="text-justify mb-8 whitespace-pre-wrap">{bio}</p>
-            </div>
-            <form
-              className="px-8 pt-6 pb-8 mb-4 flex flex-col space-y-4 basis-1/2 h-fit"
-              onSubmit={onSubmit}
-            >
-              <h1 className="text-gold text-xl font-serif font-semibold">
-                Edit your profile
-              </h1>
-              <input
-                id="upload-profile"
-                type="file"
-                className="hidden"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const url = prompt(
-                    "Currently you must upload your profile picture to IPFS and submit your ipfs.io URL here:"
-                  );
-                  if (url?.startsWith("https://ipfs.io/")) {
-                    setNewImgUrl(url);
-                  } else {
-                    alert("Bad URL");
-                  }
-                }}
+  return <>
+    <Head>
+      <title>HSTK | Submit Question</title>
+    </Head>
+    {width > 992 ? (
+      <div className="bg-gray-50 min-h-screen">
+        <Header />
+        <div className="flex my-8 mx-auto space-x-16 justify-around max-w-screen-xl">
+          <div className="rounded flex flex-col basis-2/5 shadow-gold shadow-md justify-center p-4 px-8 items-center h-fit">
+            {image && (
+              <Image
+                src={image}
+                width="100"
+                height="100"
+                alt="profile"
+                className="w-32 h-32 rounded-full my-4"
               />
-              <label
-                htmlFor="upload-profile"
-                className="w-full border border-gold text-gold font-serif rounded p-2 text-center cursor-pointer hover:bg-yellow-100"
-              >
-                Upload Profile Pic
-              </label>
+            )}
+            <h2 className="text-sm md:text-2xl font-semibold text-gold font-serif">
+              {name}
+            </h2>
+            <h3 className="text-gold text-lg">{title}</h3>
+            <div className="flex text-center justify-evenly w-full my-8">
               <div>
-                <label
-                  className="block text-gold text-sm mb-2"
-                  htmlFor="username"
-                >
-                  Name
-                </label>
-                <input
-                  className="rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline"
-                  id="username"
-                  type="text"
-                  placeholder="name"
-                  name="name"
-                  defaultValue={name || ""}
-                />
+                <div className="text-2xl">{posts}</div>
+                <div>Posts</div>
               </div>
               <div>
-                <label className="block text-gold text-sm mb-2" htmlFor="title">
-                  Title
-                </label>
-                <input
-                  className="rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline"
-                  id="title"
-                  type="text"
-                  placeholder=""
-                  name="title"
-                  defaultValue={title ?? undefined}
-                />
+                <div className="text-2xl">{comments}</div>
+                <div>Banter</div>
               </div>
               <div>
-                <label className="block text-gold text-sm mb-2" htmlFor="bio">
-                  About Me
-                </label>
-                <textarea
-                  className="rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline"
-                  id="bio"
-                  placeholder="Write a bit about yourself here, so others will know who you are and what you're knowledgable about."
-                  name="bio"
-                  rows={8}
-                  defaultValue={bio ?? undefined}
-                />
+                <div className="text-2xl">{votes}</div>
+                <div>Upvotes</div>
               </div>
-              <div className="flex justify-around space-x-8">
-                <Link href="/">
-                  <a className="text-center border-gold hover:bg-slate-100 border text-gold font-serif font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline grow">
-                    CANCEL
-                  </a>
-                </Link>
-                <button
-                  className="bg-gold hover:bg-gold text-white font-serif font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline grow"
-                  type="submit"
-                >
-                  UPDATE
-                </button>
-              </div>
-              <button
-                className="italic self-start text-sm"
-                type="button"
-                onClick={() => signOut()}
-              >
-                Sign out?
-              </button>
-            </form>
+            </div>
+            <p className="text-justify mb-8 whitespace-pre-wrap">{bio}</p>
           </div>
+          <form
+            className="px-8 pt-6 pb-8 mb-4 flex flex-col space-y-4 basis-1/2 h-fit"
+            onSubmit={onSubmit}
+          >
+            <h1 className="text-gold text-xl font-serif font-semibold">
+              Edit your profile
+            </h1>
+            <input
+              id="upload-profile"
+              type="file"
+              className="hidden"
+              onClick={(e) => {
+                e.preventDefault();
+                const url = prompt(
+                  "Currently you must upload your profile picture to IPFS and submit your ipfs.io URL here:"
+                );
+                if (url?.startsWith("https://ipfs.io/")) {
+                  setNewImgUrl(url);
+                } else {
+                  alert("Bad URL");
+                }
+              }}
+            />
+            <label
+              htmlFor="upload-profile"
+              className="w-full border border-gold text-gold font-serif rounded p-2 text-center cursor-pointer hover:bg-yellow-100"
+            >
+              Upload Profile Pic
+            </label>
+            <div>
+              <label
+                className="block text-gold text-sm mb-2"
+                htmlFor="username"
+              >
+                Name
+              </label>
+              <input
+                className="rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline"
+                id="username"
+                type="text"
+                placeholder="name"
+                name="name"
+                defaultValue={name || ""}
+              />
+            </div>
+            <div>
+              <label className="block text-gold text-sm mb-2" htmlFor="title">
+                Title
+              </label>
+              <input
+                className="rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline"
+                id="title"
+                type="text"
+                placeholder=""
+                name="title"
+                defaultValue={title ?? undefined}
+              />
+            </div>
+            <div>
+              <label className="block text-gold text-sm mb-2" htmlFor="bio">
+                About Me
+              </label>
+              <textarea
+                className="rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline"
+                id="bio"
+                placeholder="Write a bit about yourself here, so others will know who you are and what you're knowledgable about."
+                name="bio"
+                rows={8}
+                defaultValue={bio ?? undefined}
+              />
+            </div>
+            <div className="flex justify-around space-x-8">
+              <Link
+                href="/"
+                className="text-center border-gold hover:bg-slate-100 border text-gold font-serif font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline grow">
+                
+                  CANCEL
+                
+              </Link>
+              <button
+                className="bg-gold hover:bg-gold text-white font-serif font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline grow"
+                type="submit"
+              >
+                UPDATE
+              </button>
+            </div>
+            <button
+              className="italic self-start text-sm"
+              type="button"
+              onClick={() => signOut()}
+            >
+              Sign out?
+            </button>
+          </form>
         </div>
-      ) : (
-        <div>
-          <NavBar />
-          <Sidebar />
-          <div className="my-20">
-            <div className="rounded flex flex-col basis-2/5 shadow-md justify-center p-4 px-8 items-center h-fit">
-              {image && (
-                <Image
-                  src={image}
-                  width="100"
-                  height="100"
-                  alt="profile"
-                  className="w-32 h-32 rounded-full my-4"
-                />
-              )}
-              <h2 className="md:text-2xl font-semibold text-gold font-serif">
-                {name}
-              </h2>
-              <h3 className="text-gold text-lg">{title}</h3>
-              <div className="flex text-center justify-evenly w-full my-8">
-                <div>
-                  <div className="text-2xl">{posts}</div>
-                  <div>Posts</div>
-                </div>
-                <div>
-                  <div className="text-2xl">{comments}</div>
-                  <div>Banter</div>
-                </div>
-                <div>
-                  <div className="text-2xl">{votes}</div>
-                  <div>Upvotes</div>
-                </div>
-              </div>
-              <p className="text-justify mb-8 whitespace-pre-wrap">{bio}</p>
-            </div>
-            <form
-              className="px-8 pt-6 pb-8 mb-4 flex flex-col space-y-4 basis-1/2 h-fit"
-              onSubmit={onSubmit}
-            >
-              <h1 className="text-gold text-xl font-serif font-semibold">
-                Edit your profile
-              </h1>
-              <input
-                id="upload-profile"
-                type="file"
-                className="hidden"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const url = prompt(
-                    "Currently you must upload your profile picture to IPFS and submit your ipfs.io URL here:"
-                  );
-                  if (url?.startsWith("https://ipfs.io/")) {
-                    setNewImgUrl(url);
-                  } else {
-                    alert("Bad URL");
-                  }
-                }}
+      </div>
+    ) : (
+      <div>
+        <NavBar />
+        <Sidebar />
+        <div className="my-20">
+          <div className="rounded flex flex-col basis-2/5 shadow-md justify-center p-4 px-8 items-center h-fit">
+            {image && (
+              <Image
+                src={image}
+                width="100"
+                height="100"
+                alt="profile"
+                className="w-32 h-32 rounded-full my-4"
               />
-              <label
-                htmlFor="upload-profile"
-                className="w-full border border-gold text-gold font-serif rounded p-2 text-center cursor-pointer hover:bg-yellow-100"
-              >
-                Upload Profile Pic
-              </label>
+            )}
+            <h2 className="md:text-2xl font-semibold text-gold font-serif">
+              {name}
+            </h2>
+            <h3 className="text-gold text-lg">{title}</h3>
+            <div className="flex text-center justify-evenly w-full my-8">
               <div>
-                <label
-                  className="block text-gold text-sm mb-2"
-                  htmlFor="username"
-                >
-                  Name
-                </label>
-                <input
-                  className="rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline"
-                  id="username"
-                  type="text"
-                  placeholder="name"
-                  name="name"
-                  defaultValue={name || ""}
-                />
+                <div className="text-2xl">{posts}</div>
+                <div>Posts</div>
               </div>
               <div>
-                <label className="block text-gold text-sm mb-2" htmlFor="title">
-                  Title
-                </label>
-                <input
-                  className="rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline"
-                  id="title"
-                  type="text"
-                  placeholder=""
-                  name="title"
-                  defaultValue={title ?? undefined}
-                />
+                <div className="text-2xl">{comments}</div>
+                <div>Banter</div>
               </div>
               <div>
-                <label className="block text-gold text-sm mb-2" htmlFor="bio">
-                  About Me
-                </label>
-                <textarea
-                  className="rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline"
-                  id="bio"
-                  placeholder="Write a bit about yourself here, so others will know who you are and what you're knowledgable about."
-                  name="bio"
-                  rows={8}
-                  defaultValue={bio ?? undefined}
-                />
+                <div className="text-2xl">{votes}</div>
+                <div>Upvotes</div>
               </div>
-              <div className="flex justify-around space-x-8">
-                <Link href="/">
-                  <a className="text-center border-gold hover:bg-slate-100 border text-gold font-serif font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline grow">
-                    CANCEL
-                  </a>
-                </Link>
-                <button
-                  className="bg-gold hover:bg-gold text-white font-serif font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline grow"
-                  type="submit"
-                >
-                  UPDATE
-                </button>
-              </div>
-              <button
-                className="italic self-start text-sm"
-                type="button"
-                onClick={() => signOut()}
-              >
-                Sign out?
-              </button>
-            </form>
+            </div>
+            <p className="text-justify mb-8 whitespace-pre-wrap">{bio}</p>
           </div>
+          <form
+            className="px-8 pt-6 pb-8 mb-4 flex flex-col space-y-4 basis-1/2 h-fit"
+            onSubmit={onSubmit}
+          >
+            <h1 className="text-gold text-xl font-serif font-semibold">
+              Edit your profile
+            </h1>
+            <input
+              id="upload-profile"
+              type="file"
+              className="hidden"
+              onClick={(e) => {
+                e.preventDefault();
+                const url = prompt(
+                  "Currently you must upload your profile picture to IPFS and submit your ipfs.io URL here:"
+                );
+                if (url?.startsWith("https://ipfs.io/")) {
+                  setNewImgUrl(url);
+                } else {
+                  alert("Bad URL");
+                }
+              }}
+            />
+            <label
+              htmlFor="upload-profile"
+              className="w-full border border-gold text-gold font-serif rounded p-2 text-center cursor-pointer hover:bg-yellow-100"
+            >
+              Upload Profile Pic
+            </label>
+            <div>
+              <label
+                className="block text-gold text-sm mb-2"
+                htmlFor="username"
+              >
+                Name
+              </label>
+              <input
+                className="rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline"
+                id="username"
+                type="text"
+                placeholder="name"
+                name="name"
+                defaultValue={name || ""}
+              />
+            </div>
+            <div>
+              <label className="block text-gold text-sm mb-2" htmlFor="title">
+                Title
+              </label>
+              <input
+                className="rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline"
+                id="title"
+                type="text"
+                placeholder=""
+                name="title"
+                defaultValue={title ?? undefined}
+              />
+            </div>
+            <div>
+              <label className="block text-gold text-sm mb-2" htmlFor="bio">
+                About Me
+              </label>
+              <textarea
+                className="rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline"
+                id="bio"
+                placeholder="Write a bit about yourself here, so others will know who you are and what you're knowledgable about."
+                name="bio"
+                rows={8}
+                defaultValue={bio ?? undefined}
+              />
+            </div>
+            <div className="flex justify-around space-x-8">
+              <Link
+                href="/"
+                className="text-center border-gold hover:bg-slate-100 border text-gold font-serif font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline grow">
+                
+                  CANCEL
+                
+              </Link>
+              <button
+                className="bg-gold hover:bg-gold text-white font-serif font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline grow"
+                type="submit"
+              >
+                UPDATE
+              </button>
+            </div>
+            <button
+              className="italic self-start text-sm"
+              type="button"
+              onClick={() => signOut()}
+            >
+              Sign out?
+            </button>
+          </form>
+        </div>
 
-          <BottomTab />
-        </div>
-      )}
-    </>
-  );
+        <BottomTab />
+      </div>
+    )}
+  </>;
 };
 
 export default ProfilePage;

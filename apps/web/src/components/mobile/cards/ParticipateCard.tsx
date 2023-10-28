@@ -28,10 +28,10 @@ const ParticipateCard = ({
           <div className="my-4 px-2 text-white">
             {`'Does Joe Biden Have Dementia?'`}
           </div>
-          <Link href={"/participate/evidences"}>
-            <a className="italic underline text-gold">
+          <Link href={"/participate/evidences"} className="italic underline text-gold">
+            
               Click here to view evidence and cast your vote.
-            </a>
+            
           </Link>
         </div>
       ) : (

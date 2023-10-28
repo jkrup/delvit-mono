@@ -1,7 +1,7 @@
 import React from "react";
 import { useViewPort } from "@/hooks/useViewPort";
 import { FeedConsensusQuestionProps } from "@/types/props";
-import { ChevronRightIcon } from "@heroicons/react/solid";
+import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import Link from "next/link";
 import { useRouter } from "next/router";
 import ArrowLeft from "../icons/ArrowLeft";
@@ -25,7 +25,7 @@ const FeedConsensusQuestion: React.FC<FeedConsensusQuestionProps> = ({
         pathname: url,
         query,
       }}
-    >
+      legacyBehavior>
       {width > 992 ? (
         <div className="bg-white rounded-md p-2 px-4 flex shadow hover:shadow-lg transition justify-between cursor-pointer">
           <div className="flex flex-col space-y-2">

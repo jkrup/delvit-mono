@@ -11,7 +11,7 @@ const CardHeader = ({
   evidence,
 }: {
   author: Author;
-  createdAt?: Date;
+  createdAt?: Date | string;
   evidence?: "FOR" | "AGAINST";
 }) => {
   return (

@@ -1,9 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {
-  ReplyIcon,
-  ArrowUpIcon,
-  ArrowDownIcon,
-} from "@heroicons/react/outline";
 import Image from "next/image";
 import { trpc } from "@/utils/trpc";
 import ArrowDownSm from "../icons/ArrowDownSm";

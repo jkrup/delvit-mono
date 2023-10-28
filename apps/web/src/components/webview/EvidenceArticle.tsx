@@ -25,7 +25,7 @@ const EvidenceArticle: React.FC<EvidenceArticleProps> = ({
       >
         <div className="px-4 pt-1 font-bold">
           <Link href={`/articles/${id}`}>
-            <a>{title}</a>
+            {title}
           </Link>
         </div>
         <div className="bg-white px-4 py-2 rounded text-sm w-full flex flex-col ">
@@ -34,8 +34,8 @@ const EvidenceArticle: React.FC<EvidenceArticleProps> = ({
           {/* </p> */}
           <div className="mt-2">
             {url && (
-              <Link href={url}>
-                <a className="self-end text-gold">{url}</a>
+              <Link href={url} className="self-end text-gold">
+                {url}
               </Link>
             )}
           </div>

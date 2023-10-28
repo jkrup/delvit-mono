@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowLeftIcon } from "@heroicons/react/outline";
+import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -25,7 +25,7 @@ const BackTitle: React.FC<BackTitleProps> = ({ url, title }) => {
   }
   return (
     <div className="flex items-center">
-      <Link href={url}>
+      <Link href={url} legacyBehavior>
         <ArrowLeftIcon className="absolute h-8 w-8 font-bold cursor-pointer" />
       </Link>
       <h2 className="text-center grow text-xl">{title}</h2>

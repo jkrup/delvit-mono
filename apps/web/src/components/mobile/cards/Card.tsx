@@ -32,7 +32,7 @@ const Card = ({
         pathname: url,
         query,
       }}
-    >
+      legacyBehavior>
       <div className="bg-white shadow-sm my-2 p-3 rounded">
         {/* header */}
         <div className="flex mt-1 items-center justify-between">

@@ -59,11 +59,14 @@ const Evidence: React.FC<EvidenceProps> = ({
         </div>
         <div className="flex flex-col justify-between text-gray-400 mx-1 text-sm">
           {evidenceLink && (
-            <Link href={`${evidenceLink}`}>
-              <a className="text-blue-500 line-clamp-2" target="_blank">
-                {evidenceLink}
-              </a>
-            </Link>
+            (<Link
+              href={`${evidenceLink}`}
+              className="text-blue-500 line-clamp-2"
+              target="_blank">
+
+              {evidenceLink}
+
+            </Link>)
           )}
           <a>
             <Link href={`/articles/${id}`}> Comments </Link>

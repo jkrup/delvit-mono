@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { trpc } from "@/utils/trpc";
-import { LinkIcon, PhotographIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 
 import RecentConsensus from "./RecentConsensus";
@@ -66,7 +65,7 @@ function Home(): JSX.Element {
                     topic: (router.query["topic"] as string) || undefined,
                   },
                 }}
-              >
+                legacyBehavior>
                 <input
                   className="grow rounded-md px-2 h-8"
                   type="text"
@@ -81,7 +80,7 @@ function Home(): JSX.Element {
                     topic: (router.query["topic"] as string) || undefined,
                   },
                 }}
-              >
+                legacyBehavior>
                 <input
                   className="grow rounded-md  px-2 h-8"
                   type="text"

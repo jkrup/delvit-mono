@@ -1,5 +1,4 @@
 import { trpc } from "@/utils/trpc";
-import { XIcon } from "@heroicons/react/outline";
 import { useEffect, useState } from "react";
 
 interface SubmitEvidenceArticleProps {

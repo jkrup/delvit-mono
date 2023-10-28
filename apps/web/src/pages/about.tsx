@@ -60,10 +60,12 @@ const SchellingPage: NextPage = () => {
       <h1 className="text-2xl font-semibold mb-4">
         &lsquo;{question.title}&rsquo;
       </h1>
-      <Link href={`questions/${question.id}?voting=1`}>
-        <a className="text-gold underline italic">
+      <Link
+        href={`questions/${question.id}?voting=1`}
+        className="text-gold underline italic">
+        
           Click here to view evidence and cast your vote.
-        </a>
+        
       </Link>
     </div>
   );

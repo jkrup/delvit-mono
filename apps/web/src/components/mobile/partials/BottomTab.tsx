@@ -70,7 +70,7 @@ const BottomTab = () => {
                   }
             }
             key={i}
-          >
+            legacyBehavior>
             <div
               onClick={() => setIsActive(item.name)}
               className={`p-2  ${

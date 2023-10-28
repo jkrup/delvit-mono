@@ -32,15 +32,15 @@ const EvidenceCard = (props: EvidenceProps) => {
         evidence={evidenceType}
       />
       <Link href={articleUrl}>
-        <a>
-          <CardTitle title={title} />
-        </a>
+
+        <CardTitle title={title} />
+
       </Link>
 
       <CardBody desc={body} />
       <CardLink url={url} />
       <div className="flex space-x-16 text-gray-400">
-        <Link href={articleUrl}>
+        <Link href={articleUrl} legacyBehavior>
           <button className="flex items-center space-x-1">
             <Document />
             <div>

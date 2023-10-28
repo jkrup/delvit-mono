@@ -25,10 +25,10 @@ const Popup = ({ setshowPopup }: popupProps) => {
           Consensus Algorithm
         </div>
         <div className="mt-2 p-2 text-center">
-          <Link href={`/participate/new`}>
-            <a className="underline italic text-blue-900">
+          <Link href={`/participate/new`} className="underline italic text-blue-900">
+            
               click here for info
-            </a>
+            
           </Link>
         </div>
       </div>

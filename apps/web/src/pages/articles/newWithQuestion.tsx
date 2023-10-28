@@ -56,112 +56,110 @@ const NewArticlePage = () => {
 		return false
 	}
 
-	return (
-		<>
-			<Head>
-				<title>DLV | Submit Article</title>
-			</Head>
-			<div>
-				<Header />
-				<div className='min-h-screen'>
-					<form onSubmit={onSubmit} className='flex flex-col space-y-4 max-w-screen-lg m-auto py-8'>
-						{(questionId || postId) && (
-							<BackTitle
-								title={backTitle.data!}
-								url={(questionId && `/questions/${questionId}`) || (postId && `/articles/${postId}`)}
-							/>
-						)}
-						<div>
-							<div className='flex items-center justify-center space-x-4 text-lg font-semibold'>
-								<legend className='text-yellow-800'>You are posting:</legend>
-								<label htmlFor='for' className='flex items-center space-x-2'>
-									<input
-										type='radio'
-										id='for'
-										value='FOR'
-										name='evidenceType'
-										defaultChecked={true}
-										className='peer hidden'
-									/>
-									<div className='h-4 w-4 border-2 outline outline-yellow-800 rounded-full peer-checked:bg-yellow-800'></div>
-									<div className='text-green-600 font-semibold'>For</div>
-								</label>
-								<label htmlFor='against' className='flex items-center space-x-2'>
-									<input type='radio' id='against' value='AGAINST' name='evidenceType' className='hidden peer' />
-									<div className='h-4 w-4 border-2 outline outline-yellow-800 rounded-full peer-checked:bg-yellow-800'></div>
-									<div className='text-red-800 font-semibold'>Against</div>
-								</label>
-							</div>
-						</div>
+	return <>
+        <Head>
+            <title>DLV | Submit Article</title>
+        </Head>
+        <div>
+            <Header />
+            <div className='min-h-screen'>
+                <form onSubmit={onSubmit} className='flex flex-col space-y-4 max-w-screen-lg m-auto py-8'>
+                    {(questionId || postId) && (
+                        <BackTitle
+                            title={backTitle.data!}
+                            url={(questionId && `/questions/${questionId}`) || (postId && `/articles/${postId}`)}
+                        />
+                    )}
+                    <div>
+                        <div className='flex items-center justify-center space-x-4 text-lg font-semibold'>
+                            <legend className='text-yellow-800'>You are posting:</legend>
+                            <label htmlFor='for' className='flex items-center space-x-2'>
+                                <input
+                                    type='radio'
+                                    id='for'
+                                    value='FOR'
+                                    name='evidenceType'
+                                    defaultChecked={true}
+                                    className='peer hidden'
+                                />
+                                <div className='h-4 w-4 border-2 outline outline-yellow-800 rounded-full peer-checked:bg-yellow-800'></div>
+                                <div className='text-green-600 font-semibold'>For</div>
+                            </label>
+                            <label htmlFor='against' className='flex items-center space-x-2'>
+                                <input type='radio' id='against' value='AGAINST' name='evidenceType' className='hidden peer' />
+                                <div className='h-4 w-4 border-2 outline outline-yellow-800 rounded-full peer-checked:bg-yellow-800'></div>
+                                <div className='text-red-800 font-semibold'>Against</div>
+                            </label>
+                        </div>
+                    </div>
 
-						<div className='flex justify-evenly flex-wrap space-x-4 my-4'>
-							<div className='flex flex-col grow shrink-0'>
-								<div className='text-yellow-800'>Title</div>
-								<input
-									minLength={3}
-									name='title'
-									required
-									placeholder='Title of the Post'
-									className='rounded bg-stone-100 p-4'
-									defaultValue={title}
-								/>
-								<div className='text-yellow-800 mt-4'>Link</div>
-								{urls.map((url, i) => {
-									return (
-										<input
-											key={i}
-											name='link[]'
-											type='url'
-											placeholder='https://external-link.example'
-											className='rounded bg-stone-100 p-4 my-4'
-											onBlur={(e) => {
-												if (e.target.value && !e.target.validity.valid) {
-													if (!e.target.value.match(/^http.?:/)) {
-														e.target.value = 'https://' + e.target.value
-													}
-												}
-											}}
-										/>
-									)
-								})}
-								<button
-									className='flex items-center text-yellow-800 space-x-2 m-2 justify-end'
-									type='button'
-									onClick={() => {
-										setUrls([...urls, ''])
-									}}
-								>
-									<PlusIcon className='h-4 w-4' /> <div>Add</div>
-								</button>
-							</div>
-							<div className='flex flex-col grow shrink-0'>
-								<div className='text-yellow-800'>Explaination</div>
-								<textarea
-									name='body'
-									required
-									placeholder='Explaination here...'
-									className='rounded bg-stone-100 p-4 h-full'
-									defaultValue={description}
-								/>
-							</div>
-						</div>
-						<div className='flex justify-center space-x-8 font-serif'>
-							<button
-								className='text-yellow-800 border-yellow-800 border rounded p-2 uppercase font-bold w-32'
-								type='button'
-								onClick={() => {
-									router.push(`/questions/${questionId}`)
-								}}
-							>
-								Discard
-							</button>
-							<button className='bg-yellow-800 text-white rounded p-2 uppercase font-bold w-32'>Post</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</>
-	)
+                    <div className='flex justify-evenly flex-wrap space-x-4 my-4'>
+                        <div className='flex flex-col grow shrink-0'>
+                            <div className='text-yellow-800'>Title</div>
+                            <input
+                                minLength={3}
+                                name='title'
+                                required
+                                placeholder='Title of the Post'
+                                className='rounded bg-stone-100 p-4'
+                                defaultValue={title}
+                            />
+                            <div className='text-yellow-800 mt-4'>Link</div>
+                            {urls.map((url, i) => {
+                                return (
+                                    <input
+                                        key={i}
+                                        name='link[]'
+                                        type='url'
+                                        placeholder='https://external-link.example'
+                                        className='rounded bg-stone-100 p-4 my-4'
+                                        onBlur={(e) => {
+                                            if (e.target.value && !e.target.validity.valid) {
+                                                if (!e.target.value.match(/^http.?:/)) {
+                                                    e.target.value = 'https://' + e.target.value
+                                                }
+                                            }
+                                        }}
+                                    />
+                                );
+                            })}
+                            <button
+                                className='flex items-center text-yellow-800 space-x-2 m-2 justify-end'
+                                type='button'
+                                onClick={() => {
+                                    setUrls([...urls, ''])
+                                }}
+                            >
+                                <PlusIcon className='h-4 w-4' /> <div>Add</div>
+                            </button>
+                        </div>
+                        <div className='flex flex-col grow shrink-0'>
+                            <div className='text-yellow-800'>Explaination</div>
+                            <textarea
+                                name='body'
+                                required
+                                placeholder='Explaination here...'
+                                className='rounded bg-stone-100 p-4 h-full'
+                                defaultValue={description}
+                            />
+                        </div>
+                    </div>
+                    <div className='flex justify-center space-x-8 font-serif'>
+                        <button
+                            className='text-yellow-800 border-yellow-800 border rounded p-2 uppercase font-bold w-32'
+                            type='button'
+                            onClick={() => {
+                                router.push(`/questions/${questionId}`)
+                            }}
+                        >
+                            Discard
+                        </button>
+                        <button className='bg-yellow-800 text-white rounded p-2 uppercase font-bold w-32'>Post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </>;
 }
 
 export default NewArticlePage

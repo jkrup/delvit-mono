@@ -2,7 +2,6 @@ import { trpc } from "@/utils/trpc";
 import { useRouter } from "next/router";
 import FeedQuestion from "./FeedQuestion";
 import FilterBar from "./FilterBar";
-import { XIcon } from "@heroicons/react/outline";
 import SearchDisplay from "./SearchDisplay";
 import { useViewPort } from "@/hooks/useViewPort";
 import Skeleton from "../mobile/cards/Skeleton";

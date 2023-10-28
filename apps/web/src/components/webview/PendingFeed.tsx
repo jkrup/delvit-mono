@@ -18,8 +18,8 @@ const SelectedAlert = () => {
         Consensus Algorithm
       </div>
       <div className="shrink-0">
-        <Link href="/about">
-          <a className="underline italic">click here for info</a>
+        <Link href="/about" className="underline italic">
+          click here for info
         </Link>
       </div>
     </div>

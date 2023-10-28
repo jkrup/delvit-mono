@@ -35,22 +35,22 @@ const RecentConsensus = () => {
           {consensusItems?.data?.map(
             (consensusQuestion, i) =>
               i < limit && (
-                <Link
+                (<Link
                   key={consensusQuestion.id}
                   href={`/questions/${consensusQuestion.id}`}
-                >
-                  <a className="px-4 hover:bg-stone-300 hover:text-gold grow">
-                    <div
-                      key={consensusQuestion.id}
-                      className="flex p-4 items-center space-x-4"
-                    >
-                      <div className="text-xl font-bold">{i + 1}</div>
-                      <div className="m-1 text-lg rounded grow border-gold">
-                        {consensusQuestion.title}
-                      </div>
+                  className="px-4 hover:bg-stone-300 hover:text-gold grow">
+
+                  <div
+                    key={consensusQuestion.id}
+                    className="flex p-4 items-center space-x-4"
+                  >
+                    <div className="text-xl font-bold">{i + 1}</div>
+                    <div className="m-1 text-lg rounded grow border-gold">
+                      {consensusQuestion.title}
                     </div>
-                  </a>
-                </Link>
+                  </div>
+
+                </Link>)
               )
           )}
         </div>
