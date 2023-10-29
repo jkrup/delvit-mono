@@ -20,14 +20,14 @@ const NavBar = () => {
 		router.replace('/login')
 	}
 	return (
-		<div className='p-2 mt-1 py-3 fixed top-0 z-10 w-full bg-white flex items-center justify-between'>
+		<div className='p-2 mt-1 py-4 fixed top-0 z-10 w-full bg-white flex items-center justify-between'>
 			<div onClick={() => toggleSideBar(true)}>
 				<Menu />
 			</div>
-			<div className='relative'>
+			{/* <div className='relative'>
 				<Wallet width={35} height={28} />
 				<span className='text-xs text-green-600 font-bold'>+{prettyPrintInt(points)}</span>
-			</div>
+			</div> */}
 		</div>
 	)
 }

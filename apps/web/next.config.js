@@ -2,17 +2,22 @@
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { composePlugins, withNx } = require('@nx/next');
-
+const withPWA = require('next-pwa')({
+	dest: 'public',
+	disable: process.env.NODE_ENV === 'development',
+	scope: '/app',
+})
 /**
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
  **/
+
 const nextConfig = {
-  nx: {
-    // Set this to true if you would like to use SVGR
-    // See: https://github.com/gregberge/svgr
-    svgr: false,
-  },
-  reactStrictMode: true,
+	nx: {
+		// Set this to true if you would like to use SVGR
+		// See: https://github.com/gregberge/svgr
+		svgr: false,
+	},
+	reactStrictMode: true,
 	images: {
 		domains: ['ipfs.io', 'i.imgur.com', 'cloudflare-ipfs.com'],
 		remotePatterns: [
@@ -21,7 +26,7 @@ const nextConfig = {
 				hostname: '*.googleusercontent.com',
 				pathname: '/a/**',
 			},
-      {
+			{
 				protocol: 'https',
 				hostname: '*.dweb.link',
 				pathname: '**',
@@ -32,8 +37,9 @@ const nextConfig = {
 };
 
 const plugins = [
-  // Add more Next.js plugins to this list if needed.
-  withNx,
+	// Add more Next.js plugins to this list if needed.
+	withNx,
+	withPWA
 ];
 
 module.exports = composePlugins(...plugins)(nextConfig);

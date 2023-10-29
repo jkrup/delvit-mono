@@ -1,7 +1,11 @@
+import AuthButton from '@/components/mobile/partials/AuthButton'
+import Button from '@/components/mobile/partials/Button'
+import TextInput from '@/components/mobile/partials/TextInput'
 import WalletConnectButton from '@/components/mobile/partials/WalletConnectButton'
 import ArticlesFeed from '@/components/webview/ArticlesFeed'
 import PopularTopics from '@/components/webview/PopularTopics'
 import UserMenu from '@/components/webview/UserMenu'
+import { useViewPort } from '@/hooks/useViewPort'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { useWeb3Modal } from '@web3modal/react'
 import { getCsrfToken, signIn, signOut, useSession } from 'next-auth/react'
@@ -59,6 +63,7 @@ const HomePage = () => {
 }
 
 const LoginPage: React.FC = () => {
+	const { width } = useViewPort()
 	const { data: session } = useSession()
 	const [loggingIn, setLoggingIn] = useState(false)
 	const { chain } = useNetwork()
@@ -171,66 +176,129 @@ const LoginPage: React.FC = () => {
 		)
 	}
 	return (
-		<div>
+		<div className='overflow-hidden'>
 			<Head>
 				<title>Delvit | Login</title>
 				<meta name='description' content='Delvit' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<div className='hidden md:block blur'>
-				<HomePage />
-			</div>
-			<div className='absolute top-0 left-0 w-full grid min-h-screen'>
-				<div
-					className={
-						'm-auto bg-white md:bg-zinc-800/75 p-12 py-4 w-screen h-screen md:h-auto md:w-3/5 lg:w-[400px] mx-auto rounded-xl drop-shadow-2xl flex flex-col space-y-3' +
-						(loggingIn && ' blur')
-					}
-				>
-					<div className='mx-auto'>
-						<Image alt='Delvit Logo' className='cursor-pointer rounded-full mx-4 h-[64px] w-[64px]' src={hstkLogoUrl} />
+			{width > 992 ? (
+				<div>
+					<div className='blur'>
+						<HomePage />
 					</div>
-					<div className='pb-4 text-center w-full flex flex-col'>
-						<h2 className='text-3xl pb-4 text-white'>Login With:</h2>
-						<button
+					<div className='absolute top-0 left-0 w-full grid min-h-screen'>
+						<div
 							className={
-								'text-xl justify-center rounded-xl font-bold p-4 my-2 bg-gold hover:bg-yellow-500 hover:drop-shadow text-white flex items-center'
+								'm-auto bg-zinc-800/75 p-12 py-4 w-[280px] sm:w-[400px] rounded-xl drop-shadow-2xl flex flex-col space-y-3' +
+								(loggingIn && ' blur')
 							}
-							onClick={() => signIn('email')}
 						>
-							Email
-						</button>
-						<button
-							className={
-								'text-xl justify-center rounded-xl font-bold p-4 my-2 bg-gold hover:bg-yellow-500 hover:drop-shadow text-white flex items-center'
-							}
-							onClick={() => signIn('google')}
-						>
-							Google
-						</button>
-						<button
-							className={
-								'justify-center rounded-xl font-bold p-4 my-2 bg-gold hover:bg-yellow-500 hover:drop-shadow text-white flex items-center'
-							}
-							onClick={() => loginWithMetamask()}
-						>
-							<div className='w-8 mr-2'>
-								<img alt='Login with MetaMask' src='/metamask.svg' />
+							<div className='mx-auto'>
+								<Image
+									alt='Delvit Logo'
+									className='cursor-pointer rounded-full mx-4 h-[64px] w-[64px]'
+									src={hstkLogoUrl}
+								/>
 							</div>
-							<div className='text-xl'>Metamask</div>
-						</button>
-						<WalletConnectButton
-							onClick={loginWithWalletConnect}
-							icon={
-								<div className=''>
-									<SiWalletconnect className='w-6 h-6' />
-								</div>
-							}
-							label={'Walletconnect'}
-						/>
+							<div className='pb-4 text-center w-full flex flex-col'>
+								<h2 className='text-3xl pb-4 text-white'>Login With:</h2>
+								<button
+									className={
+										'text-xl justify-center rounded-xl font-bold p-4 my-2 bg-yellow-600 hover:bg-yellow-500 hover:drop-shadow text-white flex items-center'
+									}
+									onClick={() => signIn('email')}
+								>
+									Email
+								</button>
+								<button
+									className={
+										'text-xl justify-center rounded-xl font-bold p-4 my-2 bg-yellow-600 hover:bg-yellow-500 hover:drop-shadow text-white flex items-center'
+									}
+									onClick={() => signIn('google')}
+								>
+									Google
+								</button>
+								<button
+									className={
+										'justify-center rounded-xl font-bold p-4 my-2 bg-yellow-600 hover:bg-yellow-500 hover:drop-shadow text-white flex items-center'
+									}
+									onClick={() => loginWithMetamask()}
+								>
+									<div className='w-8 mr-2'>
+										<img alt='Login with MetaMask' src='/metamask.svg' />
+									</div>
+									<div className='text-xl'>Metamask</div>
+								</button>
+								<WalletConnectButton
+									label='Walletconnect'
+									icon={
+										<div className=''>
+											<SiWalletconnect className='w-6 h-6' />
+										</div>
+									}
+									onClick={loginWithWalletConnect}
+								/>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
+			) : (
+				<div className='p-12 h-screen w-screen bg-white'>
+					<div className='pt-20'>
+						<div className='flex items-center justify-center'>
+							<Image
+								width={107}
+								height={107}
+								alt='Delvit Logo'
+								className='cursor-pointer rounded-full mx-4'
+								src={'/logo-white.svg'}
+							/>
+						</div>
+						<h2 className='text-center my-6 font-semibold text-gray-700 text-2xl'>Login</h2>
+						<TextInput value='' placeholder='Enter your email' onChange={() => null} />
+						<TextInput value='' placeholder='Password' onChange={() => null} />
+						<h5 className='text-gray-600 text-right text-sm font-light'>Forget password?</h5>
+						<div className='mt-8 mb-12 flex justify-center'>
+							<Button
+								classname='rounded-full text-white text-sm px-6 py-3 bg-gold'
+								title='LOGIN'
+								onChange={() => null}
+							/>
+						</div>
+
+						<div>
+							<AuthButton
+								icon={
+									<div>
+										<Image src={'/google.svg'} width={32} height={32} alt='google icon' />
+									</div>
+								}
+								onClick={() => signIn('google')}
+								text='Sign in with Google'
+							/>
+							<AuthButton
+								icon={
+									<div>
+										<Image src={'/metamask.svg'} width={32} height={32} alt='metamask icon' />
+									</div>
+								}
+								onClick={loginWithMetamask}
+								text='Sign in with Metamask'
+							/>
+							<AuthButton
+								icon={
+									<div className=''>
+										<SiWalletconnect className='w-6 h-6' />
+									</div>
+								}
+								onClick={loginWithWalletConnect}
+								text='Sign in with Walletconnect'
+							/>
+						</div>
+					</div>
+				</div>
+			)}
 		</div>
 	)
 }

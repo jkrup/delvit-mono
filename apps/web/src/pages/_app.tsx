@@ -6,6 +6,7 @@ import { Web3Modal } from '@web3modal/react'
 import { Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
 import { AppProps } from 'next/app'
+import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import superjson from 'superjson'
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
@@ -42,6 +43,12 @@ const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppProps<{ s
 
 	return (
 		<>
+			<Head>
+				<meta
+					name='viewport'
+					content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
+				/>
+			</Head>
 			{ready ? (
 				<WagmiConfig config={wagmiConfig}>
 					<SessionProvider session={session}>
