@@ -60,23 +60,29 @@ const ProfilePage = () => {
 
 	if (!data) {
 		return (
-			<div className='w-full min-h-screen m-auto'>
-				<Header />
-				<form
-					className='bg-white my-12 shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col space-y-4'
-					onSubmit={onSubmit}
-				>
-					<div className='flex-1'>
-						<button
-							type='button'
-							className='w-full bg-yellow-500 hover:bg-gold text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-							onClick={() => signIn()}
+			<>
+				{width > 992 ? (
+					<div className='w-full min-h-screen m-auto'>
+						<Header />
+						<form
+							className='bg-white my-12 shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col space-y-4'
+							onSubmit={onSubmit}
 						>
-							Sign In
-						</button>
+							<div className='flex-1'>
+								<button
+									type='button'
+									className='w-full bg-yellow-500 hover:bg-gold text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+									onClick={() => signIn()}
+								>
+									Sign In
+								</button>
+							</div>
+						</form>
 					</div>
-				</form>
-			</div>
+				) : (
+					<PageLoading />
+				)}
+			</>
 		)
 	}
 
@@ -216,8 +222,8 @@ const ProfilePage = () => {
 									<span className='mx-1'>{prettyPrintInt(points)} DLV</span>
 								</div>
 
-								<h2 className='text-2xl capitalize font-semibold text-gold font-serif'>{name}</h2>
-								<h3 className='text-gold capitalize font-light text-sm'>{title}</h3>
+								<h2 className='text-2xl capitalize break-all font-semibold text-gold font-serif'>{name}</h2>
+								<h3 className='text-gold break-all capitalize font-light text-sm'>{title}</h3>
 								<div className='flex text-center justify-evenly w-full my-8'>
 									<div>
 										<div className='text-2xl'>{posts}</div>

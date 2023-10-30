@@ -176,7 +176,7 @@ const LoginPage: React.FC = () => {
 		)
 	}
 	return (
-		<div className='overflow-hidden'>
+		<div className=''>
 			<Head>
 				<title>Delvit | Login</title>
 				<meta name='description' content='Delvit' />
@@ -244,8 +244,8 @@ const LoginPage: React.FC = () => {
 					</div>
 				</div>
 			) : (
-				<div className='p-12 h-screen w-screen bg-white'>
-					<div className='pt-20'>
+				<div className='p-12 pb-20 h-screen w-screen bg-white'>
+					<div className='pt-8'>
 						<div className='flex items-center justify-center'>
 							<Image
 								width={107}

@@ -5,7 +5,7 @@ const { composePlugins, withNx } = require('@nx/next');
 const withPWA = require('next-pwa')({
 	dest: 'public',
 	disable: process.env.NODE_ENV === 'development',
-	scope: '/app',
+	scope: '/',
 })
 /**
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
