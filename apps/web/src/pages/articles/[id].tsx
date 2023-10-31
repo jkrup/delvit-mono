@@ -1,20 +1,23 @@
+import LoadingCard from '@/components/mobile/partials/LoadingCard'
+import PageHeader from '@/components/mobile/partials/PageHeader'
+import QuestionTabMenu from '@/components/mobile/partials/QuestionTabMenu'
+import SingleEvidence from '@/components/mobile/tabs/SingleEvidence'
+import Article from '@/components/webview/Article'
+import BackTitle from '@/components/webview/BackTitle'
+import DropDown from '@/components/webview/DropDown'
+import Evidence from '@/components/webview/Evidence'
+import EvidenceArticle from '@/components/webview/EvidenceArticle'
+import LoadingArticlePage from '@/components/webview/LoadingArticlePage'
+import Page from '@/components/webview/Page'
+import { useViewPort } from '@/hooks/useViewPort'
+import { trpc } from '@/utils/trpc'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
-import Article from '@/components/Article'
-import BackTitle from '@/components/BackTitle'
-import DropDown from '@/components/DropDown'
-import Evidence from '@/components/Evidence'
-import EvidenceArticle from '@/components/EvidenceArticle'
-import LoadingArticlePage from '@/components/LoadingArticlePage'
-import Page from '@/components/Page'
-
-import Header from '../../components/Header'
-import { trpc } from '../../utils/trpc'
-
 const ArticlePage = () => {
+	const { width } = useViewPort()
 	const router = useRouter()
 
 	//TODO: Check articleId is string
@@ -55,7 +58,19 @@ const ArticlePage = () => {
 	})
 
 	if (!router.isReady || article.isLoading || !article.data) {
-		return <LoadingArticlePage />
+		return (
+			<>
+				{width > 992 ? (
+					<LoadingArticlePage />
+				) : (
+					<>
+						<PageHeader goBack={true} title='Question' />
+						<QuestionTabMenu activeTab='Evidence' setActiveTab={() => null} />
+						<LoadingCard />
+					</>
+				)}
+			</>
+		)
 	}
 
 	const { data: articleData } = article
@@ -98,92 +113,113 @@ const ArticlePage = () => {
 	}
 
 	return (
-		<Page title={articleData.title}>
-			<div className='grid grid-cols-5 gap-4 max-w-screen-xl mx-auto'>
-				<div className='flex flex-col col-span-3 space-y-4'>
-					{backTitle.data && (
-						<BackTitle url={(questionId && `/questions/${questionId}`) || undefined} title={backTitle.data} />
-					)}
-					{/* Article SubSection */}
-					<Article
-						id={articleData.id}
-						imgSrc={article.data.imgSrc || undefined}
-						body={articleData.body}
-						url={articleData.url || undefined}
-						title={articleData.title}
-						postedAt={articleData.createdAt.toDateString()}
-						postedByName={articleData.author.name as string}
-						avatar={articleData.author.image || undefined}
-						tags={articleData.topics.map((t) => t.topic)}
-					/>
-				</div>
+		<>
+			{width > 992 ? (
+				<Page title={articleData.title}>
+					<div className='grid grid-cols-5 gap-4 max-w-screen-xl mx-auto'>
+						<div className='flex flex-col col-span-3 space-y-4'>
+							{backTitle.data && (
+								<BackTitle url={(questionId && `/questions/${questionId}`) || undefined} title={backTitle.data} />
+							)}
+							{/* Article SubSection */}
+							<Article
+								id={articleData.id}
+								imgSrc={article.data.imgSrc || undefined}
+								body={articleData.body}
+								url={articleData.url || undefined}
+								title={articleData.title}
+								postedAt={articleData.createdAt.toDateString()}
+								postedByName={articleData.author.name as string}
+								avatar={articleData.author.image || undefined}
+								tags={articleData.topics.map((t) => t.topic)}
+							/>
+						</div>
 
-				{/* Right SubSection */}
-				<div className='flex flex-col col-span-2 space-y-2'>
-					{' '}
-					{/* Col 2 */}
-					<div className='flex flex-col rounded-md'>
-						{' '}
-						{/* Col 2 */}
-						<div className='bg-white rounded-md mb-4 overflow-hidden'>
-							<div className='p-4 bg-gold font-bold text-center text-white flex justify-between items-center'>
-								<div className='font-serif text-xl px-4'>Evidence Blocks</div>
-								<Link
-									href={`/articles/newWithQuestion?postId=${articleId}`}
-									className='border rounded p-2 px-4 font-serif'
-								>
-									POST
-								</Link>
-							</div>
-							<div className='rounded-md flex flex-col'>
-								<div>
-									<div className='grid grid-cols-2 gap-2 m-4'>
-										{renderTopSupporting()}
-										{renderTopOpposing()}
+						{/* Right SubSection */}
+						<div className='flex flex-col col-span-2 space-y-2'>
+							{' '}
+							{/* Col 2 */}
+							<div className='flex flex-col rounded-md'>
+								{' '}
+								{/* Col 2 */}
+								<div className='bg-white rounded-md mb-4 overflow-hidden'>
+									<div className='p-4 bg-gold font-bold text-center text-white flex justify-between items-center'>
+										<div className='font-serif text-xl px-4'>Evidence Blocks</div>
+										<Link
+											href={`/articles/newWithQuestion?postId=${articleId}`}
+											className='border rounded p-2 px-4 font-serif'
+										>
+											POST
+										</Link>
 									</div>
-									<div className='flex justify-end mx-4'>
-										<div className='flex justify-start'>
-											<div
-												className={`rounded-full px-[5%] p-1 mr-[5%] font-serif ${
-													evidenceView === 'FOR' ? 'bg-green-200' : 'bg-red-200'
-												}`}
-											>
-												<DropDown onSelect={(e) => setEvidenceView(e.target.value)}>
-													<option value='FOR'>FOR</option>
-													<option value='AGAINST'>AGAINST</option>
-												</DropDown>
+									<div className='rounded-md flex flex-col'>
+										<div>
+											<div className='grid grid-cols-2 gap-2 m-4'>
+												{renderTopSupporting()}
+												{renderTopOpposing()}
+											</div>
+											<div className='flex justify-end mx-4'>
+												<div className='flex justify-start'>
+													<div
+														className={`rounded-full px-[5%] p-1 mr-[5%] font-serif ${
+															evidenceView === 'FOR' ? 'bg-green-200' : 'bg-red-200'
+														}`}
+													>
+														<DropDown onSelect={(e) => setEvidenceView(e.target.value)}>
+															<option value='FOR'>FOR</option>
+															<option value='AGAINST'>AGAINST</option>
+														</DropDown>
+													</div>
+												</div>
+											</div>
+											<div className='block m-4'>
+												{/* <SubmitEvidenceArticle */}
+												{/*   articleId={articleData.id} */}
+												{/*   refetch={article.refetch} */}
+												{/* /> */}
+												{articleData.evidencePosts
+													.filter((evidencePostData) => evidencePostData.evidenceType === evidenceView)
+													.map((evidencePostData) => (
+														<EvidenceArticle
+															key={evidencePostData.evidencePostId}
+															id={evidencePostData.evidencePostId}
+															title={evidencePostData.evidencePost.title}
+															views={evidencePostData.evidencePost.views}
+															commentCount={evidencePostData.evidencePost._count.comments}
+															body={evidencePostData.evidencePost.body}
+															evidenceType={evidencePostData.evidenceType}
+															// imgSrc={evidencePostData.evidenceArticle.imgSrc ?? undefined}
+															url={evidencePostData.evidencePost.url ?? undefined}
+															evidenceArticleCount={evidencePostData.evidencePost._count.parentPosts}
+														/>
+													))}
 											</div>
 										</div>
-									</div>
-									<div className='block m-4'>
-										{/* <SubmitEvidenceArticle */}
-										{/*   articleId={articleData.id} */}
-										{/*   refetch={article.refetch} */}
-										{/* /> */}
-										{articleData.evidencePosts
-											.filter((evidencePostData) => evidencePostData.evidenceType === evidenceView)
-											.map((evidencePostData) => (
-												<EvidenceArticle
-													key={evidencePostData.evidencePostId}
-													id={evidencePostData.evidencePostId}
-													title={evidencePostData.evidencePost.title}
-													views={evidencePostData.evidencePost.views}
-													commentCount={evidencePostData.evidencePost._count.comments}
-													body={evidencePostData.evidencePost.body}
-													evidenceType={evidencePostData.evidenceType}
-													// imgSrc={evidencePostData.evidenceArticle.imgSrc ?? undefined}
-													url={evidencePostData.evidencePost.url ?? undefined}
-													evidenceArticleCount={evidencePostData.evidencePost._count.parentPosts}
-												/>
-											))}
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-		</Page>
+				</Page>
+			) : (
+				<>
+					<Head>
+						<title>DLV | {articleData.title}</title>
+						<meta name='description' content='DLV App' />
+						<link rel='icon' href='/favicon.ico' />
+					</Head>
+					<SingleEvidence
+						articleData={{
+							...articleData,
+							postedAt: articleData.createdAt.toDateString(),
+							postedByName: articleData.author.name as string,
+							imgSrc: undefined,
+							url: articleData.url || undefined,
+						}}
+					/>
+				</>
+			)}
+		</>
 	)
 }
 

@@ -100,7 +100,7 @@ function Home(): JSX.Element {
                 className={`py-2 w-full text-center rounded ${
                   selectedType === ht.id
                     ? " text-white bg-stone-500" // selected classes
-                    : " bg-stone-100 text-gold"
+                    : " bg-gold bg-opacity-5 text-gold"
                 }`}
                 onClick={() => {
                   router.query["type"] = ht.id;

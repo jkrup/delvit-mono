@@ -154,7 +154,7 @@ const ProfilePage = () => {
 									Name
 								</label>
 								<input
-									className='rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline'
+									className='rounded w-full py-2 px-3 bg-gold bg-opacity-5 focus:shadow-outline'
 									id='username'
 									type='text'
 									placeholder='name'
@@ -167,7 +167,7 @@ const ProfilePage = () => {
 									Title
 								</label>
 								<input
-									className='rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline'
+									className='rounded w-full py-2 px-3 bg-gold bg-opacity-5 focus:shadow-outline'
 									id='title'
 									type='text'
 									placeholder=''
@@ -180,7 +180,7 @@ const ProfilePage = () => {
 									About Me
 								</label>
 								<textarea
-									className='rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline'
+									className='rounded w-full py-2 px-3 bg-gold bg-opacity-5 focus:shadow-outline'
 									id='bio'
 									placeholder="Write a bit about yourself here, so others will know who you are and what you're knowledgable about."
 									name='bio'
@@ -217,7 +217,7 @@ const ProfilePage = () => {
 								{image && (
 									<Image src={image} width='100' height='100' alt='profile' className='w-32 h-32 rounded-full my-4' />
 								)}
-								<div className='text-gold bg-gold bg-opacity-20 rounded-full p-3 mb-3 flex items-center justify-center'>
+								<div className='text-gold bg-gold bg-opacity-5 rounded-full p-3 mb-3 flex items-center justify-center'>
 									<Image src={'/wallet_gold.svg'} width={35} height={26} alt='wallet icon' />
 									<span className='mx-1'>{prettyPrintInt(points)} DLV</span>
 								</div>
@@ -282,7 +282,7 @@ const ProfilePage = () => {
 										Name
 									</label>
 									<input
-										className='rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline'
+										className='rounded w-full py-2 px-3 bg-gold bg-opacity-5 focus:shadow-outline'
 										id='username'
 										type='text'
 										placeholder='name'
@@ -295,7 +295,7 @@ const ProfilePage = () => {
 										Title
 									</label>
 									<input
-										className='rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline'
+										className='rounded w-full py-2 px-3 bg-gold bg-opacity-5 focus:shadow-outline'
 										id='title'
 										type='text'
 										placeholder=''
@@ -308,7 +308,7 @@ const ProfilePage = () => {
 										About Me
 									</label>
 									<textarea
-										className='rounded w-full py-2 px-3 bg-stone-100 focus:shadow-outline'
+										className='rounded w-full py-2 px-3 bg-gold bg-opacity-5 focus:shadow-outline'
 										id='bio'
 										placeholder="Write a bit about yourself here, so others will know who you are and what you're knowledgable about."
 										name='bio'

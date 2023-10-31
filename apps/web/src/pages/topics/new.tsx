@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-
-import Page from '@/components/Page'
+import Page from '@/components/webview/Page'
 import { trpc } from '@/utils/trpc'
 
 const NewTopicPage = () => {

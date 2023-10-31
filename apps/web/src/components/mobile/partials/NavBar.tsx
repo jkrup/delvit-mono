@@ -14,13 +14,13 @@ const NavBar = () => {
 	const avatarData = trpc.useQuery(['auth.getAvatar'])
 	const profile = trpc.useQuery(['auth.getProfile'])
 	const avatar = avatarData.data || '/noavatar.png'
-	const points = profile.data?.points.map((p) => p.amount).reduce((acc, p) => p + acc, 0) ?? 0
+	
 
 	if (status === 'unauthenticated') {
 		router.replace('/login')
 	}
 	return (
-		<div className='p-2 mt-1 py-4 fixed top-0 z-10 w-full bg-white flex items-center justify-between'>
+		<div className='p-2 py-4 fixed top-0 z-10 w-full bg-white flex items-center justify-between'>
 			<div onClick={() => toggleSideBar(true)}>
 				<Menu />
 			</div>

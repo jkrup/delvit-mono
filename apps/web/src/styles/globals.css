@@ -9,7 +9,7 @@ form:focus-within .so {
   display: inherit;
 }
 body {
-  @apply bg-gray-100;
+  @apply bg-gray-50;
 }
 .sidebar {
   background: linear-gradient(180deg, #8a836e -19.4%, #000 170.97%);

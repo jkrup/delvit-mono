@@ -2,8 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
-
-import Page from '@/components/Page'
+import Page from '@/components/webview/Page'
 import { trpc } from '@/utils/trpc'
 
 // const TimedQuestion = () => {

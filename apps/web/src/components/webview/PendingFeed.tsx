@@ -135,7 +135,7 @@ const PendingFeed = () => {
       ) : (
         <>
           {pendingQuestions?.map((pendingQuestion) => {
-            const url = `/pending/${pendingQuestion.id}`;
+            const url = `/questions/${pendingQuestion.id}`;
             console.log(pendingQuestion);
             return (
               <PendingCard

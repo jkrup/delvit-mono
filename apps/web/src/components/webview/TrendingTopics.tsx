@@ -64,7 +64,7 @@ const TrendingTopics = () => {
 							onClick={() => {
 								setLimit(Infinity)
 							}}
-							className='w-full py-2 px-4 text-lg whitespace-nowrap rounded hover:bg-stone-200 bg-stone-100 grow border-yellow-800 text-yellow-800'
+							className='w-full py-2 px-4 text-lg whitespace-nowrap rounded hover:bg-stone-200 bg-gold bg-opacity-5 grow border-yellow-800 text-yellow-800'
 						>
 							View all
 						</button>

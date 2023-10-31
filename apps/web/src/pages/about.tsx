@@ -79,7 +79,7 @@ const SchellingPage: NextPage = () => {
         <meta name="description" content="HSTK App" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="bg-gray-100">
+      <div className="bg-gray-50">
         <Header />
         <div className="min-h-screen">
           <div className="bg-white mx-auto my-8 rounded-md p-10 max-w-screen-xl">

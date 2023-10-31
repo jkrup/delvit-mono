@@ -1,15 +1,10 @@
+import Page from '@/components/webview/Page'
+import { useBoolState, wrapStopPropagation } from '@/utils/helpers'
+import { trpc } from '@/utils/trpc'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { orderBy } from 'lodash'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
-
-import BackTitle from '@/components/BackTitle'
-import Page from '@/components/Page'
-import { useBoolState, wrapPreventDefault, wrapStopPropagation } from '@/utils/helpers'
-
-import Header from '../../components/Header'
-import { trpc } from '../../utils/trpc'
 
 const NewArticlePage = () => {
 	const router = useRouter()
@@ -102,7 +97,7 @@ const NewArticlePage = () => {
 				?.filter((topic) => topicSearch === '' || topic.title.toLowerCase().includes(topicSearch.toLowerCase()))
 				.filter((topic) => !selectedIDs.has(topic.id)) ?? [],
 			(x) => x.title.toLowerCase(),
-			'asc'
+			'asc',
 		)
 	}, [topics.data, postTopics, topicSearch])
 
@@ -151,7 +146,7 @@ const NewArticlePage = () => {
 								{postTopics.map((topic) => (
 									<div
 										key={topic.id}
-										className='px-4 py-2 bg-gold bg-opacity-10 rounded-lg text-center justify-center align-center text-gold select-none'
+										className='px-4 py-2 bg-gold bg-opacity-5 rounded-lg text-center justify-center align-center text-gold select-none'
 									>
 										<span>
 											{topic.title}{' '}

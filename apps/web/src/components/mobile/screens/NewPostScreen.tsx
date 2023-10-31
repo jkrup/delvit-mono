@@ -58,7 +58,7 @@ const NewPostScreen = ({
     <form onSubmit={onSubmit}>
       <div className="">
         <PageHeader title="Post View" />
-        <div className="p-2 bg-gray-100">
+        <div className="p-2 bg-gray-50">
           <h3 className="my-3 text-center">{questionTitle}</h3>
           <div className="p-2 bg-white h-full rounded">
             <h5 className="text-xs text-gold text-center my-2">
@@ -95,7 +95,7 @@ const NewPostScreen = ({
                 name="title"
                 required
                 placeholder="Title of the Post"
-                className="rounded bg-stone-100 p-4"
+                className="rounded bg-gold bg-opacity-5 p-4"
                 defaultValue={title}
               />
               <div className="text-gold mt-4">Link</div>
@@ -103,7 +103,7 @@ const NewPostScreen = ({
                 name="link[]"
                 type="url"
                 placeholder="https://external-link.example"
-                className="rounded bg-stone-100 p-4 my-4"
+                className="rounded bg-gold bg-opacity-5 p-4 my-4"
                 value={currentVal}
                 onChange={(e) => {
                   setcurrentVal(e.target.value);
@@ -155,7 +155,7 @@ const NewPostScreen = ({
                 name="body"
                 required
                 placeholder="Explaination here..."
-                className="rounded bg-stone-100 p-4"
+                className="rounded bg-gold bg-opacity-5 p-4"
                 defaultValue={description}
               />
             </div>

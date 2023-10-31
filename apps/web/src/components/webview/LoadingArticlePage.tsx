@@ -9,7 +9,7 @@ const LoadingArticlePage = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Header />
-    <div className="pt-4 bg-gray-100 min-h-screen pb-64">
+    <div className="pt-4 bg-gray-50 min-h-screen pb-64">
       <div className="grid grid-cols-5 gap-4 max-w-screen-xl mx-auto">
         <div className="flex flex-col col-span-3 space-y-4 ">
           <div className="animate-pulse bg-gray-500 h-12 rounded-lg"></div>

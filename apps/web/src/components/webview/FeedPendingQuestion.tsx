@@ -29,7 +29,7 @@ const Opinion: React.FC<OpinionProps> = ({ questionId, opinion: defaultOpinion }
 
 	return (
 		<div
-			className={`rounded-lg overflow-hidden border flex flex-col space-y-2 shrink-0 font-serif bg-stone-100 ${
+			className={`rounded-lg overflow-hidden border flex flex-col space-y-2 shrink-0 font-serif bg-gold bg-opacity-5 ${
 				opinion ? '' : 'border-yellow-800'
 			}`}
 		>

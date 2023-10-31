@@ -60,7 +60,7 @@ const RecentConsensus = () => {
               onClick={() => {
                 setLimit(Infinity);
               }}
-              className="w-full py-2 px-4 text-lg whitespace-nowrap rounded hover:bg-stone-200 bg-stone-100 grow border-gold text-gold"
+              className="w-full py-2 px-4 text-lg whitespace-nowrap rounded hover:bg-stone-200 bg-gold bg-opacity-5 grow border-gold text-gold"
             >
               View all
             </button>
