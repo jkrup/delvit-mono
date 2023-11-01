@@ -27,7 +27,7 @@ const BanterTab = ({ questionData }: { questionData: QuestionProps }) => {
   const againstEarn = Math.floor(forPercent / 10) || 0;
   console.log(questionData);
   return <>
-    <div className="bg-white rounded-md p-3 m-2">
+    <div className="bg-white  rounded-md p-3 m-2">
       <CardHeader
         author={questionData?.author}
         createdAt={questionData.createdAt}
@@ -59,7 +59,7 @@ const BanterTab = ({ questionData }: { questionData: QuestionProps }) => {
         </Link>
       </div>
     </div>
-    <div className="bg-white p-1">
+    <div className="bg-white  p-1">
       <BanterSection
         articleId={questionData?.posts?.id}
         questionId={questionData.id}

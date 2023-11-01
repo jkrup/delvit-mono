@@ -32,7 +32,7 @@ const QuestionsFeed = () => {
       <>
         {width > 992 ? (
           <div className="col-span-2 flex flex-col space-y-4">
-            <div className="bg-white rounded-md p-2 px-4 flex space-x-2 items-center animate-pulse">
+            <div className="bg-white  rounded-md p-2 px-4 flex space-x-2 items-center animate-pulse">
               &nbsp;
             </div>
 

@@ -142,7 +142,7 @@ const ArticlePage = () => {
 							<div className='flex flex-col rounded-md'>
 								{' '}
 								{/* Col 2 */}
-								<div className='bg-white rounded-md mb-4 overflow-hidden'>
+								<div className='bg-white  rounded-md mb-4 overflow-hidden'>
 									<div className='p-4 bg-gold font-bold text-center text-white flex justify-between items-center'>
 										<div className='font-serif text-xl px-4'>Evidence Blocks</div>
 										<Link

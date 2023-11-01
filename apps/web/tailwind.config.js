@@ -29,7 +29,8 @@ module.exports = {
         lightgreen: 'rgba(59, 173, 91, 0.24)',
         greenish: '#009B2B',
         brightgreen: '#00D03A',
-        brownish: '#2E2D28'
+        brownish: '#2E2D28',
+        darkblue: '#09090b'
       },
       borderWidth: {
         0.5: '0.5px',

@@ -56,11 +56,11 @@ const NewPostScreen = ({
   };
   return (
     <form onSubmit={onSubmit}>
-      <div className="">
+      <div className="pb-20">
         <PageHeader title="Post View" />
         <div className="p-2 bg-gray-50">
           <h3 className="my-3 text-center">{questionTitle}</h3>
-          <div className="p-2 bg-white h-full rounded">
+          <div className="p-2 bg-white  h-full rounded">
             <h5 className="text-xs text-gold text-center my-2">
               You are posting :
             </h5>
@@ -70,7 +70,7 @@ const NewPostScreen = ({
                 className={`p-2 rounded-3xl ${
                   evidenceType === "FOR"
                     ? "bg-brightgreen text-white  border-brightgreen"
-                    : " border-brightgreen text-brightgreen bg-white"
+                    : " border-brightgreen text-brightgreen bg-white "
                 }  mx-2 px-6 border`}
               >
                 FOR
@@ -103,7 +103,7 @@ const NewPostScreen = ({
                 name="link[]"
                 type="url"
                 placeholder="https://external-link.example"
-                className="rounded bg-gold bg-opacity-5 p-4 my-4"
+                className="rounded bg-gold bg-opacity-5 p-3 mb-2"
                 value={currentVal}
                 onChange={(e) => {
                   setcurrentVal(e.target.value);
@@ -155,13 +155,13 @@ const NewPostScreen = ({
                 name="body"
                 required
                 placeholder="Explaination here..."
-                className="rounded bg-gold bg-opacity-5 p-4"
+                className="rounded bg-gold bg-opacity-5 min-h-[12rem] p-4"
                 defaultValue={description}
               />
             </div>
 
             {/* discard or post */}
-            <div className="flex justify-end my-4 mt-12 space-x-8 font-serif">
+            <div className="flex justify-end my-4 mt-12 space-x-2 md:space-x-8 font-serif">
               <button
                 className="text-gold text-sm border-gold border rounded p-2 uppercase font-bold w-32"
                 type="button"

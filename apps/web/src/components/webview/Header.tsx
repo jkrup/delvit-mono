@@ -33,7 +33,7 @@ const Header = () => {
 	return (
 		<>
 			{width > 992 ? (
-				<div className='h-24 bg-white p-4'>
+				<div className='h-24 bg-white  p-4'>
 					<div className='flex flex-row justify-between items-center max-w-screen-xl mx-auto'>
 						<Link href='/' legacyBehavior>
 							<img src={hstkLogoUrl.src} width={'64px'} height={'64px'} />

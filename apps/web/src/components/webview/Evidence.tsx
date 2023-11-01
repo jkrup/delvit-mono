@@ -40,7 +40,7 @@ const Evidence: React.FC<EvidenceProps> = ({
       {" "}
       {/* Col 2 */}
       <div
-        className={`flex flex-col block bg-white h-64 rounded-md mb-4 overflow-hidden outline outline-1 ${
+        className={`flex flex-col block bg-white  h-64 rounded-md mb-4 overflow-hidden outline outline-1 ${
           stance ? "outline-green-600" : "outline-red-800"
         }`}
       >

@@ -6,7 +6,7 @@ type SideContentProps = {
 const SideContent: React.FC<SideContentProps> = ({ title, children }) => {
   return (
     <div className="flex flex-col rounded-md"> {/* Col 2 */}
-      <div className="bg-white rounded-md mb-4 overflow-hidden">
+      <div className="bg-white  rounded-md mb-4 overflow-hidden">
         <div className="title p-4 bg-gold font-bold text-center">
           {title}
         </div>

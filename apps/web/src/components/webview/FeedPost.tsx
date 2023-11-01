@@ -29,7 +29,7 @@ const FeedPost: React.FC<FeedPostProps> = ({
   console.log(evidenceBlocksCount)
   return <>
     {width > 992 ? (
-      <div className="bg-white rounded-md p-2 px-4 flex flex-col space-y-2 shadow hover:shadow-lg transition">
+      <div className="bg-white  rounded-md p-2 px-4 flex flex-col space-y-2 shadow hover:shadow-lg transition">
         <div className="flex space-x-8 text-gold items-center">
           <div className="flex space-x-2 items-center">
             <div className="bg-gold rounded-full h-4 w-4"></div>

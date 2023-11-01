@@ -18,7 +18,7 @@ const TrendingTopics = () => {
 
 	const popTopics = popularTopics.data
 	return (
-		<div className='flex flex-col rounded bg-white overflow-hidden'>
+		<div className='flex flex-col rounded bg-white  overflow-hidden'>
 			<div className='title pt-4 text-center text-yellow-900 text-xl border-b-2 pb-4 border-gold'>
 				Trending Tags
 			</div>

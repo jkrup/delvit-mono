@@ -26,7 +26,7 @@ const RecentConsensus = () => {
   const viewAll = limit >= (consensusItems.data?.length || 1);
 
   return (
-    <div className="flex flex-col rounded bg-white overflow-hidden shadow">
+    <div className="flex flex-col rounded bg-white  overflow-hidden shadow">
       <div className="title p-4 bg-gold font-bold text-center text-white text-xl font-serif">
         Recent Consensus
       </div>

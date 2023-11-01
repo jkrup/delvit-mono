@@ -40,15 +40,15 @@ const ArticlesFeed = () => {
 	if (articlesData.isLoading || !articlesData.data) {
 		return (
 			<div className='col-span-2 flex flex-col space-y-4'>
-				<div className='bg-white rounded-md p-2 px-4 flex space-x-2 items-center animate-pulse'>&nbsp;</div>
+				<div className='bg-white  rounded-md p-2 px-4 flex space-x-2 items-center animate-pulse'>&nbsp;</div>
 
-				<div className='bg-white rounded-md p-3 px-4 animate-pulse'>&nbsp;</div>
+				<div className='bg-white  rounded-md p-3 px-4 animate-pulse'>&nbsp;</div>
 
 				{Array(10)
 					.fill(0)
 					.map((_, i) => {
 						return (
-							<div key={i} className='bg-white rounded-md h-40 animate-pulse'>
+							<div key={i} className='bg-white  rounded-md h-40 animate-pulse'>
 								{' '}
 							</div>
 						)
@@ -60,7 +60,7 @@ const ArticlesFeed = () => {
 	const articles = articlesData.data
 	return (
 		<div className='col-span-2 flex flex-col space-y-4'>
-			<div className='bg-white rounded-md p-2 px-4 flex space-x-2 items-center'>
+			<div className='bg-white  rounded-md p-2 px-4 flex space-x-2 items-center'>
 				{avatar.data && (
 					<img width='32' height='32' alt='profile-avatar' className='rounded-full h-8 w-8' src={avatar.data} />
 				)}
@@ -71,7 +71,7 @@ const ArticlesFeed = () => {
 				<LinkIcon className='h-6 w-6' />
 			</div>
 
-			<div className='bg-white rounded-md p-2 px-4'>
+			<div className='bg-white  rounded-md p-2 px-4'>
 				<div className='flex justify-between'>
 					<div className='flex space-x-2'>
 						<button

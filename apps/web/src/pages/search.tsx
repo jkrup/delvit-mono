@@ -44,7 +44,7 @@ const SearchPage: NextPage = () => {
 				</div>
 			) : (
 				<>
-					<div className='h-screen bg-white'>
+					<div className='h-screen bg-white '>
 						<Header />
 					</div>
 					<BottomTab />

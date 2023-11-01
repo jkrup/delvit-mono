@@ -28,7 +28,7 @@ const EvidenceArticle: React.FC<EvidenceArticleProps> = ({
             {title}
           </Link>
         </div>
-        <div className="bg-white px-4 py-2 rounded text-sm w-full flex flex-col ">
+        <div className="bg-white  px-4 py-2 rounded text-sm w-full flex flex-col ">
           {/* <p className='line-clamp-3 mb-2'> */}
           {body}
           {/* </p> */}

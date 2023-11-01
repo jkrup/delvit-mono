@@ -25,7 +25,7 @@ const Article: React.FC<ArticleProps> = ({
 	views,
 }) => {
 	return (
-		<div className='bg-white rounded-md p-2 px-4 flex flex-col space-y-2'>
+		<div className='bg-white  rounded-md p-2 px-4 flex flex-col space-y-2'>
 			<div className='flex space-x-8 text-yellow-800 items-center'>
 				<div className='flex space-x-2 items-center'>
 					<div className='bg-yellow-800 rounded-full h-4 w-4'></div>

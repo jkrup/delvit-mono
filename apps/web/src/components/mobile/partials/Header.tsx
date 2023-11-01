@@ -29,7 +29,7 @@ const menu: homeMenuInterface[] = [
 const Header = ({ selectedType }: { selectedType: string }) => {
   const router = useRouter();
   return (
-    <div className="flex mx-1 w-full bg-white text-sm justify-between items-center">
+    <div className="flex mx-1 w-full bg-white  text-sm justify-between items-center">
       {menu.map((item, i) => (
         <div
           onClick={() => {
@@ -38,7 +38,7 @@ const Header = ({ selectedType }: { selectedType: string }) => {
               query: { ...router.query },
             });
           }}
-          className={`py-3 w-1/4 text-center capitalize relative text-gold`}
+          className={`py-4 w-1/4 text-center capitalize relative text-gold`}
           key={i}
         >
           <span className="text-center"> {item.id}</span>

@@ -27,7 +27,7 @@ const Article: React.FC<ArticleProps> = ({
   const { width } = useViewPort();
   return <>
     {width > 992 ? (
-      <div className="rounded-md p-2 px-4 flex flex-col space-y-2 shadow bg-white">
+      <div className="rounded-md p-2 px-4 flex flex-col space-y-2 shadow bg-white ">
         {/* Article Header */}
         <div className="mx-4 flex space-x-2">
           {avatar ? (
@@ -93,7 +93,7 @@ const Article: React.FC<ArticleProps> = ({
         <BanterSection articleId={articleId} />
       </div>
     ) : (
-      <div className="bg-white p-2">
+      <div className="bg-white  p-2">
         <CardHeader author={{ name: postedByName }} createdAt={postedAt} />
         <CardTitle title={title} />
         <CardBody desc={body} />

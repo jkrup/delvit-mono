@@ -11,7 +11,7 @@ const EvidenceTab = ({ questionData }: { questionData: QuestionProps }) => {
 
   return (
     <div className="flex flex-col space-y-2 col-span-2">
-      <div className="bg-white rounded-md p-2 px-4">
+      <div className="bg-white  rounded-md p-2 px-4">
         <SubHeader />
       </div>
       <div className="flex flex-col space-y-4">

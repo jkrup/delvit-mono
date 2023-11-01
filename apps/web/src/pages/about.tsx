@@ -82,7 +82,7 @@ const SchellingPage: NextPage = () => {
       <div className="bg-gray-50">
         <Header />
         <div className="min-h-screen">
-          <div className="bg-white mx-auto my-8 rounded-md p-10 max-w-screen-xl">
+          <div className="bg-white  mx-auto my-8 rounded-md p-10 max-w-screen-xl">
             <div className="text-center">
               <h1 className="text-2xl font-bold font-serif text-gold">
                 About the Truth Consensus Algorithm

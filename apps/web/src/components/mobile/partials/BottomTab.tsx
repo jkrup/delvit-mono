@@ -23,14 +23,14 @@ export const tabMenu: tabMenuProps[] = [
   },
   {
     name: "search",
-    icon: <FiSearch className="text-3xl" />,
+    icon: <FiSearch className="text-2xl" />,
     url: "/search",
   },
   {
     name: "add",
     url: "/add",
     icon: (
-      <div className="absolute left-1/2 bottom-2 bg-white rounded-full border-t-2 border-gold -translate-x-1/2">
+      <div className="absolute left-1/2 bottom-2 bg-white  rounded-full border-t-2 border-gold -translate-x-1/2">
         <Add />
       </div>
     ),
@@ -52,8 +52,8 @@ const BottomTab = () => {
   const router = useRouter();
   console.log(router);
   return (
-    <div className="fixed bottom-0 shadow left-0 w-full">
-      <div className="w-full px-2 border-t-0.5 flex items-center justify-between border-darkgrey bg-white h-16 relative bottom-0 left-0">
+    <div className="fixed bottom-0 shadow left-0 w-full bottom">
+      <div className="w-full px-2 border-t-0.5 flex items-center justify-between border-darkgrey bg-white  h-16 relative bottom-0 left-0">
         {tabMenu.map((item, i) => (
           <Link
             href={

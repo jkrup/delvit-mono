@@ -9,7 +9,7 @@ const TrendingPosts = () => {
 
   const trendingPosts = trendingPost.data;
   return (
-    <div className="flex flex-col rounded bg-white overflow-hidden shadow">
+    <div className="flex flex-col rounded bg-white  overflow-hidden shadow">
       <div className="title p-4 bg-gold font-bold text-center text-white text-xl font-serif">
         Trending Posts
       </div>

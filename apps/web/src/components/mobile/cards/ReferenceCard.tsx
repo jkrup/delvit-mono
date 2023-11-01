@@ -24,7 +24,7 @@ const ReferenceCard = ({ title, body, type }: referenceCardProps) => {
           >
             Top
           </div>
-          <div className="bg-white rounded-b-lg p-3">
+          <div className="bg-white  rounded-b-lg p-3">
             <div className="py-3 text-lg font-semibold">{title}</div>
             <div className="my-3 text-sm">{body}</div>
           </div>
@@ -38,7 +38,7 @@ const ReferenceCard = ({ title, body, type }: referenceCardProps) => {
           >
             .
           </div>
-          <div className="p-3 w-full font-light flex rounded-r-lg bg-white justify-between">
+          <div className="p-3 w-full font-light flex rounded-r-lg bg-white  justify-between">
             <div>{title}</div>
             <BsChevronDown className="text-gold w-6 h-6 mt-1 text-xl font-bold" />
           </div>

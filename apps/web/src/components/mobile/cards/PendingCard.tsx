@@ -19,7 +19,7 @@ const PendingCard = ({
 }: FeedPendingQuestionProps) => {
   const [showBanter, setShowBanter] = useState(false);
   return (
-    <div className="bg-white shadow-sm my-2 p-3 rounded" key={id}>
+    <div className="bg-white  shadow-sm my-2 p-3 rounded" key={id}>
       <CardHeader author={author} />
       <CardTitle url={url} title={title} />
       {!opinion ? (

@@ -25,7 +25,7 @@ const ConsensusScreen = ({
     <div>
       <PageHeader goBack={true} title="Consensus" />
       <div className="p-2 bg-gray-50">
-        <div className="bg-white  my-2 p-3 rounded cursor-pointer">
+        <div className="bg-white   my-2 p-3 rounded cursor-pointer">
           <div className="">
             <CardHeader author={author} />
 

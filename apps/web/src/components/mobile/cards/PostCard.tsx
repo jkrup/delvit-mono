@@ -27,7 +27,7 @@ const PostCard = ({
   const query = { ...router.query };
   delete query["type"];
   return (
-    <div className="bg-white shadow-sm my-2 p-3 rounded">
+    <div className="bg-white  shadow-sm my-2 p-3 rounded">
       {/* header */}
       <div className="flex mt-1 items-center justify-between">
         <div className="flex text-darkgrey items-center">

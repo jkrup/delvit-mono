@@ -26,7 +26,7 @@ const Select = ({ options, post, setPost }: SelectProps) => {
 
       {/* options */}
       {isOpen && (
-        <div className="w-11/12 mx-auto absolute bg-white border border-gray-200">
+        <div className="w-11/12 mx-auto absolute bg-white  border border-gray-200">
           {options.map((item) => (
             <div
               onClick={() => handleSelect(item)}

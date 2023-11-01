@@ -10,7 +10,7 @@ const NotifScreen = () => {
       <PageHeader title="Notification" />
 
       {/* new notif card */}
-      <div className="bg-white mt-1 text-sm">
+      <div className="bg-white  mt-1 text-sm">
         <h4 className="text-gold p-3">New</h4>
         <div className="flex bg-lightgold p-4 font-light items-center">
           <div className="mr-2 w-1/10 flex items-baseline">

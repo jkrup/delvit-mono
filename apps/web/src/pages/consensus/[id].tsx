@@ -136,7 +136,7 @@ const QuestionPage = () => {
 								<div className='flex flex-col rounded-md'>
 									{' '}
 									{/* Col 2 */}
-									<div className='bg-white rounded-md mb-4 overflow-hidden'>
+									<div className='bg-white  rounded-md mb-4 overflow-hidden'>
 										<div className='p-4 bg-gold font-bold text-center justify-center text-white flex items-center'>
 											<Image alt='Delvit Logo' src={hstkLogoUrl} height='40' width='40' />
 											<div className='font-serif text-xl px-4'>References</div>
@@ -225,7 +225,7 @@ const FeedPost: React.FC<FeedPostProps> = ({
 }) => {
 	const articleUrl = `/articles/${id}?questionId=${questionId}`
 	return (
-		<div className='bg-white rounded-md p-2 px-4 flex flex-col space-y-2 shadow hover:shadow-lg transition'>
+		<div className='bg-white  rounded-md p-2 px-4 flex flex-col space-y-2 shadow hover:shadow-lg transition'>
 			<div className='flex space-x-8 text-yellow-800 items-center'>
 				<div className='flex space-x-2 items-center'>
 					<div className='bg-yellow-800 rounded-full h-4 w-4'></div>

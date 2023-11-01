@@ -4,8 +4,8 @@ const Notif = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="25"
-      height="27"
+      width="22"
+      height="24"
       viewBox="0 0 25 27"
       fill="none"
     >

@@ -3,7 +3,7 @@ import React from "react";
 
 const PageLoading = () => {
   return (
-    <div className="w-screen h-screen flex flex-col justify-center bg-white items-center">
+    <div className="w-screen h-screen flex flex-col justify-center bg-white  items-center">
       <div>
         <Image
           width={200}

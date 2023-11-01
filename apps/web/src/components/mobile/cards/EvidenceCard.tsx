@@ -25,7 +25,7 @@ const EvidenceCard = (props: EvidenceProps) => {
   delete query["type"];
   console.log(evidenceBlocksCount)
   return (
-    <div className="rounded bg-white p-3 m-2">
+    <div className="rounded bg-white  p-3 m-2">
       <CardHeader
         author={{ name: author, avatarUrl: avatar }}
         createdAt={createdAt}

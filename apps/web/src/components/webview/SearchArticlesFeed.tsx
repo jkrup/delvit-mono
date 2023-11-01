@@ -13,7 +13,7 @@ const SearchArticlesFeed: React.FC<SearchArticlesFeedProps> = ({ query }) => {
   //     <div className="col-span-2 flex flex-col space-y-4">
   //       {Array(10).fill(0).map((_, i) => {
   //         return (
-  //           <div key={i} className="bg-white rounded-md h-40 animate-pulse"> </div>
+  //           <div key={i} className="bg-white  rounded-md h-40 animate-pulse"> </div>
   //         )
   //       })}
   //     </div>

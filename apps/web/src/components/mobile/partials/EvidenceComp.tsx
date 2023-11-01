@@ -57,12 +57,12 @@ const EvidenceComp = ({
               />
             );
           })}
-        <>
+        {/* <>
           <div className="rounded-lg my-3 shadow border border-lightgreen">
             <div className="rounded-t-lg border bg-greenish text-center text-white border-green p-2">
               Top
             </div>
-            <div className="bg-white rounded-b-lg p-3">
+            <div className="bg-white  rounded-b-lg p-3">
               <div className="py-3 text-lg font-semibold">{`On-scene doctor calls Biden's incident 'concerning'`}</div>
               <div className="my-3 text-sm">
                 Ahey ijxnjaj jai00ja fayu janlld aojisn jieka shan jhans kta na
@@ -73,12 +73,12 @@ const EvidenceComp = ({
 
           <div className="rounded my-3 shadow flex">
             <div className=" rounded-l-lg w-3 bg-greenish">.</div>
-            <div className="p-3 font-light flex rounded-r-lg bg-white justify-between">
+            <div className="p-3 font-light flex rounded-r-lg bg-white  justify-between">
               <div>{`On-scene doctor calls Biden's incident 'concerning'`}</div>
               <BsChevronDown className="text-gold w-6 h-6 mt-1 text-xl font-bold" />
             </div>
           </div>
-        </>
+        </> */}
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ export interface QuestionProps {
 const Question: React.FC<QuestionProps> = ({ url, author, forPercent, postsCount, title }) => {
 	return (
 		<Link href={url} legacyBehavior>
-			<div className='bg-white rounded-md p-2 px-4 flex flex-col space-y-2 shadow hover:shadow-lg transition cursor-pointer'>
+			<div className='bg-white  rounded-md p-2 px-4 flex flex-col space-y-2 shadow hover:shadow-lg transition cursor-pointer'>
 				<div className='flex space-x-8 text-yellow-800 items-center'>
 					<div className='flex space-x-2 items-center'>
 						<div className='bg-yellow-800 rounded-full h-4 w-4'></div>

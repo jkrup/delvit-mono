@@ -20,7 +20,7 @@ const NavBar = () => {
 		router.replace('/login')
 	}
 	return (
-		<div className='p-2 py-4 fixed top-0 z-10 w-full bg-white flex items-center justify-between'>
+		<div className='p-2 py-4 fixed top-0 z-10 w-full bg-white  flex items-center justify-between'>
 			<div onClick={() => toggleSideBar(true)}>
 				<Menu />
 			</div>

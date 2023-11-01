@@ -22,6 +22,10 @@ body {
 .btn {
   @apply uppercase bg-gold text-white w-4/10 !important;
 }
+.bottom {
+  @apply bg-white;
+  padding-bottom: calc(env(safe-area-inset-bottom) - 0.75em);
+}
 
 /* multistep progress bar */
 .stepProgressBar {

@@ -7,7 +7,7 @@ import { trpc } from '@/utils/trpc'
 
 // const TimedQuestion = () => {
 //     return (
-//         <div className='bg-white text-center'>
+//         <div className='bg-white  text-center'>
 //             <div className='bg-neutral-700 p-5 px-[27%] flex justify-between'>
 //                 <div className='text-white'>
 //                     <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -49,7 +49,7 @@ import { trpc } from '@/utils/trpc'
 
 // const RelevantArticles = () => {
 //     return (
-//         <div className='bg-white rounded-t-md'>
+//         <div className='bg-white  rounded-t-md'>
 //             <div className='bg-stone-500 italic text-center text-white rounded-t-md py-5'>
 //                 Relevant Articles
 //             </div>
@@ -97,7 +97,7 @@ const Topic: React.FC<TopicProps> = ({ data }) => {
 	const admin = true
 
 	return (
-		<div className='bg-white rounded h-auto p-2 px-4 flex flex-col col-span-3 w-full'>
+		<div className='bg-white  rounded h-auto p-2 px-4 flex flex-col col-span-3 w-full'>
 			<div className='text-center text-xl mt-4 mb-10'>
 				{data.title}
 				{admin && (
@@ -155,7 +155,7 @@ const TopicPage = () => {
 				{/* ))} */}
 			</div>
 			<div className='max-w-screen-xl mx-auto flex space-x-8'>
-				<div className='bg-white rounded flex flex-col overflow-hidden w-80'>
+				<div className='bg-white  rounded flex flex-col overflow-hidden w-80'>
 					<div className='bg-black font-bold text-lg text-white text-center py-4'>Topics</div>
 					<ol className=''>{renderTopics()}</ol>
 				</div>

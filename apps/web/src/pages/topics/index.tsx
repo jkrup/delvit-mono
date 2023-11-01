@@ -34,7 +34,7 @@ const TopicListPage = () => {
 					</thead>
 					<tbody>
 						{topics.data?.map((tag) => (
-							<tr key={tag.id} className='bg-white border-b  hover:bg-neutral-50 -600'>
+							<tr key={tag.id} className='bg-white  border-b  hover:bg-neutral-50 -600'>
 								<th scope='row' className='px-6 py-4 font-medium text-neutral-900 whitespace-nowrap'>
 									{tag.title}
 								</th>

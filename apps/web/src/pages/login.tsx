@@ -1,5 +1,6 @@
 import AuthButton from '@/components/mobile/partials/AuthButton'
 import Button from '@/components/mobile/partials/Button'
+import PageLoading from '@/components/mobile/partials/PageLoading'
 import TextInput from '@/components/mobile/partials/TextInput'
 import WalletConnectButton from '@/components/mobile/partials/WalletConnectButton'
 import ArticlesFeed from '@/components/webview/ArticlesFeed'
@@ -161,18 +162,19 @@ const LoginPage: React.FC = () => {
 	if (session) {
 		setTimeout(() => router.replace('/'), 0)
 		return (
-			<div>
-				Signed in as {session.user?.name} <br />
-				<button
-					onClick={() =>
-						signOut().then(() => {
-							router.replace('/')
-						})
-					}
-				>
-					Sign out
-				</button>
-			</div>
+			<PageLoading />
+			// <div>
+			// 	Signed in as {session.user?.name} <br />
+			// 	<button
+			// 		onClick={() =>
+			// 			signOut().then(() => {
+			// 				router.replace('/')
+			// 			})
+			// 		}
+			// 	>
+			// 		Sign out
+			// 	</button>
+			// </div>
 		)
 	}
 	return (
@@ -244,7 +246,7 @@ const LoginPage: React.FC = () => {
 					</div>
 				</div>
 			) : (
-				<div className='p-12 pb-20 h-screen w-screen bg-white'>
+				<div className='p-12 pb-20 h-screen w-screen bg-white '>
 					<div className='pt-8'>
 						<div className='flex items-center justify-center'>
 							<Image

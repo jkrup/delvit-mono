@@ -65,7 +65,7 @@ const ProfilePage = () => {
 					<div className='w-full min-h-screen m-auto'>
 						<Header />
 						<form
-							className='bg-white my-12 shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col space-y-4'
+							className='bg-white  my-12 shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col space-y-4'
 							onSubmit={onSubmit}
 						>
 							<div className='flex-1'>
@@ -211,7 +211,7 @@ const ProfilePage = () => {
 			) : (
 				<div>
 					<PageHeader goBack={isEditing} title={`${isEditing ? 'Edit' : ''} Profile`} />
-					<div className='my-2 h-screen bg-white'>
+					<div className='my-2 h-screen bg-white '>
 						{!isEditing ? (
 							<div className='rounded flex flex-col justify-center p-4 px-8 items-center h-fit'>
 								{image && (

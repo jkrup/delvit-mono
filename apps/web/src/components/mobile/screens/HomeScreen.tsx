@@ -30,7 +30,7 @@ const HomeScreen = () => {
           <InfoSect body="Questions below have gone through the complete Truth Consensus Algorithm and a verdict has been reached." />
         )}
         <SubHeader />
-        <div className="p-1">
+        <div className="p-1 pb-20">
           {(selectedType === "question" && <QuestionsFeed />) ||
             (selectedType === "posts" && <PostsFeed />) ||
             (selectedType === "pending" && <PendingFeed />) ||

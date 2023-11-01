@@ -120,7 +120,7 @@ const NewArticlePage = () => {
 					<div className='flex flex-col'>
 						<label className='text-neutral-700 text-l mb-2'>External Link</label>
 						{image ? (
-							<div className='bg-white p-4 rounded-lg text-center m-auto'>
+							<div className='bg-white  p-4 rounded-lg text-center m-auto'>
 								<img
 									src={image}
 									onError={() => {
@@ -141,7 +141,7 @@ const NewArticlePage = () => {
 
 					<div className='flex flex-col'>
 						<label className='text-neutral-700 text-l mb-2'>Tags</label>
-						<div className='bg-white rounded-lg relative'>
+						<div className='bg-white  rounded-lg relative'>
 							<div className={`flex flex-row flex-wrap gap-2 ${postTopics.length && 'p-4'}`}>
 								{postTopics.map((topic) => (
 									<div
@@ -171,7 +171,7 @@ const NewArticlePage = () => {
 							/>
 
 							<div
-								className={`absolute left-0 w-full z-[1] flex-col bg-white divide-y divide-slate-200 drop-shadow-md max-h-[320px] overflow-y-auto ${
+								className={`absolute left-0 w-full z-[1] flex-col bg-white  divide-y divide-slate-200 drop-shadow-md max-h-[320px] overflow-y-auto ${
 									topicSearch !== '' || topicSearchHasFocus.val ? 'flex' : 'hidden'
 								}`}
 							>
@@ -194,7 +194,7 @@ const NewArticlePage = () => {
 							{/* <select
 										name='link'
 										placeholder='search'
-										className='rounded-lg p-4 bg-white outline-none placeholder:italic w-full'
+										className='rounded-lg p-4 bg-white  outline-none placeholder:italic w-full'
 									>
 										<option>Search tags</option>
 										<option value={'blockchain'}>blockchain</option>

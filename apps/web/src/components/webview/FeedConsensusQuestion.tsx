@@ -27,7 +27,7 @@ const FeedConsensusQuestion: React.FC<FeedConsensusQuestionProps> = ({
       }}
       legacyBehavior>
       {width > 992 ? (
-        <div className="bg-white rounded-md p-2 px-4 flex shadow hover:shadow-lg transition justify-between cursor-pointer">
+        <div className="bg-white  rounded-md p-2 px-4 flex shadow hover:shadow-lg transition justify-between cursor-pointer">
           <div className="flex flex-col space-y-2">
             <div className="flex space-x-8 text-gold items-center">
               <div className="flex space-x-2 items-center">
@@ -60,7 +60,7 @@ const FeedConsensusQuestion: React.FC<FeedConsensusQuestionProps> = ({
           </div>
         </div>
       ) : (
-        <div className="bg-white  my-2 p-3 rounded cursor-pointer">
+        <div className="bg-white   my-2 p-3 rounded cursor-pointer">
           <div className="">
             <CardHeader author={author} />
 

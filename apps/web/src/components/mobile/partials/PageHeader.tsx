@@ -12,7 +12,7 @@ const PageHeader = ({ title, goBack, button }: PageHeaderProps) => {
   const { back } = useRouter();
 
   return (
-    <div className="flex text-gold bg-white items-center justify-between p-4">
+    <div className="flex text-gold bg-white  items-center justify-between p-4">
       <div>
         {goBack && (
           <div onClick={back}>

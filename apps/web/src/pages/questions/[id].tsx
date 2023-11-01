@@ -382,11 +382,11 @@ const QuestionPage = () => {
 						)}
 
 						<div className='flex flex-col space-y-2 col-span-2'>
-							<div className='bg-white rounded-md p-2 px-4'>
+							<div className='bg-white  rounded-md p-2 px-4'>
 								<FilterBar />
 							</div>
 							{isAdmin.data && !finalizeConsensus.isSuccess && questionState === 'ACTIVE' && (
-								<div className='bg-white rounded-md p-2 px-4 flex justify-around items-center'>
+								<div className='bg-white  rounded-md p-2 px-4 flex justify-around items-center'>
 									<ConsensusDropdown questionId={questionId} />
 									<span>Invitations: {consensusInvitations?.length}</span>
 									<span>Responses: {consensusCompleted?.length}</span>
@@ -476,7 +476,7 @@ const FeedPost: React.FC<FeedPostProps> = ({
 }) => {
 	const articleUrl = `/articles/${id}?questionId=${questionId}`
 	return (
-		<div className='bg-white rounded-md p-2 px-4 flex flex-col space-y-2 shadow hover:shadow-lg transition'>
+		<div className='bg-white  rounded-md p-2 px-4 flex flex-col space-y-2 shadow hover:shadow-lg transition'>
 			<div className='flex space-x-8 text-yellow-800 items-center'>
 				<div className='flex space-x-2 items-center'>
 					<div className={`${evidenceType === 'FOR' ? 'bg-green-600' : 'bg-red-600'} rounded-full h-4 w-4`}></div>

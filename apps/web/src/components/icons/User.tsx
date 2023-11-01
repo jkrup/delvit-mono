@@ -4,8 +4,8 @@ const User = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="27"
-      height="27"
+      width="23"
+      height="23"
       viewBox="0 0 27 27"
       fill="none"
     >
