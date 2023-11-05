@@ -1,15 +1,12 @@
 // src/pages/_app.tsx
 import ViewportProvider from '@/utils/ViewportProvider'
 import { withTRPC } from '@trpc/next'
-import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
-import { Web3Modal } from '@web3modal/react'
 import { Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import superjson from 'superjson'
-import { WagmiConfig, configureChains, createConfig } from 'wagmi'
 import { mainnet, optimism, polygon } from 'wagmi/chains'
 
 import type { AppRouter } from '../server/router'
@@ -23,16 +20,6 @@ const projectId = process.env.NEXT_PUBLIC_PROJECT_ID
 
 // 2. Configure wagmi client
 const chains = [mainnet, polygon, optimism]
-
-const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
-const wagmiConfig = createConfig({
-	autoConnect: true,
-	connectors: w3mConnectors({ chains, projectId }),
-	publicClient,
-})
-
-// 3. Configure modal ethereum client
-const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
 const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppProps<{ session: Session }>) => {
 	const [ready, setReady] = useState(false)
@@ -50,15 +37,12 @@ const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppProps<{ s
 				/>
 			</Head>
 			{ready ? (
-				<WagmiConfig config={wagmiConfig}>
 					<SessionProvider session={session}>
 						<ViewportProvider>
 							<Component {...pageProps} />
 						</ViewportProvider>
 					</SessionProvider>
-				</WagmiConfig>
 			) : null}
-			<Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
 		</>
 	)
 }

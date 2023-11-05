@@ -2,13 +2,11 @@ import AuthButton from '@/components/mobile/partials/AuthButton'
 import Button from '@/components/mobile/partials/Button'
 import PageLoading from '@/components/mobile/partials/PageLoading'
 import TextInput from '@/components/mobile/partials/TextInput'
-import WalletConnectButton from '@/components/mobile/partials/WalletConnectButton'
 import ArticlesFeed from '@/components/webview/ArticlesFeed'
 import PopularTopics from '@/components/webview/PopularTopics'
 import UserMenu from '@/components/webview/UserMenu'
 import { useViewPort } from '@/hooks/useViewPort'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import { useWeb3Modal } from '@web3modal/react'
 import { getCsrfToken, signIn, signOut, useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -17,10 +15,9 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { SiWalletconnect } from 'react-icons/si'
 import { SiweMessage } from 'siwe'
-import { useAccount, useConnect, useNetwork, useSignMessage } from 'wagmi'
-import { InjectedConnector } from 'wagmi/connectors/injected'
 
 import hstkLogoUrl from '../imgs/hstk-logo.png'
+import TelegramLoginButton from 'telegram-login-button'
 
 // Skeleton that will be blurred
 const HomePage = () => {
@@ -67,13 +64,6 @@ const LoginPage: React.FC = () => {
 	const { width } = useViewPort()
 	const { data: session } = useSession()
 	const [loggingIn, setLoggingIn] = useState(false)
-	const { chain } = useNetwork()
-	const { isConnected, address } = useAccount()
-	const { signMessageAsync } = useSignMessage()
-	const { open } = useWeb3Modal()
-	const { connect } = useConnect({
-		connector: new InjectedConnector(),
-	})
 
 	const router = useRouter()
 
@@ -232,15 +222,7 @@ const LoginPage: React.FC = () => {
 									</div>
 									<div className='text-xl'>Metamask</div>
 								</button>
-								<WalletConnectButton
-									label='Walletconnect'
-									icon={
-										<div className=''>
-											<SiWalletconnect className='w-6 h-6' />
-										</div>
-									}
-									onClick={loginWithWalletConnect}
-								/>
+								<TelegramLoginButton botName='DelvitAuthBot' dataOnauth={(u) => {console.log(u)}}/>
 							</div>
 						</div>
 					</div>
@@ -288,15 +270,7 @@ const LoginPage: React.FC = () => {
 								onClick={loginWithMetamask}
 								text='Sign in with Metamask'
 							/>
-							<AuthButton
-								icon={
-									<div className=''>
-										<SiWalletconnect className='w-6 h-6' />
-									</div>
-								}
-								onClick={loginWithWalletConnect}
-								text='Sign in with Walletconnect'
-							/>
+							<TelegramLoginButton botName='DelvitAuthBot' dataOnauth={(u) => {console.log(u)}}/>
 						</div>
 					</div>
 				</div>
