@@ -165,7 +165,7 @@ const NewArticlePage = () => {
 			) : (
 				<NewPostScreen
 					submitPost={submitPost}
-					questionTitle={backTitle.data}
+					questionTitle={backTitle.data ?? ''}
 					title={title}
 					setTitle={setTitle}
 					postId={postId}

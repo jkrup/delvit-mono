@@ -2,6 +2,7 @@ import { trpc } from '@/utils/trpc'
 import { HandThumbDownIcon, HandThumbUpIcon } from '@heroicons/react/20/solid'
 import { ChatBubbleLeftRightIcon, CheckBadgeIcon } from '@heroicons/react/24/outline'
 import { useState } from 'react'
+
 import type { Author } from './Author'
 import BanterSection from './BanterSection'
 import { CommentData } from './Comment'
@@ -88,7 +89,7 @@ export interface FeedPendingQuestionProps {
 	opinion?: 'AGREE' | 'DISAGREE'
 	comments: CommentData[]
 	refetch: () => void
-	activate: () => Promise<void>
+	activate: () => void
 }
 
 const Question: React.FC<FeedPendingQuestionProps> = ({ id, author, votes = 0, title, opinion, isAdmin, activate }) => {

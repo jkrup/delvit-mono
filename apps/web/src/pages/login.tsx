@@ -261,16 +261,16 @@ const LoginPage: React.FC = () => {
 								onClick={() => signIn('google')}
 								text='Sign in with Google'
 							/>
+							<TelegramLoginButton botName='DelvitAuthBot' dataOnauth={(u) => {console.log(u)}}/>
 							<AuthButton
 								icon={
-									<div>
-										<Image src={'/metamask.svg'} width={32} height={32} alt='metamask icon' />
+									<div className=''>
+										<SiWalletconnect className='w-6 h-6' />
 									</div>
 								}
-								onClick={loginWithMetamask}
-								text='Sign in with Metamask'
+								onClick={loginWithWalletConnect}
+								text='Sign in with Walletconnect'
 							/>
-							<TelegramLoginButton botName='DelvitAuthBot' dataOnauth={(u) => {console.log(u)}}/>
 						</div>
 					</div>
 				</div>

@@ -15,11 +15,7 @@ const ConsensusScreen = ({
   consensusData,
   evidenceView,
   setEvidenceView,
-}: {
-  consensusData: FeedConsensusQuestionProps;
-  evidenceView: string;
-  setEvidenceView: () => void;
-}) => {
+}: any) => {
   const { author, title, answer } = consensusData;
   return (
     <div>

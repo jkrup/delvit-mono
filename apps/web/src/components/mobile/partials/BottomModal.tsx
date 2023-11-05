@@ -1,57 +1,46 @@
-import ChevronUp from "@/components/icons/ChevronUp";
-import { consensusProps } from "@/types/props";
-import Image from "next/image";
-import React, { useState } from "react";
-import { BsChevronDown } from "react-icons/bs";
-import ReferenceCard from "../cards/ReferenceCard";
-import EvidenceComp from "./EvidenceComp";
+import ChevronUp from '@/components/icons/ChevronUp'
+import { FeedConsensusQuestionProps, consensusProps } from '@/types/props'
+import Image from 'next/image'
+import React, { useState } from 'react'
+import { BsChevronDown } from 'react-icons/bs'
+import ReferenceCard from '../cards/ReferenceCard'
+import EvidenceComp from './EvidenceComp'
 
 export interface checkStatusProps {
-  name: "FOR" | "AGAINST";
+	name: 'FOR' | 'AGAINST'
 }
 
 export const menu: checkStatusProps[] = [
-  {
-    name: "FOR",
-  },
-  {
-    name: "AGAINST",
-  },
-];
+	{
+		name: 'FOR',
+	},
+	{
+		name: 'AGAINST',
+	},
+]
 
-const BottomModal = ({
-  consensusData,
-  evidenceView,
-  setEvidenceView,
-}: consensusProps) => {
-  const [status, setStatus] = useState("FOR");
-  const [isOpen, setisOpen] = useState(false);
+const BottomModal = ({ consensusData, evidenceView, setEvidenceView }: any) => {
+	const [status, setStatus] = useState('FOR')
+	const [isOpen, setisOpen] = useState(false)
 
-  return (
-    <div
-      className={`absolute shadow-lg -bottom-2 w-full ${
-        isOpen ? " h-3/4" : "h-48"
-      } transform transition-transform duration-300 ease-in-out`}
-    >
-      <div className="bg-gold p-2 shadow-lg justify-between rounded-t-xl flex items-center text-white font-typo">
-        <div />
-        <div className="flex items-center">
-          <Image width={42} height={42} src={"/logo.svg"} alt="delvit logo" />
-          <span className="mx-2 capitalize font-typo">References</span>
-        </div>
-        <div
-          onClick={() => setisOpen(!isOpen)}
-          className={`p-3 ${isOpen ? "rotate-180" : ""}`}
-        >
-          <ChevronUp />
-        </div>
-      </div>
-      <EvidenceComp
-        consensusData={consensusData}
-        evidenceView={evidenceView}
-        setEvidenceView={setEvidenceView}
-      />
-      {/* <div className="p-2 flex w-full bg-lightgold">
+	return (
+		<div
+			className={`absolute shadow-lg -bottom-2 w-full ${
+				isOpen ? ' h-3/4' : 'h-48'
+			} transform transition-transform duration-300 ease-in-out`}
+		>
+			<div className='bg-gold p-2 shadow-lg justify-between rounded-t-xl flex items-center text-white font-typo'>
+				<div />
+				<div className='flex items-center'>
+					<Image width={42} height={42} src={'/logo.svg'} alt='delvit logo' />
+					<span className='mx-2 capitalize font-typo'>References</span>
+				</div>
+				<div onClick={() => setisOpen(!isOpen)} className={`p-3 ${isOpen ? 'rotate-180' : ''}`}>
+					<ChevronUp />
+				</div>
+			</div>
+			<EvidenceComp consensusData={consensusData} evidenceView={evidenceView} setEvidenceView={setEvidenceView} />
+			{/* <div className="p-2 flex w-full bg-lightgold">
         {menu.map((item) => (
           <div
             onClick={() => setStatus(item.name)}
@@ -96,8 +85,8 @@ const BottomModal = ({
           </div>
         </>
       </div> */}
-    </div>
-  );
-};
+		</div>
+	)
+}
 
-export default BottomModal;
+export default BottomModal

@@ -131,7 +131,7 @@ const ArticlePage = () => {
 								postedAt={articleData.createdAt.toDateString()}
 								postedByName={articleData.author.name as string}
 								avatar={articleData.author.image || undefined}
-								tags={articleData.topics.map((t) => t.topic)}
+								// tags={articleData.topics.map((t) => t.topic)}
 							/>
 						</div>
 

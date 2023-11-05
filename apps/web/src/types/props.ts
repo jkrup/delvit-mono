@@ -45,7 +45,7 @@ export interface ArticleProps {
     postedByName: string;
     title: string;
     url?: string;
-    evidencePosts: any;
+    evidencePosts?: any;
 }
 export interface EvidenceProps extends FeedPostProps {
     articleUrl: Url | string;

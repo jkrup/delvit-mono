@@ -6,7 +6,7 @@ import QuestionTabMenu from "../partials/QuestionTabMenu";
 import BanterTab from "../tabs/BanterTab";
 import EvidenceTab from "../tabs/EvidenceTab";
 
-const QuestionScreen = ({ questionData }: { questionData: QuestionProps }) => {
+const QuestionScreen = ({ questionData }: { questionData: any }) => {
   const [activeTab, setActiveTab] = useState("Banter");
   return (
     <div>

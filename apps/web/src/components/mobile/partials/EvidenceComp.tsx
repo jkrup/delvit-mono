@@ -20,7 +20,7 @@ const EvidenceComp = ({
   consensusData,
   evidenceView,
   setEvidenceView,
-}: consensusProps) => {
+}: any) => {
   const [status, setStatus] = useState("FOR");
  
   return (
