@@ -7,14 +7,12 @@ import PopularTopics from '@/components/webview/PopularTopics'
 import UserMenu from '@/components/webview/UserMenu'
 import { useViewPort } from '@/hooks/useViewPort'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import { getCsrfToken, signIn, signOut, useSession } from 'next-auth/react'
+import {  signIn, useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { SiWalletconnect } from 'react-icons/si'
-import { SiweMessage } from 'siwe'
 
 import hstkLogoUrl from '../imgs/hstk-logo.png'
 import TelegramLoginButton from 'telegram-login-button'
@@ -29,7 +27,7 @@ const HomePage = () => {
 					{/* <Bars3Icon className='w-10 relative' /> */}
 				</Link>
 				<form className='grow my-auto flex-wrap space-x-4 mx-8 justify-center max-w-screen-xl hidden sm:flex'>
-					<div className='flex items-center bg-neutral-100 bg-opacity-50 text-stone-400 space-x-2 flex-1 rounded-sm px-2 overflow-hidden text-zinc-600 focus:text-zinc-400'>
+					<div className='flex items-center bg-neutral-100 bg-opacity-50 space-x-2 flex-1 rounded-sm px-2 overflow-hidden text-zinc-600 focus:text-zinc-400'>
 						<MagnifyingGlassIcon className='w-6' />
 						<input
 							className='grow max-w-screen-xl bg-neutral-100 bg-opacity-0 h-8 placeholder:text-zinc-300 focus:placeholder:text-zinc-400 flex-1 outline-none'
@@ -51,7 +49,6 @@ const HomePage = () => {
 					<div className='flex flex-col space-y-2'>
 						{' '}
 						{/* Col 2 */}
-						{/* <TopContent /> */}
 						<PopularTopics />
 					</div>
 				</div>
@@ -105,37 +102,6 @@ const LoginPage: React.FC = () => {
 		}
 	}
 
-	const loginWithWalletConnect = async () => {
-		if (!isConnected) open()
-		try {
-			const message = new SiweMessage({
-				domain: window.location.host,
-				uri: window.location.origin,
-				version: '1',
-				address: address,
-				statement: process.env.NEXT_PUBLIC_SIGNIN_MESSAGE,
-				nonce: await getCsrfToken(),
-				chainId: chain?.id,
-			})
-
-			const signedMessage = await signMessageAsync({
-				message: message.prepareMessage(),
-			})
-
-			const response = await signIn('walletconnect', {
-				message: JSON.stringify(message),
-				signedMessage,
-				redirect: true,
-				callbackUrl: '/profile',
-			})
-			if (response?.error) {
-				console.log('Error occured:', response.error)
-			}
-		} catch (error) {
-			console.log('Error Occured', error)
-		}
-	}
-
 	if (router.query['auto'] === 'google') {
 		signIn('google')
 	}
@@ -153,18 +119,6 @@ const LoginPage: React.FC = () => {
 		setTimeout(() => router.replace('/'), 0)
 		return (
 			<PageLoading />
-			// <div>
-			// 	Signed in as {session.user?.name} <br />
-			// 	<button
-			// 		onClick={() =>
-			// 			signOut().then(() => {
-			// 				router.replace('/')
-			// 			})
-			// 		}
-			// 	>
-			// 		Sign out
-			// 	</button>
-			// </div>
 		)
 	}
 	return (
@@ -262,15 +216,6 @@ const LoginPage: React.FC = () => {
 								text='Sign in with Google'
 							/>
 							<TelegramLoginButton botName='DelvitAuthBot' dataOnauth={(u) => {console.log(u)}}/>
-							<AuthButton
-								icon={
-									<div className=''>
-										<SiWalletconnect className='w-6 h-6' />
-									</div>
-								}
-								onClick={loginWithWalletConnect}
-								text='Sign in with Walletconnect'
-							/>
 						</div>
 					</div>
 				</div>
